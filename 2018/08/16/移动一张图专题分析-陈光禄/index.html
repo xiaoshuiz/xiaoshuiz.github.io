@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="xiaoshuiz">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="xiaoshuiz">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>移动一张图专题分析 · Fellow Travellers</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/avatar/logo.png" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Fellow Travellers</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">移动一张图专题分析</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Fellow Travellers</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/travellers.png)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            移动一张图专题分析
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.6k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/08/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="移动一张图专题分析"><a href="#移动一张图专题分析" class="headerlink" title="移动一张图专题分析"></a>移动一张图专题分析</h1><hr>
+<p>##简介<br>[专题模块为整个项目中的重要组成部分，也是不可或缺之一。用户可通过专题信息查看其主要层级结构和内部构造划分。对主要层级可进行收藏展示，便于直观查看。可手动点击某一层级结构打开对应图层，查看详细信息。]</p>
+<blockquote>
+<p>列表主要分为两种结构，一种为树状结构、一种为层级结构。以相同的数据模型展示不同的列表结构，便于用户选择。</p>
+</blockquote>
+<p>##逻辑<br>列表项包括三角号小图标、收藏按钮和点击开关的按钮。根据不同情境分别设置相应的展示状态。</p>
+<blockquote>
+<ul>
+<li>当为树状结构时：首先初始化专题列表，通过Id展示最新列表。当点击Item项时，我们会记录专题的id,通过id找到子集列表数据，查看子集的type类型是否为“catalog”,如果是该类型，则会继续打开。直到我们点击Item项为“group”类型时，这时图层状态则不显示下一级别。 当我们点击开关状态时，获取子结点数据，将当前状态设置为打开，设置专题是否可见，根据id判断找到父级与子级，并更新整个专题的数据。当开关状态点击到“group”级别时，下一级别则是“layer”级别，图层状态则不显示下一级别。直接在图层上加载layer级别的数据。关闭时如果点击group级别的数据，则会直接关闭当前对应级别数据，父级状态为半开状态，如果关闭“catalog级则会将子级数据共同关闭，直到点击状态为“catalog”级别，对应“parentLayerId”=-1时，这时所有子级数据将全部关闭。</li>
+<li>当为层级结构时：当我们点击开关状态时，记录当前id,并通过id找到对应子级的信息，清空当前数据，将最新数据更新到列表上。关闭时当”parentLayerId!=-1”时,列表下方有一个按钮提示返回上一级，当点击按钮时会找到上一级别数据，将当前级别数据清空，并将父级数据展示到列表上，更新适配器。</li>
+</ul>
+</blockquote>
+<h3 id="Windows平台-AndroidStudio开发环境"><a href="#Windows平台-AndroidStudio开发环境" class="headerlink" title="Windows平台/AndroidStudio开发环境"></a><a href="https://www.cnblogs.com/vikezhu/p/4606230.html" target="_blank" rel="noopener">Windows平台/AndroidStudio开发环境</a></h3><h2 id="重要代码实现"><a href="#重要代码实现" class="headerlink" title="##重要代码实现"></a>##重要代码实现</h2><h4 id="1-通过ID获取列表，projectId刚开始传入-1-显示根目录列表："><a href="#1-通过ID获取列表，projectId刚开始传入-1-显示根目录列表：" class="headerlink" title="1. 通过ID获取列表，projectId刚开始传入-1.显示根目录列表："></a>1. 通过ID获取列表，projectId刚开始传入-1.显示根目录列表：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">replaceAndShowListById</span><span class="params">(Context context, String projectId, <span class="keyword">boolean</span> isOnlyShow)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            List&lt;ThemeInfo&gt; themeInfoList=TopicLayerManager.getSubTopicList(context, projectId);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != themeInfoList) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> != showList) &#123;</span><br><span class="line">                 showList.clear();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            listViewSetAdapter(themeInfoList);</span><br><span class="line"><span class="keyword">if</span> (!isOnlyShow &amp;&amp; <span class="keyword">null</span> != themeInfoList &amp;&amp; themeInfoList.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                TotalApplication.getListIdInstance().clear();</span><br><span class="line">                TotalApplication.getListIdInstance().add(projectId);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">listViewSetAdapter</span><span class="params">(List&lt;ThemeInfo&gt; dmpList)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != dmpList &amp;&amp; dmpList.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> == projectAdapter) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> != <span class="keyword">this</span>.themeListView) &#123;</span><br><span class="line">                    <span class="keyword">this</span>.showList = dmpList;</span><br><span class="line">                 projectAdapter = <span class="keyword">new</span> TopicAdapter(<span class="keyword">this</span>.context, <span class="keyword">this</span>.showList, handler, isGradedData);</span><br><span class="line">                    <span class="keyword">this</span>.themeListView.setAdapter(projectAdapter);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.showList = dmpList;</span><br><span class="line">                projectAdapter.setThemeInfoList(<span class="keyword">this</span>.showList);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-列表Item的点击事件："><a href="#2-列表Item的点击事件：" class="headerlink" title="2. 列表Item的点击事件："></a>2. 列表Item的点击事件：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clickItemResponse</span><span class="params">(Context context, <span class="keyword">int</span> position)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != showList) &#123;</span><br><span class="line">        ThemeInfo node = showList.get(position);</span><br><span class="line">        <span class="keyword">if</span> (JudgeNullUtil.ObjIsNull(node)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;ThemeInfo&gt; dmpList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        String projectId = node.getId();</span><br><span class="line">        String type = node.getType();</span><br><span class="line">        <span class="keyword">if</span> (projectId != <span class="keyword">null</span> &amp;&amp; projectId.length() &gt; <span class="number">0</span> &amp;&amp; Constants.TYPE_CATLOG.equals(type)) &#123;</span><br><span class="line">            dmpList = TopicLayerManager.getSubTopicList(context, projectId);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != dmpList &amp;&amp; dmpList.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isGradedData) &#123;</span><br><span class="line">                <span class="keyword">if</span> (projectId != <span class="keyword">null</span> &amp;&amp; projectId.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!node.isLeaf()) &#123;</span><br><span class="line">                        node.setExpand(!node.isExpand());</span><br><span class="line">                        <span class="keyword">if</span> (node.isExpand()) &#123;</span><br><span class="line">                            <span class="keyword">for</span> (ThemeInfo cNode : dmpList) &#123;</span><br><span class="line">                                cNode.setLevel(node.getLevel() + <span class="number">1</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                            showList.addAll(position + <span class="number">1</span>, dmpList);</span><br><span class="line">                            listViewSetAdapter(showList);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            List&lt;ThemeInfo&gt; rmList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">                            TopicUtil.getAllChildren(node, rmList, showList, <span class="keyword">false</span>);</span><br><span class="line">                            showList.removeAll(rmList);</span><br><span class="line">                            listViewSetAdapter(showList);</span><br><span class="line">                        &#125;</span><br><span class="line">                        TotalApplication.getListIdInstance().add(projectId);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (projectId != <span class="keyword">null</span> &amp;&amp; projectId.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    showList = dmpList;</span><br><span class="line">                    listViewSetAdapter(showList);</span><br><span class="line">                    TotalApplication.getListIdInstance().add(projectId);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-开关按钮的点击事件："><a href="#3-开关按钮的点击事件：" class="headerlink" title="3. 开关按钮的点击事件："></a>3. 开关按钮的点击事件：</h4><pre><code class="Java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">projectSwitch</span><span class="params">(Context context, Handler handler, List&lt;ThemeInfo&gt; themeInfoList, ThemeInfo info, TopicAdapter.ViewHolder finalHolder, <span class="keyword">boolean</span> isGradedData)</span> </span>{
+       List&lt;ThemeInfo&gt; parents = <span class="keyword">new</span> ArrayList&lt;&gt;();
+       TopicUtil.getAllParent(info, parents, themeInfoList, <span class="keyword">false</span>);
+
+       List&lt;ThemeInfo&gt; childrens = <span class="keyword">new</span> ArrayList&lt;&gt;();
+       TopicUtil.getAllChildren(info, childrens, themeInfoList, <span class="keyword">false</span>);
+       String openStatus = info.getOpenStatus();
+       <span class="keyword">if</span> (!openStatus.equals(Constants.TOPIC_STATUS_OFF)) {
+           finalHolder.isOpen.setImageResource(R.mipmap.topic_off);
+           info.setOpenStatus(Constants.TOPIC_STATUS_OFF);
+           TopicUtil.closeCurrentNode(info, themeInfoList, <span class="keyword">false</span>);
+       } <span class="keyword">else</span> {
+           finalHolder.isOpen.setImageResource(R.mipmap.topic_on);
+           info.setOpenStatus(Constants.TOPIC_STATUS_ON);
+           <span class="keyword">for</span> (ThemeInfo node : childrens) {
+               node.setOpenStatus(Constants.TOPIC_STATUS_ON);
+           }
+           <span class="keyword">for</span> (ThemeInfo node : parents) {
+               node.setOpenStatus(Constants.TOPIC_STATUS_ON);
+           }
+       }
+       <span class="keyword">if</span> (JudgeNullUtil.ObjIsNull(info)) {
+           <span class="keyword">return</span>;
+       }
+       TopicUtil.topicSwitchVisible(context, info, handler, isGradedData);
+   }
+
+</code></pre>
+<h4 id="4-通过图层id显示专题图层："><a href="#4-通过图层id显示专题图层：" class="headerlink" title="4.通过图层id显示专题图层："></a>4.通过图层id显示专题图层：</h4><pre><code class="Java"><span class="comment">/**</span>
+<span class="comment">    * 通过图层id显示专题图层。</span>
+<span class="comment">    *</span>
+<span class="comment">    * <span class="doctag">@param</span> context      上下文</span>
+<span class="comment">    * <span class="doctag">@param</span> visibleInfos 当前需要显示的图层</span>
+<span class="comment">    */</span>
+   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setLayerVisible</span><span class="params">(Context context, List&lt;ThemeInfo&gt; visibleInfos, String currentStatus)</span> <span class="keyword">throws</span> Exception </span>{
+       <span class="keyword">if</span> (JudgeNullUtil.ObjIsNull(visibleInfos)) {
+           <span class="keyword">return</span>;
+       }
+       <span class="keyword">boolean</span> isOpenLayer = <span class="keyword">false</span>;
+       <span class="keyword">if</span> (!currentStatus.equals(Constants.TOPIC_STATUS_OFF)) {
+           isOpenLayer = <span class="keyword">true</span>;
+       }
+       <span class="keyword">if</span>(App.isOnLineData){
+           onlineVisibleLayer(context, visibleInfos, isOpenLayer);
+       }<span class="keyword">else</span>{
+           offlineVisibleLayer(visibleInfos,isOpenLayer);
+       }
+   }
+
+</code></pre>
+<h4 id="5-更新专题数据："><a href="#5-更新专题数据：" class="headerlink" title="5.更新专题数据："></a>5.更新专题数据：</h4><pre><code class="Java"><span class="comment">/**</span>
+<span class="comment"> * 更新专题某一层级数据或整个专题数据源</span>
+<span class="comment"> */</span>
+   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">updateThemeList</span><span class="params">(Context context, List&lt;ThemeInfo&gt; themeList)</span> <span class="keyword">throws</span> Exception </span>{
+       App appCtx = (App) context.getApplicationContext();
+       appCtx.getDataSource().setTheme(themeList);
+   }
+<span class="comment">/**</span>
+<span class="comment">    * 更新子级目录专题数据</span>
+<span class="comment">    */</span>
+   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;ThemeInfo&gt; <span class="title">updateSubData</span><span class="params">(ThemeInfo subThemeInfo, List&lt;ThemeInfo&gt; themeList)</span> <span class="keyword">throws</span> Exception </span>{
+       <span class="keyword">if</span> (subThemeInfo == <span class="keyword">null</span>) {
+           <span class="keyword">return</span> themeList;
+       }
+       String currentId = subThemeInfo.getId();
+       <span class="keyword">if</span> (currentId == <span class="keyword">null</span> || JudgeNullUtil.ObjIsNull(themeList)) {
+           <span class="keyword">return</span> themeList;
+       }
+       List&lt;String&gt; subLayerIds = getSubLayerIds(currentId, themeList);
+       <span class="keyword">if</span> (JudgeNullUtil.ObjIsNull(subLayerIds)) {
+           <span class="keyword">return</span> themeList;
+       }
+       <span class="keyword">assert</span> subLayerIds != <span class="keyword">null</span>;
+       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; subLayerIds.size(); i++) {
+           String subId = subLayerIds.get(i);
+           subThemeInfo.setId(subId);
+           String type = getThemeType(subThemeInfo, themeList);
+           updateCurrentData(subThemeInfo, themeList);
+           <span class="keyword">if</span> (type == <span class="keyword">null</span>) {
+               <span class="keyword">continue</span>;
+           }
+           <span class="keyword">if</span> (type.equals(Constants.TYPE_CATLOG)) {
+               updateSubData(subThemeInfo, themeList);
+           }
+       }
+       <span class="keyword">return</span> themeList;
+   }
+
+</code></pre>
+<h4 id="6-更新layer数据："><a href="#6-更新layer数据：" class="headerlink" title="6. 更新layer数据："></a>6. 更新layer数据：</h4><pre><code class="Java"><span class="comment">/**</span>
+<span class="comment">  * 设置layer显示状态</span>
+<span class="comment">  * <span class="doctag">@param</span> layer专题图层</span>
+<span class="comment">  * <span class="doctag">@param</span> visibleIds 图层id</span>
+<span class="comment">  */</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">updateLayerVisible</span><span class="params">(Layer layer, <span class="keyword">int</span>[] visibleIds, <span class="keyword">boolean</span> isOpenLayer)</span> <span class="keyword">throws</span> Exception </span>{
+        <span class="keyword">if</span> (layer == <span class="keyword">null</span>) {
+            <span class="keyword">return</span>;
+        }
+        <span class="keyword">if</span> (layer <span class="keyword">instanceof</span> ArcGISDynamicMapServiceLayer) {
+            ArcGISDynamicMapServiceLayer dynamicLayer = (ArcGISDynamicMapServiceLayer) layer;
+            refreshDynamicLayer(visibleIds, dynamicLayer, isOpenLayer);
+        } <span class="keyword">else</span> {
+            layer.setVisible(isOpenLayer);
+        }
+    }
+<span class="comment">/**</span>
+<span class="comment">     * 根据visibleIds 更新DymicLayer</span>
+<span class="comment">     * <span class="doctag">@param</span> visibleIds   layer Ids</span>
+<span class="comment">     * <span class="doctag">@param</span> dynamicLayer 当前需要刷新的图层</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">refreshDynamicLayer</span><span class="params">(<span class="keyword">int</span>[] visibleIds, ArcGISDynamicMapServiceLayer dynamicLayer, <span class="keyword">boolean</span> isOpenLayer)</span> <span class="keyword">throws</span> Exception </span>{
+        <span class="keyword">if</span> (dynamicLayer == <span class="keyword">null</span>) {
+            <span class="keyword">return</span>;
+        }
+        ArcGISLayerInfo[] arcGISLayerInfos = dynamicLayer.getAllLayers();
+        <span class="keyword">if</span> (visibleIds.length &gt; arcGISLayerInfos.length) {
+            <span class="keyword">return</span>;
+        }
+        ArcGISLayerInfo layerInfo;
+        <span class="keyword">for</span> (<span class="keyword">int</span> index : visibleIds) {
+            <span class="keyword">if</span> (index &lt; <span class="number">0</span>) {
+                <span class="keyword">continue</span>;
+            }
+            layerInfo = arcGISLayerInfos[index];
+            <span class="keyword">if</span> (layerInfo == <span class="keyword">null</span>) {
+                <span class="keyword">continue</span>;
+            }
+            <span class="keyword">boolean</span> isVisible = layerInfo.isVisible();
+            ArcGISLayerInfo layerParentInfo = layerInfo.getParentLayer();
+
+            <span class="keyword">if</span> (layerParentInfo != <span class="keyword">null</span>) {
+                <span class="keyword">boolean</span> parentVisible = layerParentInfo.isVisible();
+                <span class="keyword">if</span> (isOpenLayer) {
+                    <span class="keyword">if</span> (!parentVisible) {
+                        layerParentInfo.setVisible(<span class="keyword">true</span>);
+                    }
+                } <span class="keyword">else</span> {
+                    <span class="keyword">if</span> (parentVisible) {
+                        layerParentInfo.setVisible(<span class="keyword">false</span>);
+                    }
+                }
+            }
+            <span class="keyword">if</span> (isOpenLayer) {
+                <span class="keyword">if</span> (!isVisible) {
+                    layerInfo.setVisible(<span class="keyword">true</span>);
+                }
+            } <span class="keyword">else</span> {
+                <span class="keyword">if</span> (isVisible) {
+                    layerInfo.setVisible(<span class="keyword">false</span>);
+                }
+            }
+        }
+        <span class="keyword">if</span> (!dynamicLayer.isVisible()) {
+            dynamicLayer.setVisible(<span class="keyword">true</span>);
+        }
+        dynamicLayer.refresh();
+    }
+
+</code></pre>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>专题模块的开发提高了项目的灵活性和通透性，大大缩短了用户点击搜索的时间，保证了多层级结构加载时层与层之间的联系不冲突，确保它们之间稳定性。查询时可通过坐标点查询多个图层所对应信息，大大缩短了查询效率，确保项目的顺利进行。为后期新功能迭代打下坚实基础，提高用户体验。</p>
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/09/16/Android Gis开发经验分享/" title= "Android Gis开发经验分享">
+                    <div class="nextTitle">Android Gis开发经验分享</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/13/landanalysis/" title= "移动用地分析">
+                    <div class="prevTitle">移动用地分析</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:distmobile@126.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fellowtravellers" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动一张图专题分析"><span class="toc-number">1.</span> <span class="toc-text">移动一张图专题分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows平台-AndroidStudio开发环境"><span class="toc-number">1.0.1.</span> <span class="toc-text">Windows平台/AndroidStudio开发环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要代码实现"><span class="toc-number">1.1.</span> <span class="toc-text">##重要代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-通过ID获取列表，projectId刚开始传入-1-显示根目录列表："><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1. 通过ID获取列表，projectId刚开始传入-1.显示根目录列表：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-列表Item的点击事件："><span class="toc-number">1.1.0.2.</span> <span class="toc-text">2. 列表Item的点击事件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开关按钮的点击事件："><span class="toc-number">1.1.0.3.</span> <span class="toc-text">3. 开关按钮的点击事件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-通过图层id显示专题图层："><span class="toc-number">1.1.0.4.</span> <span class="toc-text">4.通过图层id显示专题图层：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-更新专题数据："><span class="toc-number">1.1.0.5.</span> <span class="toc-text">5.更新专题数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-更新layer数据："><span class="toc-number">1.1.0.6.</span> <span class="toc-text">6. 更新layer数据：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">1.2.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 6
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/offlineremote/" >移动离线督察功能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/legendfilter/" >移动图例过滤功能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/Android Gis开发经验分享/" >Android Gis开发经验分享</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2018/08/16/移动一张图专题分析-陈光禄/" >移动一张图专题分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2018/08/13/landanalysis/" >移动用地分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/05</span><a class="archive-post-title" href= "/2018/08/05/在线缓存功能开发分享-万峥嵘/" >在线缓存功能开发分享</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Gis"><span class="iconfont-archer">&#xe606;</span>Gis</span>
+    
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="肖健"><span class="iconfont-archer">&#xe60a;</span>肖健</span>
+    
+        <span class="sidebar-category-name" data-categories="张泉"><span class="iconfont-archer">&#xe60a;</span>张泉</span>
+    
+        <span class="sidebar-category-name" data-categories="陈光禄"><span class="iconfont-archer">&#xe60a;</span>陈光禄</span>
+    
+        <span class="sidebar-category-name" data-categories="万峥嵘"><span class="iconfont-archer">&#xe60a;</span>万峥嵘</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "xiaoshuiz"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

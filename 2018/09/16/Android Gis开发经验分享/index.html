@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>移动用地分析 · Fellow Travellers</title>
+    <title>Android Gis开发经验分享 · Fellow Travellers</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Fellow Travellers</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">移动用地分析</a>
+                <a href="#" class="post-name">Android Gis开发经验分享</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            移动用地分析
+            Android Gis开发经验分享
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Gis">Gis</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.2k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.3k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/09/28</span>
+                    <span class="post-intro-time">2018/09/16</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,194 +401,50 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <header><br><td bgcolor="#0099ff"><br><br>   <center><table><tr><td bgcolor="#333333"><font size="7" face="黑体" color="#ffffff"><strong>移动用地分析功能</strong></font></td></tr></table></center><br><br><br></td><br></header>
-
-
-
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">用地分析是指在对地区各自然要素进行综合分析研究的基础上，按照城市规划和建设要求、用地整备工程技术的可能性和经济性，对城市规划用地进行适用性分析评定，以划出城市用地的不同等级。</font><br><br><br><font size="4">另外用于查清村和农、林、牧、渔场，居民点及其以外的独立工矿企事业单位土地权属界线和村以上各级行政界线，查清各类用地面积、分布和利用状况。</font><br><br><br><font color="#664499" size="4">在本文中，用地分析主要实现为对所选中区域进行土地类别、面积和分布的识别与判断，计算其中各个层级占其父级的百分比以及面积情况。</font>
-
-
-<hr>
-
-<p><br></p>
-<h2 id="实现逻辑略析"><a href="#实现逻辑略析" class="headerlink" title="实现逻辑略析"></a><font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font></h2><ol>
-<li>可视化与相关功能操作窗口的基本实现<br></li>
-</ol>
-<ol start="2">
-<li>加载功能基础的地图底图与分析操作图层<br></li>
-</ol>
-<ol start="3">
-<li>分析区域的选择并获取当前图形<br></li>
-</ol>
-<ol start="4">
-<li><font color="#664499">离线调用FeatureQuery（在线调用QueryTask）进行要素查询与过滤</font><br></li>
-</ol>
-<ol start="5">
-<li><font color="#664499">获得结果FeatureResult，从中获取Geometry<font color="#ee0000">（并非与绘制图形做过交叉处理的Geometry）</font>与Attribute</font><br></li>
-</ol>
-<ol start="6">
-<li><font color="#664499">图形切割与面积计算</font><br></li>
-</ol>
-<ol start="7">
-<li>通过GraphicLayer进行图形展示以及图形条组与相应控件Item绑定<br></li>
-</ol>
-<p><hr><br><br></p>
-<h2 id="重要部分代码实现"><a href="#重要部分代码实现" class="headerlink" title="重要部分代码实现"></a><font size="6" face="黑体" color="#005432"><strong>重要部分代码实现</strong></font></h2><h3 id="1-分析区域选择"><a href="#1-分析区域选择" class="headerlink" title="1.分析区域选择"></a>1.<font size="5" face="黑体"><strong>分析区域选择</strong></font><br></h3><pre><code>//通过多点集合绘制几何图形
-polygon.lineTo(currentPoint);
-currentGraphic = new Graphic(polygon, symbol);
-drawLayer.updateGraphic(currentGraphicIndex,currentGraphic);
-pointGraphic=new Graphic(multiPoint,pointSymbol);
-drawLayer.updateGraphic(pointGraphicIndex,pointGraphic);
-multiPoint.add(currentPoint);
-if(lastGraphicIndex!=-1){
-    drawLayer.removeGraphic(lastGraphicIndex);
-}
-lastGraphic=new Graphic(currentPoint,lastSymbol);
-lastGraphicIndex=drawLayer.addGraphic(lastGraphic);
-</code></pre><p><br></p>
-<h3 id="2-地图查询"><a href="#2-地图查询" class="headerlink" title="2.地图查询"></a>2.<font size="5" face="黑体" color="#ff0000"><strong>地图查询</strong></font><br></h3><blockquote>
-<p>  离线查询</p>
-</blockquote>
-<p>离线查询通过初始化一个QueryParameter并设置其参数，调用FeatureLayer对象的QueryFeature方法进行查询，拿到查询结果的Geometry与Attribute。</p>
-<pre><code>QueryParameters queryParams=new QueryParameters();
-//设置区域
-if (isALL) {
-queryParams.setGeometry(mapView_main.getExtent());
-}else {
-    Polygon queryPolygon=measureManager.getpolygon();
-    queryParams.setGeometry(queryPolygon);
-}
-//设置过滤字段
-queryParams.setOutFields(new String[]{&quot;*&quot;});
-landAnalysisResultInfos=new ArrayList&lt;&gt;();
-List&lt;LandAnalysisResultInfo&gt; analysisResultInfos=new ArrayList&lt;&gt;();                    
-Future&lt;FeatureResult&gt; resultFuture=null;
-FeatureResult featureResult=null;
-FeatureLayer featureLayer=(FeatureLayer)layer;
-resultFuture=featureLayer.getFeatureTable().queryFeatures(queryParams,callbackListener);
-try {
-    //获取结果
-    featureResult=resultFuture.get();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-if (featureResult!=null&amp;&amp;featureResult.featureCount()&gt;0) {
-    Iterator it = featureResult.iterator();
-     while (it.hasNext()){
-    GeodatabaseFeature geodatabaseFeature= (GeodatabaseFeature) it.next();
-    Geometry geometry=geodatabaseFeature.getGeometry();
-    &lt;String, Object&gt; featureMap=geodatabaseFeature.getAttributes();
-
-    if(geometry!=null){
-        //进行图形处理
-    }
-    if (featureMap!=null&amp;&amp;featureMap.size()&gt;0) {
-        //进行内容详情提取处理
-    }
-}
-</code></pre><p><br></p>
-<blockquote>
-<p>  在线查询</p>
-</blockquote>
-<p>在线查询通过初始化一个QueryParameter并设置其参数，然后通过在线图层的URL初始化一个QueryTask，通过其对象的execute方法拿到查询结果的Geometry与Attribute。</p>
-<pre><code>QueryParameters queryParams=new QueryParameters();
-Polygon Querypolygon=measureManager.getpolygon();
-queryParams.setGeometry(Querypolygon);
-landAnalysisResultInfos=new ArrayList&lt;&gt;();
-queryParams.setOutFields(new String[]{&quot;*&quot;});
-List&lt;LandAnalysisResultInfo&gt; analysisResultInfos=new ArrayList&lt;&gt;();
-Future&lt;FeatureResult&gt; resultFuture=null;
-FeatureResult featureResult=null;
-ArcGISDynamicMapServiceLayer featureLayer=(ArcGISDynamicMapServiceLayer)layer;
-QueryTask queryTask=new QueryTask(featureLayer.getQueryUrl(0));
-resultFuture=queryTask.execute(queryParams, callbackListener);
-try {
-    featureResult=resultFuture.get();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-if (featureResult!=null&amp;&amp;featureResult.featureCount()&gt;0) {
-    for (Object element : featureResult) {
-        if (element instanceof Feature) {
-            Feature f = (Feature) element;
-            Geometry geometry=f.getGeometry();
-            Map&lt;String, Object&gt; featureMap=f.getAttributes();
-            if(geometry!=null){
-                //进行图形处理
-            }
-            if (featureMap!=null&amp;&amp;featureMap.size()&gt;0) {
-                //进行内容详情提取处理
-            }
-        }
-    }
-}        
-</code></pre><p><br></p>
-<h3 id="3-图形交叉处理"><a href="#3-图形交叉处理" class="headerlink" title="3.图形交叉处理"></a>3.<font size="5" face="黑体" color="#ff0000"><strong>图形交叉处理</strong></font><br></h3><blockquote>
-<p> 通过调用GeometeyEngine.intersect()方法获取。</p>
-</blockquote>
-<pre><code>Geometry geometry = GeometryEngine.intersect(geometry,measureManager.getpolygon(),mapView_main.getSpatialReference());
-</code></pre><p><br></p>
-<h3 id="4-面积计算"><a href="#4-面积计算" class="headerlink" title="4.面积计算"></a>4.<font size="5" face="黑体"><strong>面积计算</strong></font><br></h3><blockquote>
-<p>由于获取的Geometry的面积与其父Geometry的面积均为调用Geometry对象的calculateArea2D()方法，并非实际面积。<br><br>所以我们需要通过Attribute获得的实际面积计算切割Geometry与其父Geometry的实际面积，并计算其百分比。</p>
-</blockquote>
-<pre><code>/**
- *通过在地图上的Area大小计算百分比与实际面积
- *
- * @param landResourceInfos 分析结果的数组 成员： {@link LandAnalysisResultInfo}
- * @return 一个结果的数组 变更了参数数组中成员的属性
- */
-public static List&lt;LandAnalysisResultInfo&gt; getLandPercentValue(List&lt;LandAnalysisResultInfo&gt; landResourceInfos){
-    /*计算实际面积 */
-    double MUM=0;
-    for (LandAnalysisResultInfo landResourceInfo : landResourceInfos) {
-        if (landResourceInfo.getYDMJ()==null) {
-            landResourceInfos.remove(landResourceInfo);
-            continue;
-        }
-        Double visualArea=landResourceInfo.getGeometry().calculateArea2D();
-        Double visualParentArea=landResourceInfo.getParentGeometry().calculateArea2D();
-        Double realArea=landResourceInfo.getYDMJ()/visualParentArea*visualArea;
-        landResourceInfo.setYDMJ(realArea);
-
-        //累计求和
-        MUM=MUM+landResourceInfo.getYDMJ();
-    }
-    /*分别计算百分比*/
-    for (LandAnalysisResultInfo landResourceInfo : landResourceInfos) {
-        landResourceInfo.setPercentValue(String.valueOf(landResourceInfo.getYDMJ()/MUM*100));
-    }
-    return landResourceInfos;
-}
-</code></pre><p><br></p>
-<h3 id="5-图形展示"><a href="#5-图形展示" class="headerlink" title="5.图形展示"></a>5.<font size="5" face="黑体"><strong>图形展示</strong></font><br></h3><blockquote>
-<p>由于本次使用为列表显示，故图形展示在点击子Item的时候进行Geometry的绘制与添加。</p>
-</blockquote>
-<pre><code>/**
- * 结果列表点击效果
- */
-private AdapterView.OnItemClickListener resultListOnItemClickListener =new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
-        resultDrawerLayer.removeAll();
-        resultDrawerLayer.addGraphic(new Graphic(landAnalysisResultInfos.get(position).getGeometry(), MapViewTapTool.getLabelSymbol(MainMapActivity.this,Geometry.Type.POLYGON, Color.BLUE)));
-        resultDrawerLayer.addGraphic(new Graphic(landAnalysisResultInfos.get(position).getParentGeometry(),MapViewTapTool.getLabelSymbol(MainMapActivity.this,Geometry.Type.POLYLINE, Color.BLACK)));
-        Envelope tempEnvelope = new Envelope();
-        landAnalysisResultInfos.get(position).getParentGeometry().queryEnvelope(tempEnvelope);
-        Point tempPoint = tEnvelope.getCenter();
-        mapView_main.centerAt(tempPoint,true);
-    }
-};
-</code></pre><p><hr><br><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><font size="6" face="黑体" color="#005432"><strong>结语</strong></font></h2><p>&emsp;&emsp;用地分析功能的开发，既减少了用户查看地图计算面积的时间，提高了地图的可阅读性。让用户通过移动设备简单的操作即可获取选取区域中各类型的板块内容与面积，并通过绘制图层让用户在地图上更直观的看清板块对象。</p>
-<p><font size="3"><a href="https://github.com/xiaoshuiz/Rep4MarkDown/tree/%E7%94%A8%E5%9C%B0%E5%88%86%E6%9E%90%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81/%E7%94%A8%E5%9C%B0%E5%88%86%E6%9E%90" title="点击进去作者Git" target="_blank" rel="noopener">相关关键代码查看</a></font><br><br><br><br></p>
-<p><image src="http://www.dist.com.cn/templates/cn/images/logo.png" align="right"><br><br>&emsp;</image></p>
-<p><br></p>
-<hr>
-
+        <p>#Android Gis开发经验分享</p>
+<p>##概述</p>
+<p>###一、地图坐标系的认识</p>
+<p>###二、地图管理类的认识</p>
+<p>###三、Gis开发熟知</p>
+<p>###四、Gis开发平台差异化注意事项</p>
+<p>####一、地图坐标系的认识</p>
+<p>####1. WGS84坐标系<br>          一种国际上采用的地心坐标系.  </p>
+<p>####2.    WGS84 Web墨卡托<br>        Web墨卡托是2005年谷歌在谷歌地图中首次使用的,如今主流的Web地图几乎都是使用的Web墨卡托,如：国内的百度地图、高德地图、腾讯地图和天地图等也是基于Web墨卡托（国内地图有加密要求，有两种情况，一种是在 Web墨卡托的基础上经过国家标准加密的国标02坐标系，熟称“火星坐标系”；另一种是在国标的02坐标系下进一步进行加密，如百度地图的BD09坐标系）。</p>
+<p><img src="https://i.imgur.com/3lj9uJ0.png" alt="Alt text"></p>
+<p>####3.GCJ02经纬度投影<br>        GCJ-02是由中国国家测绘局（G表示Guojia国家，C表示Cehui测绘，J表示Ju局）制订的地理信息系统的坐标系统。它其实就是对真实坐标系统进行人为的加偏处理，按照特殊的算法，将真实的坐标加密成虚假的坐标，而这个加偏并不是线性的加偏，所以各地的偏移情况都会有所不同。而加密后的坐标也常被大家称为“火星坐标系统”。<br>        该坐标系的坐标值为经纬度格式，单位为度； GCJ02经纬度投影，就是在WGS84经纬度的基础之上，进行GCJ-02加偏；BD09经纬度投影属于百度坐标系，它是在标准经纬度的基础上进行GCJ-02加偏之后，再加上百度自身的加偏算法，也就是在标准经纬度的基础之上进行了两次加偏。</p>
+<p>####4.GCJ02 Web 墨卡托投影<br>       该坐标系的坐标值为Web墨卡托格式，单位为米；这里的GCJ02 Web 墨卡托，也就是在标准Web默卡托的基础之上，进行GCJ-02加偏。</p>
+<p>####5. 北京54坐标系<br>    我国与前苏联1942年坐标系进行联测，通过计算建立了我国大地坐标系，定名为1954年北京坐标系。<br>它的原点不在北京而是在前苏联的普尔科沃；该坐标系存在很多缺点，为此，我国在1978年在西安召开了”全国天文大地网整体平差会议”，提出了建立属于我国自己的大地坐标系，即后来的1980西安坐标系。</p>
+<p>####6. 西安80坐标系<br>     该坐标系的大地原点设在我国中部的陕西省泾阳县永乐镇，位于西安市西北方向约60公里。</p>
+<p>####7. CGCS2000坐标系<br>     2000中国大地坐标系(China Geodetic Coordinate System 2000，CGCS2000)，又称之为2000国家大地坐标系，是中国新一代大地坐标系，21世纪初已在中国正式实施。</p>
+<p>####8.   OGC标准<br>      OGC 全称是开放地理空间信息联盟(Open Geospatial Consortium),是一个非盈利的国际标准组织，<br>它制定了数据和服务的一系列标准，GIS厂商按照这个标准进行开发可保证空间数据的互操作</p>
+<p>####9.EPSP代码<br>      EPSP的英文全称是European Petroleum Survey Group，中文名称为欧洲石油调查组织。这个组织成立于1986年，2005年并入IOGP(InternationalAssociation of Oil &amp; Gas Producers)，中文名称为国际油气生产者协会；EPSG对世界的每一个地方都制定了地图，但是由于座标系不同，所以地图也各不相同。</p>
+<p>####10.SRID：<br>    OGC标准中的参数SRID，也是指的空间参考系统的ID，与EPSG一致；天地图通常采用的4490坐标系其实也就是CGCS2000坐标系 。</p>
+<p><img src="https://i.imgur.com/0B4XQ95.png" alt=""><br><img src="https://i.imgur.com/66Kwr9W.png" alt=""></p>
+<p>####二、地图管理类的认识</p>
+<p>####1. ArcGISDynamicMapServiceLayer<br>                 extends DynamicLayer</p>
+<p>####2. ArcGISTiledMapServiceLayer<br>                 extends TiledServiceLayer</p>
+<p>####3. ArcGISLocalTiledLayer<br>                 extends TiledLayer</p>
+<p>####4. ArcGISFeatureLayer<br>                extends GraphicsLayer</p>
+<p>####5. TianDiTuLayer<br>                extends TiledServiceLayer</p>
+<p>####6. GraphicsLayer<br>                extends Layer</p>
+<p>####7. WMSLayer<br>               extends DynamicLayer</p>
+<p>####8. 其他：<br>    WMSLayer、WFS、 WMTSLayer、 WebMapLayer、 WCS、WPS、WCPS等…<br>    其中wms是web地图服务，是一个仓库管理系统；wfs 是web要素服务，是一个工作流系统；</p>
+<p><img src="https://i.imgur.com/kBRTMUt.png" alt=""></p>
+<p>####三、Gis开发常用函数</p>
+<p>####1.FindTask<br>         多个图层的要素查询、不能进行“空间查询”；</p>
+<p>####2. QueryTask<br>        空间和属性查询</p>
+<p>####3. IdentifyTask<br>       多个图层中查询、识别要素（Feature）；</p>
+<p>####4. OnSingleTapListener<br>    地图点击事件监听</p>
+<p>####5. calculateLength2D()<br>         线长度计算</p>
+<p>####6. polygon.calculateArea2D()<br>         面积计算</p>
+<p>####7. GeometryEngine<br>      图形交叉关系识别及计算<br><img src="https://i.imgur.com/BezMpOa.png" alt=""></p>
+<p>####四、Gis平台差异化注意事项（android为主）</p>
+<p>####1.ArcGISDynamicMapServiceLayer   无法显示问题属性设置：Supports Dynamic Layers: true</p>
+<p>####2.ArcGISDynamicMapServiceLayer可根据底图坐标系自行调整。<br>      如：加载wmts地图服务后进行ArcGISDynamicMapServiceLayer叠加可进行图层显示、反之无法显示。</p>
+<p>####3.ArcGISDynamicMapServiceLayer(String url) 与</p>
+<p>####ArcGISDynamicMapServiceLayer(String url, int[] visiblelayers)差异<br>     初始化传入visiblelayers，后面可通过图层id进行单个图层的控制、否则无法正常控制。</p>
+<p>####4.ArcGISDynamicMapServiceLayer(String url, int[] visiblelayers)部分地图服务必须使用此函数才可正常显示图层。<br>     项目经历：广州项目添加特有的配置文件支持该函数的使用。</p>
+<p>####问题讨论：<br>         1.三大查询的异步处理机制？<br>         2.地图服务操作常见问题总结。<br>         3.天地图加载方式及注意事项。</p>
 
     </article>
     <!-- license  -->
@@ -598,16 +454,16 @@ private AdapterView.OnItemClickListener resultListOnItemClickListener =new Adapt
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/09/28/offlineremote/" title= "移动离线督察功能">
-                    <div class="nextTitle">移动离线督察功能</div>
+                <a href= "/2018/09/24/legendfilter/" title= "移动图例过滤功能">
+                    <div class="nextTitle">移动图例过滤功能</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/09/28/legendfilter/" title= "移动图例过滤功能">
-                    <div class="prevTitle">移动图例过滤功能</div>
+                <a href= "/2018/08/16/移动一张图专题分析-陈光禄/" title= "移动一张图专题分析">
+                    <div class="prevTitle">移动一张图专题分析</div>
                 </a>
             
         </li>
@@ -719,7 +575,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-分析区域选择"><span class="toc-number">3.1.</span> <span class="toc-text">1.分析区域选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-地图查询"><span class="toc-number">3.2.</span> <span class="toc-text">2.地图查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图形交叉处理"><span class="toc-number">3.3.</span> <span class="toc-text">3.图形交叉处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-面积计算"><span class="toc-number">3.4.</span> <span class="toc-text">4.面积计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-图形展示"><span class="toc-number">3.5.</span> <span class="toc-text">5.图形展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+        
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -759,9 +615,36 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 3
+        Total : 6
         </div>
         <!-- search  -->
         
@@ -777,23 +660,40 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/offlineremote/" >移动离线督察功能</a>
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/offlineremote/" >移动离线督察功能</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/landanalysis/" >移动用地分析</a>
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/legendfilter/" >移动图例过滤功能</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/legendfilter/" >移动图例过滤功能</a>
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2018/09/16/Android Gis开发经验分享/" >Android Gis开发经验分享</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2018/08/16/移动一张图专题分析-陈光禄/" >移动一张图专题分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2018/08/13/landanalysis/" >移动用地分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/05</span><a class="archive-post-title" href= "/2018/08/05/在线缓存功能开发分享-万峥嵘/" >在线缓存功能开发分享</a>
         </li>
     
     </div>
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Gis"><span class="iconfont-archer">&#xe606;</span>Gis</span>
     
         <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
     
@@ -830,7 +730,13 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="移动"><span class="iconfont-archer">&#xe60a;</span>移动</span>
+        <span class="sidebar-category-name" data-categories="肖健"><span class="iconfont-archer">&#xe60a;</span>肖健</span>
+    
+        <span class="sidebar-category-name" data-categories="张泉"><span class="iconfont-archer">&#xe60a;</span>张泉</span>
+    
+        <span class="sidebar-category-name" data-categories="陈光禄"><span class="iconfont-archer">&#xe60a;</span>陈光禄</span>
+    
+        <span class="sidebar-category-name" data-categories="万峥嵘"><span class="iconfont-archer">&#xe60a;</span>万峥嵘</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
