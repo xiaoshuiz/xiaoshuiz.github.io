@@ -401,22 +401,27 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>#1. 简介</p>
-<ol>
+        <p><br></p>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><ol>
 <li>离线在线一体化<br>数据存储在企业级地理数据库中，通过Arcgis桌面加载后配图处理，并发布到Arcgis for Server中，供移动端设备编辑使用，并可以同步回传版本化存档。</li>
-<li>应用场景<br>在没有网络的情况下我们需要用到在线的地图数据进行操作，这些数据需要有一定的时效性，如果采用，打包离线包的方式提前做好离线数据，那时效性相对较差。所以，用在线缓存技术可以支持这一点。<br>#2. 在线缓存的实现逻辑思路</li>
+<li>应用场景<br>在没有网络的情况下我们需要用到在线的地图数据进行操作，这些数据需要有一定的时效性，如果采用，打包离线包的方式提前做好离线数据，那时效性相对较差。所以，用在线缓存技术可以支持这一点。</li>
 </ol>
-<ul>
+<p><br></p>
+<h2 id="2-在线缓存的实现逻辑思路"><a href="#2-在线缓存的实现逻辑思路" class="headerlink" title="2. 在线缓存的实现逻辑思路"></a>2. 在线缓存的实现逻辑思路</h2><ul>
 <li>在地图上选定区域，作为需要下载对应离线数据的地图范围（可以设定范围，也可以自定义）</li>
 <li>获取下载滴地图服务所需要的具体参数</li>
-<li>在本地创建文件，存放下载的数据，以供使用<br>#3. 用到的核心功能类以及说明</li>
+<li>在本地创建文件，存放下载的数据，以供使用</li>
+</ul>
+<p><br></p>
+<h2 id="3-用到的核心功能类以及说明"><a href="#3-用到的核心功能类以及说明" class="headerlink" title="3. 用到的核心功能类以及说明"></a>3. 用到的核心功能类以及说明</h2><ul>
 <li>GeodatabaseSyncTask类，实现下载同步功能</li>
 <li>GenerateGeodatabaseParameters，下载数据时所需的参数对象，该类构造函数一共有7个根据需要选择<br><img src="https://upload-images.jianshu.io/upload_images/13449852-0a6c357a2b8c670d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
 <li>CallbackListener<geodatabase>，完成GDB数据库下载的回调函数类，在该回调中我们只可以执行一些操作，如示例里在回调中删除了在线的服务图层，加载离线的数据图层到地图上进行显示。通过Geodatabase本地数据库可以获取要素图层列表<a href="http://blog.csdn.net/arcgis_all/article/details/20442663" target="_blank" rel="noopener">List</a>&lt;<a href="http://blog.csdn.net/arcgis_all/article/details/20442663" target="_blank" rel="noopener">GdbFeatureTable</a>&gt;对象，通过newFeatureLayer(gdbFeatureTable)来创建一个离线要素图层进行要素显示。</geodatabase></li>
 <li>GeodatabaseStatusCallback，本地数据库回调状态类，在数据下载过程中会有很多状态改变，各种状态改变时都会走这个类的回调函数。</li>
-<li>GeodatabaseTask.generateGeodatabase，通过该方法生成离线数据库和相应的要素表，方法需要传递上面介绍的三个参数和一个数据库存储的路径。<br>#4. 代码示例</li>
+<li>GeodatabaseTask.generateGeodatabase，通过该方法生成离线数据库和相应的要素表，方法需要传递上面介绍的三个参数和一个数据库存储的路径。</li>
 </ul>
-<ol>
+<p><br></p>
+<h2 id="4-代码示例"><a href="#4-代码示例" class="headerlink" title="4. 代码示例"></a>4. 代码示例</h2><ol>
 <li><p>在地图上自定义一个区域</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * 绘制出在线缓存区域</span><br><span class="line"> * */</span><br><span class="line">private void polygonState(Point currentPoint)throws Exception&#123;</span><br><span class="line">    if(startPoint!=null&amp;&amp;!startPoint.isEmpty())&#123;</span><br><span class="line">        polygon.lineTo(currentPoint);</span><br><span class="line">        currentGraphic = new Graphic(polygon, symbol);</span><br><span class="line">        drawLayer.updateGraphic(currentGraphicIndex,currentGraphic);</span><br><span class="line"></span><br><span class="line">        pointGraphic=new Graphic(multiPoint,pointSymbol);</span><br><span class="line">        drawLayer.updateGraphic(pointGraphicIndex,pointGraphic);</span><br><span class="line">        multiPoint.add(currentPoint);</span><br><span class="line">        if(lastGraphicIndex!=-1)&#123;</span><br><span class="line">            drawLayer.removeGraphic(lastGraphicIndex);</span><br><span class="line">        &#125;</span><br><span class="line">        lastGraphic=new Graphic(currentPoint,lastSymbol);</span><br><span class="line">        lastGraphicIndex=drawLayer.addGraphic(lastGraphic);</span><br><span class="line"></span><br><span class="line">        if(polygon.getPointCount()&gt;=3)&#123;</span><br><span class="line">            isCheckedSave=true;</span><br><span class="line">            isSave=isCheckedSave;</span><br><span class="line">            onlinesave.setTextColor(ContextCompat.getColor(mActivity,R.color.blue));</span><br><span class="line">            onlinesave.setClickable(isSave);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        polygon=new Polygon();</span><br><span class="line">        multiPoint=new MultiPoint();</span><br><span class="line">        polygon.startPath(currentPoint);</span><br><span class="line">        startPoint=currentPoint;</span><br><span class="line">        currentGraphic=new Graphic(startPoint,symbol);</span><br><span class="line">        currentGraphicIndex=drawLayer.addGraphic(currentGraphic);</span><br><span class="line">        pointGraphic=new Graphic(startPoint,lastSymbol);</span><br><span class="line">        pointGraphicIndex=drawLayer.addGraphic(pointGraphic);</span><br><span class="line">        multiPoint.add(currentPoint);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * 确定所选区域范围</span><br><span class="line"> * */</span><br><span class="line">public void SaveLabel()throws Exception&#123;</span><br><span class="line">    if(isSave&amp;&amp;drawLayer!=null) &#123;</span><br><span class="line">        startPoint = null;</span><br><span class="line">        isCheckedSave=false;</span><br><span class="line">        isSave=isCheckedSave;</span><br><span class="line">        onlinesave.setTextColor(ContextCompat.getColor(mActivity,R.color.gray));</span><br><span class="line">        onlinesave.setClickable(isSave);</span><br><span class="line">        if(currentGraphicIndex!=-1)&#123;</span><br><span class="line">            Graphic graphic = drawLayer.getGraphic(currentGraphicIndex);</span><br><span class="line">            if(graphic!=null)&#123;</span><br><span class="line">                Geometry geometry=graphic.getGeometry();</span><br><span class="line">                Graphic saveGraphic=null;</span><br><span class="line">                if(geometryType.equals(Geometry.Type.POLYGON))&#123;</span><br><span class="line">                    symbol=MapViewTapTool.getLabelSymbol(mActivity,geometryType,ContextCompat.getColor(mActivity,R.color.green_transparent));</span><br><span class="line">                    saveGraphic=new Graphic(geometry,symbol);</span><br><span class="line">                    pointSymbol=MapViewTapTool.getCircleGreenSymbol(mActivity);</span><br><span class="line">                    pointGraphic=new Graphic(geometry,pointSymbol);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    symbol=MapViewTapTool.getLabelSymbol(mActivity,geometryType,ContextCompat.getColor(mActivity,R.color.green));</span><br><span class="line">                    saveGraphic=new Graphic(geometry,symbol);</span><br><span class="line">                    pointSymbol=MapViewTapTool.getCircleGreenSymbol(mActivity);</span><br><span class="line">                    pointGraphic=new Graphic(geometry,pointSymbol);</span><br><span class="line">                &#125;</span><br><span class="line">                if(onlineCacheInfoList!=null&amp;&amp;onlineCacheInfoList.size()&gt;0)&#123;</span><br><span class="line">                    setView();</span><br><span class="line">                    int i = 0;</span><br><span class="line">                    if(onlineCacheInfoList.get(i).getCacheurl().trim().length()&gt;0) &#123;</span><br><span class="line">                        downloadData(onlineCacheInfoList.get(i), geometry, i);//缓存featureLayer</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        isCheckedSave=false;</span><br><span class="line">        isSave=isCheckedSave;</span><br><span class="line">        onlinesave.setTextColor(ContextCompat.getColor(mActivity,R.color.gray));</span><br><span class="line">        onlinesave.setClickable(isSave);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -427,7 +432,8 @@ height:50vh;
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//加载数据</span><br><span class="line">private void updateFeatureLayer(String featureLayerPath) &#123;</span><br><span class="line">        // create a new geodatabase</span><br><span class="line">        Geodatabase localGdb = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            localGdb = new Geodatabase(featureLayerPath);</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (localGdb != null) &#123;</span><br><span class="line">            for (GeodatabaseFeatureTable gdbFeatureTable : localGdb</span><br><span class="line">                    .getGeodatabaseTables()) &#123;</span><br><span class="line">                if (gdbFeatureTable.hasGeometry())&#123;</span><br><span class="line">                    mOneMapView.addLayer(new FeatureLayer(gdbFeatureTable));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>#5. 结语<br>在线缓存的应用，减少了手动制作离线数据的步骤，大大提高了地图制作的效率，只需发布对应的地图服务就能实现离线数据的在线下载。另外也同时保证了数据的时效性，如果对应地图服务有新的数据更改，那我们可以重新下载新的在线数据，不需要再去手动打包地图文件。</p>
+<p><br></p>
+<h2 id="5-结语"><a href="#5-结语" class="headerlink" title="5. 结语"></a>5. 结语</h2><p>在线缓存的应用，减少了手动制作离线数据的步骤，大大提高了地图制作的效率，只需发布对应的地图服务就能实现离线数据的在线下载。另外也同时保证了数据的时效性，如果对应地图服务有新的数据更改，那我们可以重新下载新的在线数据，不需要再去手动打包地图文件。</p>
 <ul>
 <li>最后感谢您的阅读，有机会一起探讨！</li>
 </ul>
@@ -556,7 +562,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-简介"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-在线缓存的实现逻辑思路"><span class="toc-number">2.</span> <span class="toc-text">2. 在线缓存的实现逻辑思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-用到的核心功能类以及说明"><span class="toc-number">3.</span> <span class="toc-text">3. 用到的核心功能类以及说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-代码示例"><span class="toc-number">4.</span> <span class="toc-text">4. 代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-结语"><span class="toc-number">5.</span> <span class="toc-text">5. 结语</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -569,6 +575,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
@@ -713,9 +723,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="肖健"><span class="iconfont-archer">&#xe60a;</span>肖健</span>
     
-        <span class="sidebar-category-name" data-categories="张泉"><span class="iconfont-archer">&#xe60a;</span>张泉</span>
-    
         <span class="sidebar-category-name" data-categories="陈光禄"><span class="iconfont-archer">&#xe60a;</span>陈光禄</span>
+    
+        <span class="sidebar-category-name" data-categories="张泉"><span class="iconfont-archer">&#xe60a;</span>张泉</span>
     
         <span class="sidebar-category-name" data-categories="万峥嵘"><span class="iconfont-archer">&#xe60a;</span>万峥嵘</span>
     
