@@ -403,11 +403,11 @@ height:50vh;
     <article class="article-entry">
         <h1 id="移动一张图专题分析"><a href="#移动一张图专题分析" class="headerlink" title="移动一张图专题分析"></a>移动一张图专题分析</h1><hr>
 <p><br></p>
-<p>##简介<br>[专题模块为整个项目中的重要组成部分，也是不可或缺之一。用户可通过专题信息查看其主要层级结构和内部构造划分。对主要层级可进行收藏展示，便于直观查看。可手动点击某一层级结构打开对应图层，查看详细信息。]</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>[专题模块为整个项目中的重要组成部分，也是不可或缺之一。用户可通过专题信息查看其主要层级结构和内部构造划分。对主要层级可进行收藏展示，便于直观查看。可手动点击某一层级结构打开对应图层，查看详细信息。]</p>
 <blockquote>
 <p>列表主要分为两种结构，一种为树状结构、一种为层级结构。以相同的数据模型展示不同的列表结构，便于用户选择。<br><br></p>
 </blockquote>
-<p>##逻辑<br>列表项包括三角号小图标、收藏按钮和点击开关的按钮。根据不同情境分别设置相应的展示状态。</p>
+<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><p>列表项包括三角号小图标、收藏按钮和点击开关的按钮。根据不同情境分别设置相应的展示状态。</p>
 <blockquote>
 <ul>
 <li>当为树状结构时：首先初始化专题列表，通过Id展示最新列表。当点击Item项时，我们会记录专题的id,通过id找到子集列表数据，查看子集的type类型是否为“catalog”,如果是该类型，则会继续打开。直到我们点击Item项为“group”类型时，这时图层状态则不显示下一级别。 当我们点击开关状态时，获取子结点数据，将当前状态设置为打开，设置专题是否可见，根据id判断找到父级与子级，并更新整个专题的数据。当开关状态点击到“group”级别时，下一级别则是“layer”级别，图层状态则不显示下一级别。直接在图层上加载layer级别的数据。关闭时如果点击group级别的数据，则会直接关闭当前对应级别数据，父级状态为半开状态，如果关闭“catalog级则会将子级数据共同关闭，直到点击状态为“catalog”级别，对应“parentLayerId”=-1时，这时所有子级数据将全部关闭。</li>
@@ -714,7 +714,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动一张图专题分析"><span class="toc-number">1.</span> <span class="toc-text">移动一张图专题分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows平台-AndroidStudio开发环境"><span class="toc-number">1.0.1.</span> <span class="toc-text">Windows平台/AndroidStudio开发环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要代码实现"><span class="toc-number">1.1.</span> <span class="toc-text">##重要代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-通过ID获取列表，projectId刚开始传入-1-显示根目录列表："><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1. 通过ID获取列表，projectId刚开始传入-1.显示根目录列表：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-列表Item的点击事件："><span class="toc-number">1.1.0.2.</span> <span class="toc-text">2. 列表Item的点击事件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开关按钮的点击事件："><span class="toc-number">1.1.0.3.</span> <span class="toc-text">3. 开关按钮的点击事件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-通过图层id显示专题图层："><span class="toc-number">1.1.0.4.</span> <span class="toc-text">4.通过图层id显示专题图层：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-更新专题数据："><span class="toc-number">1.1.0.5.</span> <span class="toc-text">5.更新专题数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-更新layer数据："><span class="toc-number">1.1.0.6.</span> <span class="toc-text">6. 更新layer数据：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">1.2.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动一张图专题分析"><span class="toc-number">1.</span> <span class="toc-text">移动一张图专题分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑"><span class="toc-number">1.2.</span> <span class="toc-text">逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows平台-AndroidStudio开发环境"><span class="toc-number">1.2.1.</span> <span class="toc-text">Windows平台/AndroidStudio开发环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要代码实现"><span class="toc-number">1.3.</span> <span class="toc-text">##重要代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-通过ID获取列表，projectId刚开始传入-1-显示根目录列表："><span class="toc-number">1.3.0.1.</span> <span class="toc-text">1. 通过ID获取列表，projectId刚开始传入-1.显示根目录列表：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-列表Item的点击事件："><span class="toc-number">1.3.0.2.</span> <span class="toc-text">2. 列表Item的点击事件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开关按钮的点击事件："><span class="toc-number">1.3.0.3.</span> <span class="toc-text">3. 开关按钮的点击事件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-通过图层id显示专题图层："><span class="toc-number">1.3.0.4.</span> <span class="toc-text">4.通过图层id显示专题图层：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-更新专题数据："><span class="toc-number">1.3.0.5.</span> <span class="toc-text">5.更新专题数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-更新layer数据："><span class="toc-number">1.3.0.6.</span> <span class="toc-text">6. 更新layer数据：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">1.4.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -875,11 +875,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="肖健"><span class="iconfont-archer">&#xe60a;</span>肖健</span>
     
-        <span class="sidebar-category-name" data-categories="陈光禄"><span class="iconfont-archer">&#xe60a;</span>陈光禄</span>
-    
         <span class="sidebar-category-name" data-categories="张泉"><span class="iconfont-archer">&#xe60a;</span>张泉</span>
     
         <span class="sidebar-category-name" data-categories="万峥嵘"><span class="iconfont-archer">&#xe60a;</span>万峥嵘</span>
+    
+        <span class="sidebar-category-name" data-categories="陈光禄"><span class="iconfont-archer">&#xe60a;</span>陈光禄</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
