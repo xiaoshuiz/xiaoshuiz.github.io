@@ -401,10 +401,13 @@ height:50vh;
 
 
 
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">用地分析是指在对地区各自然要素进行综合分析研究的基础上，按照城市规划和建设要求、用地整备工程技术的可能性和经济性，对城市规划用地进行适用性分析评定，以划出城市用地的不同等级。</font><br><br><br><font size="4">另外用于查清村和农、林、牧、渔场，居民点及其以外的独立工矿企事业单位土地权属界线和村以上各级行政界线，查清各类用地面积、分布和利用状况。</font><br><br><br><font color="#664499" size="4">在本文中，用地分析主要实现为对所选中区域进行土地类别、面积和分布的识别与判断，计算其中各个层级占其父级的百分比以及面积情况。</font><br><br><br><br><hr><br><br><br><br><br><br>## <font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">用地分析是指在对地区各自然要素进行综合分析研究的基础上，按照城市规划和建设要求、用地整备工程技术的可能性和经济性，对城市规划用地进行适用性分析评定，以划出城市用地的不同等级。</font><br><br><br><font size="4">另外用于查清村和农、林、牧、渔场，居民点及其以外的独立工矿企事业单位土地权属界线和村以上各级行政界线，查清各类用地面积、分布和利用状况。</font><br><br><br><font color="#664499" size="4">在本文中，用地分析主要实现为对所选中区域进行土地类别、面积和分布的识别与判断，计算其中各个层级占其父级的百分比以及面积情况。</font>
 
 
-<ol>
+<hr>
+
+<p><br></p>
+<h2 id="实现逻辑略析"><a href="#实现逻辑略析" class="headerlink" title="实现逻辑略析"></a><font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font></h2><ol>
 <li>可视化与相关功能操作窗口的基本实现<br></li>
 </ol>
 <ol start="2">
@@ -712,7 +715,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">2.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-分析区域选择"><span class="toc-number">2.1.</span> <span class="toc-text">1.分析区域选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-地图查询"><span class="toc-number">2.2.</span> <span class="toc-text">2.地图查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图形交叉处理"><span class="toc-number">2.3.</span> <span class="toc-text">3.图形交叉处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-面积计算"><span class="toc-number">2.4.</span> <span class="toc-text">4.面积计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-图形展示"><span class="toc-number">2.5.</span> <span class="toc-text">5.图形展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">3.</span> <span class="toc-text">结语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-分析区域选择"><span class="toc-number">3.1.</span> <span class="toc-text">1.分析区域选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-地图查询"><span class="toc-number">3.2.</span> <span class="toc-text">2.地图查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图形交叉处理"><span class="toc-number">3.3.</span> <span class="toc-text">3.图形交叉处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-面积计算"><span class="toc-number">3.4.</span> <span class="toc-text">4.面积计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-图形展示"><span class="toc-number">3.5.</span> <span class="toc-text">5.图形展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -775,12 +778,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/landanalysis/" >移动用地分析</a>
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/legendfilter/" >移动图例过滤功能</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/legendfilter/" >移动图例过滤功能</a>
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2018/09/28/landanalysis/" >移动用地分析</a>
         </li>
     
     </div>
