@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>移动图例过滤功能 · Fellow Travellers</title>
+    <title>移动在线缓存 · Fellow Travellers</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Fellow Travellers</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">移动图例过滤功能</a>
+                <a href="#" class="post-name">移动在线缓存</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            移动图例过滤功能
+            移动在线缓存
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IOS">IOS</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.3k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/09/24</span>
+                    <span class="post-intro-time">2017/02/24</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,249 +401,169 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p><header> </header></p>
-<td bgcolor="#0099ff"><br><br>   <center><table><tr><td bgcolor="#333333"><font size="7" face="黑体" color="#ffffff"><strong>移动图例过滤功能</strong></font></td></tr></table></center><br><br><br></td>
+        <h1 id="移动在线缓存"><a href="#移动在线缓存" class="headerlink" title="移动在线缓存"></a>移动在线缓存</h1><h2 id="一-在线缓存的必要性"><a href="#一-在线缓存的必要性" class="headerlink" title="一.在线缓存的必要性"></a>一.在线缓存的必要性</h2><p>   众所周知，移动一张图目前包含两个应用场景：在线和离线。在线场景中，多用户共用数据，与云服务同步，实时性较强。而后者为单用户使用数据，无实时性要求，不常更新，需要数据拷贝，数据也能保证一定的隐秘性。那么在线缓存的应用场景突出在哪里呢？</p>
+<p>###1.在线离线一体化<br>目前移动一张图的在线离线需要在登录时用户手动切换。而数据方面二者并不是同步的，在数据管理方面存在一定的弊端。而通过在线缓存即可实现多用户同步数据，具有较强的数据实时性,数据也便于云端管理。</p>
+<p>###2. 方便用户操作。</p>
+<p>用户在在线与离线的应用场景中可以自由切换,比如在线过程中，临时切换，并不需要返回登录页面切换。</p>
+<p>但同时，部分用户需要保证数据安全性（不需要在线版）,或者大部分使用场景都是离线,所以我们并不能将离线场景去除。</p>
+<p>综述,在线、离线、在线缓存为3大应用场景。</p>
+<h2 id="二-在线缓存的可行性"><a href="#二-在线缓存的可行性" class="headerlink" title="二.在线缓存的可行性"></a>二.在线缓存的可行性</h2><p>目前我们一张图主要数据有两类：地图数据和业务数据。而 ArcGIS for desktop 10.2.2以上已经支持两者缓存的技术可行性。具体条件如下：</p>
+<ul>
+<li>ArcGIS for desktop 版本为10.2.2或者 以上。</li>
+<li>相关服务需要配置好设置(具体见后文)</li>
+<li>AGS-Runtime-SDK-iOS 10.2.5 </li>
+<li>业务数据需要通过Feature Service服务.</li>
+</ul>
+<h2 id="三-支持在线缓存的服务设置"><a href="#三-支持在线缓存的服务设置" class="headerlink" title="三. 支持在线缓存的服务设置"></a>三. 支持在线缓存的服务设置</h2><ul>
+<li>设置允许客户端导出切片</li>
+<li>设置允许切片导出限制</li>
+<li>发布<a href="http://www.cnblogs.com/gis-luq/p/5857188.html" target="_blank" rel="noopener"> <em>Feature Service</em> </a>服务</li>
+</ul>
+<h2 id="四-iOS相关API与代码"><a href="#四-iOS相关API与代码" class="headerlink" title="四. iOS相关API与代码"></a>四. iOS相关API与代码</h2><h3 id="相关类与方法"><a href="#相关类与方法" class="headerlink" title="相关类与方法"></a>相关类与方法</h3><ul>
+<li><code>AGSExportTileCacheTask</code></li>
+<li><code>AGSExportTileCacheParams</code></li>
+<li><code>AGSGDBSyncTask</code></li>
+<li><code>AGSGDBGenerateParameters</code></li>
+<li><code>exportTileCacheWithParameters</code></li>
+<li><code>estimateTileCacheSizeWithParameters</code></li>
+<li><code>generateGeodatabaseWithParameters</code></li>
+</ul>
+<h3 id="初始化底图与要素"><a href="#初始化底图与要素" class="headerlink" title="初始化底图与要素"></a>初始化底图与要素</h3><pre><code>let huaianServiceUrl = &quot;http://192.168.1.162:6080/arcgis/rest/services/test3/MapServer&quot;
+let huaianFeatureUrl = &quot;http://192.168.1.162:6080/arcgis/rest/services/test4/FeatureServer&quot;
 
-<p></p>
-<p><div style="text-align: right"><font size="4"><br>—– &emsp;<br> xiaoshuiz<br>&emsp;  &emsp;&emsp;&emsp;<br> </font><br></div><br><br></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">图例过滤是对于多图例图层的一种查看方式，这种查看方式方便对特定类型的图块进行统一查看。</font><br><br><br><font size="4">多图例图层一般为DynamicLayer与FeatureLayer,而且单个图例的图层与多个图例的图层，其渲染器也是不同的，单个图例的为SimpleRenderer，多个图例为UniqueValueRenderer。</font><br><br><br><font color="#664499" size="4">在本文中，图例过滤主要为对图例进行特定过滤达到多图层互斥过滤的效果，另外对于在线图例过滤使用了Layer Definition进行图层Visible控制问题。</font>
+class ViewController: UIViewController,AGSLayerDelegate {
 
-<p><hr><br><br></p>
-<h2 id="实现逻辑略析"><a href="#实现逻辑略析" class="headerlink" title="实现逻辑略析"></a><font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font></h2><ol>
-<li>可视化与相关功能操作监听的基本实现<br></li>
-</ol>
-<ol start="2">
-<li>加载功能基础的分析操作图层与其图例<br></li>
-</ol>
-<ol start="3">
-<li>单个图例的点击并获取其LabelName<br></li>
-</ol>
-<ol start="4">
-<li><font color="#664499">在线将ArcGisDynamicServiceLayer通过ArcGisFeatureLayer加载，并获取其Renderer转为UniqueValueRenderer（离线获取FeatureLayer的Renderer） 并获取Render中的Feild1字段<font color="#ee0000">（配置的过滤字段）</font></font><br></li>
-</ol>
-<ol start="5">
-<li><font color="#664499">WhereClause语句的拼接（过滤字段与LabelName中的值拼接成Sql Where语句）</font><br></li>
-</ol>
-<ol start="6">
-<li><p><font color="#664499">在线通过设置ArcGisDynamicServiceLayer的LayerDefinition（离线通过设置FeatureLayer的DefinitionExpression）进行过滤</font><br></p>
-</li>
-<li><p>对于在线DynamicLayer多图层控制显示问题，将Visible控制可视改为Layer Definition控制可视，只维护一套属性。</p>
-</li>
-</ol>
-<p><hr><br><br></p>
-<h2 id="重要部分代码实现"><a href="#重要部分代码实现" class="headerlink" title="重要部分代码实现"></a><font size="6" face="黑体" color="#ffb022"><strong>重要</strong></font><font size="6" face="黑体" color="#005432"><strong>部分代码实现</strong></font></h2><h3 id="1-LayerDefinition控制可视"><a href="#1-LayerDefinition控制可视" class="headerlink" title="1.LayerDefinition控制可视"></a>1.<font size="5" face="黑体"><strong>LayerDefinition控制可视</strong></font><br></h3><blockquote>
-<p>/** </p>
-<p>  **   根据visibleIds 更新DynamicLayer 通过DynamicLayer的Definition进行控制显示</p>
-<p>  ** Definition中 1-&gt; “1=1” 表示图层 1 全部显示</p>
-<p>  **/<br> <br></p>
-</blockquote>
-<pre><code>//要存储的LayerDefinitions
-Map&lt;String, Map&lt;Integer, String&gt;&gt; dynamicLayerDefinitionMap = TotalApplication.getDynamicLayerDefinitionMap();
-//要操作的LayerDefinitions
-Map&lt;Integer, String&gt; layerDefinitions = dynamicLayer.getLayerDefinitions();
-if (layerDefinitions==null) {
-    layerDefinitions=new HashMap&lt;&gt;();
+@IBOutlet var mapView: AGSMapView!
+
+var mapLayer: AGSTiledMapServiceLayer!
+
+var tileCacheTask: AGSExportTileCacheTask!
+
+var gdbTask: AGSGDBSyncTask!
+
+
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+
+    self.mapLayer = AGSTiledMapServiceLayer(URL: NSURL(string: huaianServiceUrl))
+    self.mapLayer.delegate = self
+    mapView.addMapLayer(mapLayer)
+
+    if self.tileCacheTask == nil {
+        self.tileCacheTask = AGSExportTileCacheTask(URL: NSURL(string: huaianServiceUrl))
+    }
+
 }
-if (isOpenLayer) {
-    //显示
-    if (dynamicLayerDefinitionMap.containsKey(dynamicLayer.getUrl())) {
-        //从存储语句中获取之前的过滤语句
-        for (int visibleId : visibleIds) {
+func layerDidLoad(layer: AGSLayer!) {
+    if layer == self.mapLayer {
+    gdbTask = AGSGDBSyncTask(URL: NSURL(string: huaianFeatureUrl))
+    gdbTask.loadCompletion = {
+        error in
+        if error != nil {
+            print(error.localizedDescription)
+        }
+        for info in self.gdbTask.featureServiceInfo.layerInfos as! [AGSMapServiceLayerInfo] {
+            let url = self.gdbTask.URL.URLByAppendingPathComponent(&quot;\(info.layerId)&quot;)
+            let featureServiceTable = AGSGDBFeatureServiceTable(serviceURL: url, credential: self.gdbTask.credential, spatialReference: self.mapView.spatialReference)
+            let featureLayer = AGSFeatureTableLayer(featureTable:featureServiceTable)
+            self.mapView.addMapLayer(featureLayer)
 
-            Map&lt;Integer, String&gt; integerStringMap = dynamicLayerDefinitionMap.get(dynamicLayer.getUrl());
-            if (integerStringMap.containsKey(visibleId)
-                    &amp;&amp;integerStringMap.get(visibleId)!=null
-                    &amp;&amp;!Constants.SQL_FALSE.equalsIgnoreCase(integerStringMap.get(visibleId))) {
-                //已存该layer的id的Layer Definition Sql 语句
-                layerDefinitions.put(visibleId,integerStringMap.get(visibleId));
-            }else {
-                //全部显示
-                layerDefinitions.put(visibleId,Constants.SQL_TURE);
+        }
+    }
+    }
+
+}
+</code></pre><h3 id="下载底图形成tpk文件"><a href="#下载底图形成tpk文件" class="headerlink" title="下载底图形成tpk文件"></a>下载底图形成tpk文件</h3><pre><code>@IBAction func downloadTpkAction(sender: UIBarButtonItem) {
+
+
+    SVProgressHUD.showWithStatus(&quot;准备下载&quot;)
+    let levels = [self.mapLayer.currentLOD().level]
+    let extent = self.mapView.visibleAreaEnvelope
+
+    //let extent = AGSEnvelope(xmin: 610875.41170353664, ymin: 3780046.638612428, xmax: 610948.9641964633, ymax: 3780074.6404850003, spatialReference: self.mapView.spatialReference)
+
+    let params = AGSExportTileCacheParams(levelsOfDetail: levels, areaOfInterest: extent)
+
+
+    //showSizesOfTpk(params)
+    downloadTileCache(params)
+
+}
+
+func downloadTileCache(params: AGSExportTileCacheParams) {
+
+    let tpkPath = NSHomeDirectory() + &quot;/Documents&quot; + &quot;/tpk&quot;
+
+    self.tileCacheTask.exportTileCacheWithParameters(params, downloadFolderPath: tpkPath, useExisting: true, status: { (status, userInfo) in
+        print(&quot;\(AGSResumableTaskJobStatusAsString(status)), \(userInfo)&quot;)
+        let totalBytesDownloaded: AnyObject? = userInfo?[&quot;AGSDownloadProgressTotalBytesDownloaded&quot;]
+        let totalBytesExpected: AnyObject? = userInfo?[&quot;AGSDownloadProgressTotalBytesExpected&quot;]
+        if totalBytesDownloaded != nil &amp;&amp; totalBytesExpected != nil {
+            let dPercentage = Float(totalBytesDownloaded! as! NSNumber)/Float(totalBytesExpected! as! NSNumber)
+            SVProgressHUD.showProgress(dPercentage, status: &quot;下载中&quot;)
+            if dPercentage == 1 {
+                SVProgressHUD.dismiss()
             }
-        }
-    }else {
-        //全部显示
-        for (int visibleId : visibleIds) {
-            layerDefinitions.put(visibleId,Constants.SQL_TURE);
-        }
-    }
-}else {
-    //关闭
-    if (!layerDefinitions.isEmpty()) {
-        Map&lt;Integer, String&gt; integerStringMap;
-        if (dynamicLayerDefinitionMap.containsKey(dynamicLayer.getUrl())) {
-            //存储中有这个Layer的Definition
-            integerStringMap = dynamicLayerDefinitionMap.get(dynamicLayer.getUrl());
-        }else {
-            //存储中没有这个layer的definition
-            integerStringMap=new HashMap&lt;&gt;();
-        }
-        for (int visibleId : visibleIds) {
-            if (layerDefinitions.containsKey(visibleId)
-                    &amp;&amp;layerDefinitions.get(visibleId)!=null
-                    &amp;&amp;!Constants.SQL_FALSE.equalsIgnoreCase(layerDefinitions.get(visibleId))) {
-                //有可视语句，进行储存
-                integerStringMap.put(visibleId,layerDefinitions.get(visibleId));
+            print(dPercentage)
+
+        } }) { (tiledLayer, error) in
+
+            if error != nil {
+                SVProgressHUD.showErrorWithStatus(error.localizedDescription)
             }
-            //取消可视
-            layerDefinitions.put(visibleId,Constants.SQL_FALSE);
-        }
-        TotalApplication.getDynamicLayerDefinitionMap().put(dynamicLayer.getUrl(),integerStringMap);
+            self.mapView.reset()
+            self.mapView.addMapLayer(tiledLayer, withName:&quot;offline&quot;)
 
-    }else {
-        //一般走不到这，避免花里胡哨的操作
-        for (int visibleId : visibleIds) {
-            //取消可视
-            layerDefinitions.put(visibleId,Constants.SQL_FALSE);
-        }
     }
 }
-dynamicLayer.setLayerDefinitions(layerDefinitions);
-dynamicLayer.refresh();
-</code></pre><p><br></p>
-<h3 id="2-Render获取与过滤字段获取"><a href="#2-Render获取与过滤字段获取" class="headerlink" title="2.Render获取与过滤字段获取"></a>2.<font size="5" face="黑体"><strong>Render获取与过滤字段获取</strong></font><br></h3><blockquote>
-<p>  离线获取</p>
-</blockquote>
-<p>离线用的FeatureLayer.getRenderer()<br><br></p>
-<pre><code> FeatureLayer featureLayer= (FeatureLayer) layer;
-//判断是否获取过，避免重复查询
-if (TotalApplication.getInstanceFilterFieldMap().containsKey(layerName)) {
-    filterField=TotalApplication.getInstanceFilterFieldMap().get(layerName);
-}else{
-    //记录已查询 以免无结果 重复查询
-    TotalApplication.getInstanceFilterFieldMap().put(layerName,Constants.NO_FILTER_FIELD);
-    filterField=Constants.NO_FILTER_FIELD;
-    //获取过滤字段
-    Renderer renderer = featureLayer.getRenderer();
-    if (renderer instanceof UniqueValueRenderer) {
-        UniqueValueRenderer uniqueValueRenderer= (UniqueValueRenderer) renderer;
-        filterField = uniqueValueRenderer.getField1();
-        TotalApplication.getInstanceFilterFieldMap().put(layerName,filterField);
-    }
-}
-</code></pre><p><br></p>
-<blockquote>
-<p>  在线获取</p>
-</blockquote>
-<p>在线通过加载ArcGisFeatureLayer获取Renderer中的过滤字段<br><br></p>
-<pre><code>//Renderer中过滤字段的查询和保存，避免重复加载 例：RDDM
-if (TotalApplication.getInstanceFilterFieldMap().keySet().contains(url+Constants.SPLIT_SYMBOL[4]+layerID)) {
-    //通知过滤
-}else{
-    final ArcGISFeatureLayer arcGISFeatureLayer= new ArcGISFeatureLayer(url+Constants.SPLIT_SYMBOL[4]+layerID, ArcGISFeatureLayer.MODE.SELECTION);
-    final String finalUrl = url;
-    final String finalLayerID = layerID;
-    arcGISFeatureLayer.setOnStatusChangedListener(new OnStatusChangedListener() {
-        @Override
-        public void onStatusChanged(Object o, STATUS status) {
-            if (status== STATUS.INITIALIZED) {
-                //记录已查询 以免无结果 重复查询
-                TotalApplication.getInstanceFilterFieldMap().put(arcGISFeatureLayer.getUrl(),Constants.NO_FILTER_FIELD);
-                Renderer renderer = arcGISFeatureLayer.getRenderer();
-                if (renderer!=null) {
+</code></pre><p>###下载要素形成 gdb<br>    @IBAction func downloadGdbAction(sender: UIBarButtonItem) {</p>
+<pre><code>    SVProgressHUD.showWithStatus(&quot;准备下载&quot;)
 
-                    if (renderer instanceof UniqueValueRenderer) {
-                        UniqueValueRenderer uniqueValueRenderer= (UniqueValueRenderer) renderer;
-                        //获取过滤字段 RDDM
-                        String filterField = uniqueValueRenderer.getField1();
-                        if (filterField!=null&amp;&amp;!filterField.isEmpty()) {
-                            TotalApplication.getInstanceFilterFieldMap().put(arcGISFeatureLayer.getUrl(),filterField);
-                        }
-                    }
+    let gdbPath = NSHomeDirectory() + &quot;/Documents&quot; + &quot;/gdb&quot;
+    let params = AGSGDBGenerateParameters(featureServiceInfo: self.gdbTask.featureServiceInfo)
+
+    params.extent = self.mapView.maxEnvelope
+
+    params.outSpatialReference = self.mapView.spatialReference
+    let layers = self.gdbTask.featureServiceInfo.layerInfos.map { layerInfo -&gt; Int in layerInfo.layerId
+    }
+    params.layerIDs = layers
+
+    self.gdbTask.generateGeodatabaseWithParameters(params, downloadFolderPath: gdbPath, useExisting: true, status: {
+        (status, userInfo) in
+            print(AGSResumableTaskJobStatusAsString(status))
+        let totalBytesDownloaded: AnyObject? = userInfo?[&quot;AGSDownloadProgressTotalBytesDownloaded&quot;]
+        let totalBytesExpected: AnyObject? = userInfo?[&quot;AGSDownloadProgressTotalBytesExpected&quot;]
+        if totalBytesDownloaded != nil &amp;&amp; totalBytesExpected != nil {
+            let dPercentage = Float(totalBytesDownloaded! as! NSNumber)/Float(totalBytesExpected! as! NSNumber)
+            SVProgressHUD.showProgress(dPercentage, status: &quot;下载中&quot;)
+            if dPercentage == 1 {
+                SVProgressHUD.dismiss()
+            }
+            print(dPercentage)
+        }
+        }) { (gdb, error) in
+            if error != nil {
+                print(error)
+            }
+            for layer in self.mapView.mapLayers as! [AGSLayer] {
+                if layer is AGSFeatureTableLayer {
+                    self.mapView.removeMapLayer(layer)
                 }
-                //通知过滤
             }
-
-        }
-    });
-}  
-</code></pre><h3 id="3-图例过滤"><a href="#3-图例过滤" class="headerlink" title="3.图例过滤"></a>3.<font size="5" face="黑体" color="#ff0000"><strong>图例过滤</strong></font><br></h3><blockquote>
-<p>  离线过滤</p>
-</blockquote>
-<p>离线用的FeatureLayer过滤 FeatureLayer的LayerDefinition为 String (Sql Where Clause)，<br><br><br>无需控制图层，且可以和Visible混合使用</p>
-<pre><code>//图例过滤 例：YDDM = &apos;mc&apos;
-featureLayer.setDefinitionExpression(filterField+Constants.WHERE_EQUAL+Constants.WHERE_QUOTATION_MARKS+finalLegendLabel+Constants.WHERE_QUOTATION_MARKS);
-</code></pre><p><br></p>
-<blockquote>
-<p>  在线过滤</p>
-</blockquote>
-<p>在线用的ArcGISDynamicMapServiceLayer过滤<br><br>ArcGISDynamicMapServiceLayer的LayerDefinition为Map&lt; int(layerId) , String(Sql Where Clause) &gt;，<br><br><br>得到所需数据进行过滤<br><br></p>
-<pre><code>//图例过滤
-if (filterField!=null&amp;&amp;!Constants.NO_FILTER_FIELD.equalsIgnoreCase(filterField)&amp;&amp;!filterField.isEmpty()) {
-    if (layer instanceof ArcGISDynamicMapServiceLayer) {
-        //拼组Sql Where clause 并设置LayerDefinitions 进行过滤
-        Map&lt;Integer, String&gt; layerDefinitions = ((ArcGISDynamicMapServiceLayer) layer).getLayerDefinitions();
-        if (layerDefinitions==null) {
-            layerDefinitions=new HashMap&lt;Integer, String&gt;();
-        }
-        //map中： layerId -&gt; where clause   YDDM = &apos;G1&apos;
-        layerDefinitions.put(Integer.parseInt(layerId),filterField+Constants.WHERE_EQUAL+Constants.WHERE_QUOTATION_MARKS+legendName+Constants.WHERE_QUOTATION_MARKS);
-        ((ArcGISDynamicMapServiceLayer) layer).setLayerDefinitions(layerDefinitions);
-        ((ArcGISDynamicMapServiceLayer) layer).refresh();
-    }
+            if gdb.featureTables().count &gt; 0 {
+                for table in gdb.featureTables() as! [AGSFeatureTable]{
+                    if table.hasGeometry() {
+                    let tableLayer = AGSFeatureTableLayer(featureTable: table)
+                    self.mapView.addMapLayer(tableLayer)
+                    }
+           }           }
+    }   
 }
-</code></pre><h3 id="4-结束过滤-全部显示"><a href="#4-结束过滤-全部显示" class="headerlink" title="4.结束过滤(全部显示)"></a>4.<font size="5" face="黑体" color="#ff0000"><strong>结束过滤(全部显示)</strong></font><br></h3><blockquote>
-<p> 离线结束过滤</p>
-</blockquote>
-<pre><code>Map&lt;String, Layer&gt; layerMap = TotalApplication.getInstanceAllLayerMap();
-if (layerMap.containsKey(name)) {
-    Layer layer = layerMap.get(name);
-    if (layer instanceof FeatureLayer) {
-        //设置LayerDefinition
-        ((FeatureLayer) layer).setDefinitionExpression(Constants.SQL_TURE);
-        //数据改变
-        legendAdapter.selectLabel= Constants.NO_SELECT;
-        TotalApplication.getLayerSelectLabelMap().put(name,Constants.NO_SELECT);
-        legendAdapter.notifyDataSetChanged();
-    }
-}
-</code></pre><p><br></p>
-<blockquote>
-<p> 在线结束过滤</p>
-</blockquote>
-<pre><code>//获取当前layer对应的Service Layer 的URL与Id
-List&lt;ThemeInfo&gt; theme = oneMapActivity.mDataSource.getTheme();
-for (ThemeInfo themeInfo : theme) {
-    if (name.equalsIgnoreCase(themeInfo.getName())) {
-        serviceUID=themeInfo.getServiceUid();
-        layerID=themeInfo.getLayerId();
-    }
-}
-List&lt;MapServicesInfo&gt; mapServices = oneMapActivity.mDataSource.getMapServices();
-for (MapServicesInfo mapService : mapServices) {
-    if (serviceUID!=null&amp;&amp;serviceUID.equalsIgnoreCase(mapService.getName())) {
-        url=mapService.getUrl();
-    }
-}
-//数据改变
-legendAdapter.selectLabel= Constants.NO_SELECT;
-TotalApplication.getLayerSelectLabelMap().put(name,Constants.NO_SELECT);
-legendAdapter.notifyDataSetChanged();
-//TODO 通知图例过滤
-</code></pre><p><br><br>全部显示</p>
-<pre><code>if (layer instanceof ArcGISDynamicMapServiceLayer) {
-    Map&lt;Integer, String&gt; layerDefinitions = ((ArcGISDynamicMapServiceLayer) layer).getLayerDefinitions();
-    if (layerDefinitions==null){
-        layerDefinitions=new HashMap&lt;Integer, String&gt;();
-    }
-    layerDefinitions.put(Integer.parseInt(layerId),Constants.SQL_TURE);
-    ((ArcGISDynamicMapServiceLayer) layer).setLayerDefinitions(layerDefinitions);
-    ((ArcGISDynamicMapServiceLayer) layer).refresh();
-}
-</code></pre><p><hr><br><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><font size="6" face="黑体" color="#005432"><strong>结语</strong></font></h2><p>&emsp;&emsp;图例过滤功能的开发，既减少了用户手动查找相应地块和汇总的时间，提高了地图的可阅读性。让用户通过移动设备简单的操作地图中同一类型的地块汇总，并通过绘制图层让用户在地图上更直观的看清板块对象。</p>
-<p><br></p>
-<p><image src="http://www.dist.com.cn/templates/cn/images/logo.png" align="right"><br><br>&emsp;</image></p>
-<p><br></p>
-<hr>
-
-
-
-
-
-
-
-
+</code></pre><p>五. 总结与后续问题思考</p>
+<p>经过研究实践，移动在线缓存技术是完全可行的,详见 CacheDemo</p>
 
     </article>
     <!-- license  -->
@@ -653,17 +573,12 @@ legendAdapter.notifyDataSetChanged();
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/09/24/offlineremote/" title= "移动离线督察功能">
-                    <div class="nextTitle">移动离线督察功能</div>
+                <a href= "/2017/02/24/20170224-Jenkins for iOS-刘小标/" title= "Jenkins For Ios">
+                    <div class="nextTitle">Jenkins For Ios</div>
                 </a>
             
         </li>
         <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/09/16/Android Gis开发经验分享/" title= "Android Gis开发经验分享">
-                    <div class="prevTitle">Android Gis开发经验分享</div>
-                </a>
             
         </li>
     </ul>
@@ -774,7 +689,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-LayerDefinition控制可视"><span class="toc-number">3.1.</span> <span class="toc-text">1.LayerDefinition控制可视</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Render获取与过滤字段获取"><span class="toc-number">3.2.</span> <span class="toc-text">2.Render获取与过滤字段获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图例过滤"><span class="toc-number">3.3.</span> <span class="toc-text">3.图例过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-结束过滤-全部显示"><span class="toc-number">3.4.</span> <span class="toc-text">4.结束过滤(全部显示)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动在线缓存"><span class="toc-number">1.</span> <span class="toc-text">移动在线缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-在线缓存的必要性"><span class="toc-number">1.1.</span> <span class="toc-text">一.在线缓存的必要性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-在线缓存的可行性"><span class="toc-number">1.2.</span> <span class="toc-text">二.在线缓存的可行性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-支持在线缓存的服务设置"><span class="toc-number">1.3.</span> <span class="toc-text">三. 支持在线缓存的服务设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-iOS相关API与代码"><span class="toc-number">1.4.</span> <span class="toc-text">四. iOS相关API与代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关类与方法"><span class="toc-number">1.4.1.</span> <span class="toc-text">相关类与方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化底图与要素"><span class="toc-number">1.4.2.</span> <span class="toc-text">初始化底图与要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载底图形成tpk文件"><span class="toc-number">1.4.3.</span> <span class="toc-text">下载底图形成tpk文件</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
