@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Fellow Travellers</title>
+    <title>Jenkins For iOS · Fellow Travellers</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Fellow Travellers</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name"></a>
+                <a href="#" class="post-name">Jenkins For iOS</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            [Untitled Post]
+            Jenkins For iOS
             <!-- 404 -->
             
         </h1>
@@ -264,6 +264,12 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS">iOS</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
                         <span>字数统计: <span class="post-count word-count">1.9k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
@@ -271,7 +277,7 @@ height:50vh;
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/09/28</span>
+                    <span class="post-intro-time">2017/02/24</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,25 +401,25 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Jenkins-for-iOS-with-Fastlane-and-SVN"><a href="#Jenkins-for-iOS-with-Fastlane-and-SVN" class="headerlink" title="Jenkins for iOS with Fastlane and SVN"></a>Jenkins for iOS with Fastlane and SVN</h1><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/1.png" alt="image"></p>
+        <h1 id="Jenkins-for-iOS-with-Fastlane-and-SVN"><a href="#Jenkins-for-iOS-with-Fastlane-and-SVN" class="headerlink" title="Jenkins for iOS with Fastlane and SVN"></a>Jenkins for iOS with Fastlane and SVN</h1><p><img src="https://i.imgur.com/cijcziW.png" alt=""></p>
 <h2 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h2><p>Jenkins的安装需要JDK环境，JDK安装方法自行参考网络。Jenkins的安装有两种方式，一种是java包安装，另一种是pkg可执行程序（两种安装后的配置一样，pkg安装会在电脑上多出一个用户）。本文采用war包 + tomcat安装方法。</p>
-<h3 id="1-安装Java环境，请自行下载安装"><a href="#1-安装Java环境，请自行下载安装" class="headerlink" title="1   安装Java环境，请自行下载安装"></a>1   安装<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">Java</a>环境，请自行下载安装</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/2.png" alt="image"></p>
-<h3 id="2-安装tomcat-打开官网地址"><a href="#2-安装tomcat-打开官网地址" class="headerlink" title="2   安装tomcat,打开官网地址"></a>2   安装<a href="https://tomcat.apache.org/" target="_blank" rel="noopener">tomcat</a>,打开官网地址</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/3.png" alt="image"></p>
-<h4 id="2-1-将下载的zip包解压（可以重命名），把解压后的文件夹放到-Library下。"><a href="#2-1-将下载的zip包解压（可以重命名），把解压后的文件夹放到-Library下。" class="headerlink" title="2.1    将下载的zip包解压（可以重命名），把解压后的文件夹放到 /Library下。"></a>2.1    将下载的zip包解压（可以重命名），把解压后的文件夹放到 /Library下。</h4><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/4.png" alt="image"></p>
+<h3 id="1-安装Java环境，请自行下载安装"><a href="#1-安装Java环境，请自行下载安装" class="headerlink" title="1   安装Java环境，请自行下载安装"></a>1   安装<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">Java</a>环境，请自行下载安装</h3><p><img src="https://i.imgur.com/oTHHWsY.png" alt=""></p>
+<h3 id="2-安装tomcat-打开官网地址"><a href="#2-安装tomcat-打开官网地址" class="headerlink" title="2   安装tomcat,打开官网地址"></a>2   安装<a href="https://tomcat.apache.org/" target="_blank" rel="noopener">tomcat</a>,打开官网地址</h3><p><img src="https://i.imgur.com/mdXdSnv.png" alt=""></p>
+<h4 id="2-1-将下载的zip包解压（可以重命名），把解压后的文件夹放到-Library下。"><a href="#2-1-将下载的zip包解压（可以重命名），把解压后的文件夹放到-Library下。" class="headerlink" title="2.1    将下载的zip包解压（可以重命名），把解压后的文件夹放到 /Library下。"></a>2.1    将下载的zip包解压（可以重命名），把解压后的文件夹放到 /Library下。</h4><p><img src="https://i.imgur.com/L1z2wmD.png" alt=""></p>
 <h4 id="2-2-在终端启动Tomcat服务器，这里首先cd到Tomcat的bin目录："><a href="#2-2-在终端启动Tomcat服务器，这里首先cd到Tomcat的bin目录：" class="headerlink" title="2.2    在终端启动Tomcat服务器，这里首先cd到Tomcat的bin目录："></a>2.2    在终端启动Tomcat服务器，这里首先cd到Tomcat的bin目录：</h4><p><code>sudo chmod 755 *.sh</code><br><br>按回车键之后会提示输入密码，请输入管理员密码。之后输入并回车:<br><br><code>sudo sh startup.sh</code><br><br>执行完<code>startup.sh</code>的结果如下:</p>
-<p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/5.png" alt="image"></p>
+<p><img src="https://i.imgur.com/FZ9fnHO.png" alt=""></p>
 <p>然后在浏览器里输入：<code>localhost:8080</code>就OK了。如下图所示:</p>
-<p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/6.png" alt="image"></p>
-<h2 id="二、Jenkins安装，打开官网"><a href="#二、Jenkins安装，打开官网" class="headerlink" title="二、Jenkins安装，打开官网"></a>二、Jenkins安装，打开<a href="https://jenkins.io/index.html" target="_blank" rel="noopener">官网</a></h2><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/7.png" alt="image"></p>
+<p><img src="https://i.imgur.com/SWnHLWN.png" alt=""></p>
+<h2 id="二、Jenkins安装，打开官网"><a href="#二、Jenkins安装，打开官网" class="headerlink" title="二、Jenkins安装，打开官网"></a>二、Jenkins安装，打开<a href="https://jenkins.io/index.html" target="_blank" rel="noopener">官网</a></h2><p><img src="https://i.imgur.com/E9Whzt2.png" alt=""></p>
 <p>在tomcat的安装目录下，找到<code>webapps</code>，然后将下载的<code>war</code>包放到该文件夹下即可。<br>在浏览器里输入：<code>localhost:8080/Jenkins/</code>，几分钟后即可以看到如下界面：</p>
-<p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/8.png" alt="image"></p>
+<p><img src="https://i.imgur.com/vV06a7M.png" alt=""></p>
 <p>根据自己安装的红色提示，前往该文件打开，找到初始密码。（pkg安装模式，会提示没有打开文件夹权限，则需要你手动获取对应的读写权限）<br>接下来则是傻瓜式操作。如下图所示：</p>
-<p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/9.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/10.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/11.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/12.png" alt="image"></p>
+<p><img src="https://i.imgur.com/o3Yl5GX.png" alt=""><br><img src="https://i.imgur.com/8imRLm1.png" alt=""><br><img src="https://i.imgur.com/JEOrmSI.png" alt=""><br><img src="https://i.imgur.com/HWoAIKM.png" alt=""></p>
 <p>设置用户名密码邮件等，最后Save and Finish，OK，到此Jenkins初始化安装完成。</p>
 <h3 id="1-安装系统插件"><a href="#1-安装系统插件" class="headerlink" title="1   安装系统插件"></a>1   安装系统插件</h3><p>在“系统管理-&gt;管理插件-&gt;可选插件”中，选择下载必要的插件。<br><br>1、    Publish Over FTP Plugin<br><br>2、    Email Extension Plugin<br></p>
-<h3 id="2-系统配置"><a href="#2-系统配置" class="headerlink" title="2   系统配置"></a>2   系统配置</h3><h4 id="2-1-在“系统管理-gt-系统设置”中找到“Jenkins-Location”配置，配置如下图："><a href="#2-1-在“系统管理-gt-系统设置”中找到“Jenkins-Location”配置，配置如下图：" class="headerlink" title="2.1   在“系统管理-&gt;系统设置”中找到“Jenkins Location”配置，配置如下图："></a>2.1   在“系统管理-&gt;系统设置”中找到“Jenkins Location”配置，配置如下图：</h4><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/13.png" alt="image"></p>
-<h4 id="2-2-在“系统管理-gt-系统设置”中找到“Publish-over-FTP”配置，配置如下图："><a href="#2-2-在“系统管理-gt-系统设置”中找到“Publish-over-FTP”配置，配置如下图：" class="headerlink" title="2.2   在“系统管理-&gt;系统设置”中找到“Publish over FTP”配置，配置如下图："></a>2.2   在“系统管理-&gt;系统设置”中找到“Publish over FTP”配置，配置如下图：</h4><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/14.png" alt="image"></p>
-<h4 id="2-3-在“系统管理-gt-系统设置”中找到“Extended-E-mail-Notification”配置，配置如下图："><a href="#2-3-在“系统管理-gt-系统设置”中找到“Extended-E-mail-Notification”配置，配置如下图：" class="headerlink" title="2.3   在“系统管理-&gt;系统设置”中找到“Extended E-mail Notification”配置，配置如下图："></a>2.3   在“系统管理-&gt;系统设置”中找到“Extended E-mail Notification”配置，配置如下图：</h4><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/15.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/16.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/17.png" alt="image"></p>
+<h3 id="2-系统配置"><a href="#2-系统配置" class="headerlink" title="2   系统配置"></a>2   系统配置</h3><h4 id="2-1-在“系统管理-gt-系统设置”中找到“Jenkins-Location”配置，配置如下图："><a href="#2-1-在“系统管理-gt-系统设置”中找到“Jenkins-Location”配置，配置如下图：" class="headerlink" title="2.1   在“系统管理-&gt;系统设置”中找到“Jenkins Location”配置，配置如下图："></a>2.1   在“系统管理-&gt;系统设置”中找到“Jenkins Location”配置，配置如下图：</h4><p><img src="https://i.imgur.com/ouwggg7.png" alt=""></p>
+<h4 id="2-2-在“系统管理-gt-系统设置”中找到“Publish-over-FTP”配置，配置如下图："><a href="#2-2-在“系统管理-gt-系统设置”中找到“Publish-over-FTP”配置，配置如下图：" class="headerlink" title="2.2   在“系统管理-&gt;系统设置”中找到“Publish over FTP”配置，配置如下图："></a>2.2   在“系统管理-&gt;系统设置”中找到“Publish over FTP”配置，配置如下图：</h4><p><img src="https://i.imgur.com/DcBitf6.png" alt=""></p>
+<h4 id="2-3-在“系统管理-gt-系统设置”中找到“Extended-E-mail-Notification”配置，配置如下图："><a href="#2-3-在“系统管理-gt-系统设置”中找到“Extended-E-mail-Notification”配置，配置如下图：" class="headerlink" title="2.3   在“系统管理-&gt;系统设置”中找到“Extended E-mail Notification”配置，配置如下图："></a>2.3   在“系统管理-&gt;系统设置”中找到“Extended E-mail Notification”配置，配置如下图：</h4><p><img src="https://i.imgur.com/j9UEe9M.png" alt=""><br><img src="https://i.imgur.com/56vyJ8G.png" alt=""><br><img src="https://i.imgur.com/oAPv0wo.png" alt=""></p>
 <h4 id="Default-Content样例："><a href="#Default-Content样例：" class="headerlink" title="Default Content样例："></a>Default Content样例：</h4><pre><code>(本邮件是程序自动下发的，请勿回复！)&lt;br/&gt;&lt;hr/&gt;
 项目名称：$PROJECT_NAME&lt;br/&gt;&lt;hr/&gt;
 版本号：${FILE,path=&quot;version.txt&quot;}&lt;br/&gt;&lt;hr/&gt;
@@ -435,14 +441,14 @@ gem sources -a http://ruby.taobao.org把源切换至淘宝镜像服务器
 </code></pre><h4 id="1-4-安装ruby"><a href="#1-4-安装ruby" class="headerlink" title="1.4   安装ruby"></a>1.4   安装ruby</h4><pre><code>$ rvm install 2.4
 </code></pre><h3 id="2-安装fastlane，详细资料请看Github地址"><a href="#2-安装fastlane，详细资料请看Github地址" class="headerlink" title="2   安装fastlane，详细资料请看Github地址"></a>2   安装fastlane，详细资料请看<a href="https://github.com/fastlane/fastlane" target="_blank" rel="noopener">Github地址</a></h3><h4 id="2-1-命令安装"><a href="#2-1-命令安装" class="headerlink" title="2.1   命令安装"></a>2.1   命令安装</h4><pre><code>$ sudo gem install fastlane
 </code></pre><h4 id="2-2-查看版本"><a href="#2-2-查看版本" class="headerlink" title="2.2   查看版本"></a>2.2   查看版本</h4><pre><code>$ fastlane –v
-</code></pre><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/18.png" alt="image"></p>
+</code></pre><p><img src="https://i.imgur.com/Bkd4zgs.png" alt=""></p>
 <h4 id="2-3-查看命令方法"><a href="#2-3-查看命令方法" class="headerlink" title="2.3   查看命令方法"></a>2.3   查看命令方法</h4><pre><code>$ fastlane actions
-</code></pre><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/19.png" alt="image"></p>
+</code></pre><p><img src="https://i.imgur.com/QTlxrAL.png" alt=""></p>
 <h4 id="2-4-查看指定方法"><a href="#2-4-查看指定方法" class="headerlink" title="2.4   查看指定方法"></a>2.4   查看指定方法</h4><pre><code>$ fastlane actions gym
-</code></pre><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/20.png" alt="image"></p>
-<h2 id="四、Jenkins新建Job"><a href="#四、Jenkins新建Job" class="headerlink" title="四、Jenkins新建Job"></a>四、Jenkins新建Job</h2><h3 id="1-新建一个item，选择自由风格的项目"><a href="#1-新建一个item，选择自由风格的项目" class="headerlink" title="1    新建一个item，选择自由风格的项目"></a>1    新建一个item，选择自由风格的项目</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/21.png" alt="image"></p>
-<h3 id="2-输入项目名称，描述等基本信息。"><a href="#2-输入项目名称，描述等基本信息。" class="headerlink" title="2    输入项目名称，描述等基本信息。"></a>2    输入项目名称，描述等基本信息。</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/22.png" alt="image"></p>
-<h3 id="3-源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示："><a href="#3-源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示：" class="headerlink" title="3 源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示："></a>3 源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示：</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/23.png" alt="image"><br>点击Add配置SVN用户信息。如下图所示：<br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/24.png" alt="image"><br>成功配置如下图所示：<br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/25.png" alt="image"></p>
+</code></pre><p><img src="https://i.imgur.com/9lncd3C.png" alt=""></p>
+<h2 id="四、Jenkins新建Job"><a href="#四、Jenkins新建Job" class="headerlink" title="四、Jenkins新建Job"></a>四、Jenkins新建Job</h2><h3 id="1-新建一个item，选择自由风格的项目"><a href="#1-新建一个item，选择自由风格的项目" class="headerlink" title="1    新建一个item，选择自由风格的项目"></a>1    新建一个item，选择自由风格的项目</h3><p><img src="https://i.imgur.com/GPiT3jp.png" alt=""></p>
+<h3 id="2-输入项目名称，描述等基本信息。"><a href="#2-输入项目名称，描述等基本信息。" class="headerlink" title="2    输入项目名称，描述等基本信息。"></a>2    输入项目名称，描述等基本信息。</h3><p><img src="https://i.imgur.com/b80Gu9i.png" alt=""></p>
+<h3 id="3-源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示："><a href="#3-源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示：" class="headerlink" title="3 源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示："></a>3 源代码管理，因为使用的是SVN，所以选择Subversion。具体操作如下图所示：</h3><p><img src="https://i.imgur.com/0ecvoOl.png" alt=""><br>点击Add配置SVN用户信息。如下图所示：<br><img src="https://i.imgur.com/umLoC55.png" alt=""><br>成功配置如下图所示：<br><img src="https://i.imgur.com/eIKtC2l.png" alt=""></p>
 <h3 id="4-配置构建触发器"><a href="#4-配置构建触发器" class="headerlink" title="4    配置构建触发器"></a>4    配置构建触发器</h3><h4 id="4-1触发器支持多种类型，常用的有："><a href="#4-1触发器支持多种类型，常用的有：" class="headerlink" title="4.1触发器支持多种类型，常用的有："></a>4.1触发器支持多种类型，常用的有：</h4><pre><code>A 定期进行构建（Build periodically）
 B 根据提交进行构建（Build when a change is pushed to GitHub）
 C 定期检测代码更新，如有更新则进行构建（Poll SCM）
@@ -463,9 +469,9 @@ C 定期检测代码更新，如有更新则进行构建（Poll SCM）
 <pre><code>•  H/15 * * * *：代表每隔15分钟，并且开始时间不确定，这个小时可能是:07,:22,:37,:52，下一个小时就可能是:03,:18,:33,:48；
 •  H(0-29)/10 * * * *：代表前半小时内每隔10分钟，并且开始时间不确定，这个小时可能是:04,:14,:24，下一个小时就可能是:09,:19,:29；
 •  H 23 * * 1-5：工作日每晚23:00至23:59之间的某一时刻；
-</code></pre><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/26.png" alt="image">    </p>
-<h3 id="5-构建环境（没有用到，暂未深入研究）"><a href="#5-构建环境（没有用到，暂未深入研究）" class="headerlink" title="5    构建环境（没有用到，暂未深入研究）"></a>5    构建环境（没有用到，暂未深入研究）</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/27.png" alt="image"></p>
-<h3 id="6-构建选择Execute-shell"><a href="#6-构建选择Execute-shell" class="headerlink" title="6    构建选择Execute shell"></a>6    构建选择Execute shell</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/28.png" alt="image"></p>
+</code></pre><p><img src="https://i.imgur.com/caDsqmd.png" alt=""></p>
+<h3 id="5-构建环境（没有用到，暂未深入研究）"><a href="#5-构建环境（没有用到，暂未深入研究）" class="headerlink" title="5    构建环境（没有用到，暂未深入研究）"></a>5    构建环境（没有用到，暂未深入研究）</h3><p><img src="https://i.imgur.com/kTsyj9N.png" alt=""></p>
+<h3 id="6-构建选择Execute-shell"><a href="#6-构建选择Execute-shell" class="headerlink" title="6    构建选择Execute shell"></a>6    构建选择Execute shell</h3><p><img src="https://i.imgur.com/UqEhBid.png" alt=""></p>
 <h4 id="Execute-shell代码段"><a href="#Execute-shell代码段" class="headerlink" title="Execute shell代码段"></a>Execute shell代码段</h4><pre><code>#!/bin/bash
 #计时
 SECONDS=0
@@ -521,8 +527,8 @@ fastlane gym --workspace ${workspace_path} --scheme ${scheme} --clean --configur
 
 #输出总用时
 echo &quot;===Finished. Total time: ${SECONDS}s===&quot;
-</code></pre><h3 id="7-构建后操作增加邮件提醒，选择Editable-Email-Notification"><a href="#7-构建后操作增加邮件提醒，选择Editable-Email-Notification" class="headerlink" title="7    构建后操作增加邮件提醒，选择Editable Email Notification"></a>7    构建后操作增加邮件提醒，选择Editable Email Notification</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/29.png" alt="image"><br>配置触发操作：<br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/30.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/31.png" alt="image"><br><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/32.png" alt="image"></p>
-<h3 id="8-构建后操作增加文件上传，选择Send-build-artifacts-over-FTP"><a href="#8-构建后操作增加文件上传，选择Send-build-artifacts-over-FTP" class="headerlink" title="8    构建后操作增加文件上传，选择Send build artifacts over FTP"></a>8    构建后操作增加文件上传，选择Send build artifacts over FTP</h3><p><img src="https://github.com/lxbboy326/jenkins-for-iOS-with-fastlane-and-svn/blob/master/resources/33.png" alt="image"></p>
+</code></pre><h3 id="7-构建后操作增加邮件提醒，选择Editable-Email-Notification"><a href="#7-构建后操作增加邮件提醒，选择Editable-Email-Notification" class="headerlink" title="7    构建后操作增加邮件提醒，选择Editable Email Notification"></a>7    构建后操作增加邮件提醒，选择Editable Email Notification</h3><p><img src="https://i.imgur.com/VhHiALc.png" alt=""><br>配置触发操作：<br><img src="https://i.imgur.com/qnFd574.png" alt=""><br><img src="https://i.imgur.com/TLsy8y3.png" alt=""><br><img src="https://i.imgur.com/vgDERe8.png" alt=""></p>
+<h3 id="8-构建后操作增加文件上传，选择Send-build-artifacts-over-FTP"><a href="#8-构建后操作增加文件上传，选择Send-build-artifacts-over-FTP" class="headerlink" title="8    构建后操作增加文件上传，选择Send build artifacts over FTP"></a>8    构建后操作增加文件上传，选择Send build artifacts over FTP</h3><p><img src="https://i.imgur.com/5q22c7T.png" alt=""></p>
 <h1 id="至此，Jenkins的安装配置完成，立即构建查看效果吧。"><a href="#至此，Jenkins的安装配置完成，立即构建查看效果吧。" class="headerlink" title="至此，Jenkins的安装配置完成，立即构建查看效果吧。"></a>至此，Jenkins的安装配置完成，立即构建查看效果吧。</h1>
     </article>
     <!-- license  -->
@@ -531,12 +537,17 @@ echo &quot;===Finished. Total time: ${SECONDS}s===&quot;
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2017/03/03/20170303-在线缓存(iOS)-汪洋/" title= "移动在线缓存">
+                    <div class="nextTitle">移动在线缓存</div>
+                </a>
+            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/09/24/offlineremote/" title= "移动离线督察功能">
-                    <div class="prevTitle">移动离线督察功能</div>
+                <a href= "/2017/02/17/AndroidRecyclerView使用解析/" title= "Android Recycler View 使用解析">
+                    <div class="prevTitle">Android Recycler View 使用解析</div>
                 </a>
             
         </li>
@@ -593,28 +604,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -928,29 +917,6 @@ top:50vh;
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/09/28/20170224-Jenkins for iOS-刘小标/" >[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2017 </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
             <span class="archive-post-date">08/23</span><a class="archive-post-title" href= "/2017/08/23/20170616-消息推送（IOS）-孙俊祥/" >消息推送(iOS)</a>
         </li>
@@ -973,6 +939,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/03</span><a class="archive-post-title" href= "/2017/03/03/20170303-在线缓存(iOS)-汪洋/" >移动在线缓存</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/24</span><a class="archive-post-title" href= "/2017/02/24/20170224-Jenkins for iOS-刘小标/" >Jenkins For iOS</a>
         </li>
     
     
@@ -1034,13 +1005,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="孙俊祥"><span class="iconfont-archer">&#xe60a;</span>孙俊祥</span>
     
-        <span class="sidebar-category-name" data-categories="肖健"><span class="iconfont-archer">&#xe60a;</span>肖健</span>
-    
         <span class="sidebar-category-name" data-categories="张泉"><span class="iconfont-archer">&#xe60a;</span>张泉</span>
     
-        <span class="sidebar-category-name" data-categories="陈广禄"><span class="iconfont-archer">&#xe60a;</span>陈广禄</span>
+        <span class="sidebar-category-name" data-categories="肖健"><span class="iconfont-archer">&#xe60a;</span>肖健</span>
     
         <span class="sidebar-category-name" data-categories="万峥嵘"><span class="iconfont-archer">&#xe60a;</span>万峥嵘</span>
+    
+        <span class="sidebar-category-name" data-categories="陈广禄"><span class="iconfont-archer">&#xe60a;</span>陈广禄</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
