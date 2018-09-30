@@ -78,8 +78,6 @@
     <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -203,8 +201,10 @@
 </head>
 
     
+        <body class="home-body">
     
-<header class="header">
+    
+<header class="header index-header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -220,21 +220,34 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/travellers.png)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Fellow Travellers
+            <!-- 文章页  -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            
+            
+                it's better to burn out than to fade away
+            
+            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -346,26 +359,18 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/16/移动一张图专题分析-陈光禄/" >
+        <a class="abstract-title" href = "/2017/02/17/AndroidRecyclerView使用解析/" >
             
-                <span>移动一张图专题分析</span>
+                <span>Android Recycler View 使用解析</span>
         </a>
         <div class="abstract-content">
-            移动一张图专题分析
-
-简介[专题模块为整个项目中的重要组成部分，也是不可或缺之一。用户可通过专题信息查看其主要层级结构和内部构造划分。对主要层级可进行收藏展示，便于直观查看。可手动点击某一层级结构打开对应图层，查看详细信息。]
-
-列表主要分为两种结构，一种为树状结构、一种为层级结构。以相同的数据模型展示不同的列表结构，便于用户选择。
-
-逻辑列表项包括三角号小图标、收藏按钮和点击开关的按钮。根据不同情境分别设置相应的展示状态。
-
-
-当为树状结构时：首先初始化专题列表，通过Id展示最新列表。当点击Item项时，我们会记录专题的id,通过id找到子集列表数据，查看子集的type类型是否为“ca...
+            移动应用团队代码走查（20170217）1 摘要走查主题：Android RecyclerView  使用解析主讲人员：肖健参加人员：杨龙、万峥嵘、汪洋。走查时间：2017年2月17日星期五下午16:00到17：30走查地点：公司负一楼2 走查内容2.1 RecyclerView简介  在android L的预览版中，最新的v7支持包新添加了两个控件：RecyclerView和CardView。今天讲解的RecyclerView是经典的ListView的进化与升          华，与ListView比起来具有高度的解耦、更加灵活的特性，但也因此引入了一定的复杂性。
+2.2 Recyc...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/16</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/02/17</span>
             </div>
             <!-- tags  -->
             
@@ -380,8 +385,94 @@
     
     <!-- paginator  -->
     
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+    
 </main>
             <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" alt="avatar" src= /avatar/logo.png >
+    <div class="profile-name">Dist</div>
+    
+    <div class="profile-signature">
+        Fellow Travellers
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:distmobile@126.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fellowtravellers" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+                    <span>
+                        <a href= //github.com/xiaoshuiz target="_black">maintainer</a>
+                    </span>
+                
+            
+                
+            
+                
+            
+        </div>
+    
+    
+</div>
             
         </div>
         <footer class="footer footer-unloaded">
