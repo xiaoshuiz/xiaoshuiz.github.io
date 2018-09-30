@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Fellow Travellers</title>
+    <title>Android 性能分析工具 · Fellow Travellers</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Fellow Travellers</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Android 性能分析工具</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Fellow Travellers</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/travellers.png)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Android 性能分析工具
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/07/01</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,171 +399,90 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/08/23/20170823-矢量切片MMPK-汪洋/" >
-            
-                <span>矢量切片 &amp; MMPK</span>
-        </a>
-        <div class="abstract-content">
-            矢量切片 &amp; MMPK基于ArcGIS SDK100 的新特性1. 矢量切片1.1 定义1.1.0 栅格数据以二维矩阵的形式来表示地理空间信息的数据结构，其中数据的最小存在单元是以像素的形式存在，可以理解为和图片的组织结构类似，以分辨率等特征作为精度的定义标准。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="一、官方工具"><a href="#一、官方工具" class="headerlink" title="一、官方工具"></a>一、官方工具</h1><p>  一般来说, 学习一门新的技术, 最应该做的就是阅读其官方文档, 那是最权威的。Android本身给我们提供了很多App性能测试和分析工具, 而且大部分都集成到Android Studio或DDMS中，非常方便使用。</p>
+<h2 id="1-StrictMode"><a href="#1-StrictMode" class="headerlink" title="1.StrictMode"></a>1.StrictMode</h2><p>  说明：<br><br>       顾名思义, “严格模式”，主要用来限制应用做一些不符合性能规范的事情。一般用来检测主线程中的耗 时操作和阻塞。开启StrictMode后, 如果线程中做一些诸如读写文件, 网络访问等操作, 将会在Log console输出一些警告, 警告信息包含Stack Trace来显示哪个地方出了问题。<br>  作用：<br><br>    主要用来做主线程优化分析</p>
+<h2 id="2-Systrace"><a href="#2-Systrace" class="headerlink" title="2.Systrace"></a>2.Systrace</h2><p>   说明: <br><br>   Systrace是一个收集和检测时间信息的工具, 它能显示CPU和时间被消耗在哪儿了, 每个进程和线程都在其CPU时间片内做了什么事儿。而且会指示哪个地方出了问题, 以及给出Fix建议.其以trace文件（html）的方式记录。可以直接用Chrome浏览器打开查看。界面如下:</p>
+   <image src="http://thyrsi.com/t6/377/1538209277x-1404792849.png">
 
-1.1.1 矢量数据试图利用点、线、面等几何要素来表现这个世界，其数据结构紧凑精准，数据图形质量好，有利于地理信息检索与网络传输等。其中矢量数据的最小单元是以点的形式存在，点构成线，线组成面，面构造出体
+<h2 id="3-Hierarchy-Viewer"><a href="#3-Hierarchy-Viewer" class="headerlink" title="3.Hierarchy Viewer"></a>3.Hierarchy Viewer</h2><p>  说明： <br><br>  Hierarchy Viewer提供了一个可视化的界面来观测布局的层级, 让我们可以优化布局层级, 删除多余的不必要的View层级, 提升布局速度。<br><br>  作用： <br><br>  用来做View层级分析, 可以分析出View Tree中的性能阻塞点, 以便对症下药, 提升布局性能.<br>  Hierarchy Viewer需要Root的机器（产品机没有开启ViewServer）才可以执行.可以使用第三方的开源的ViewServer来协助我们在未Root的机器上使用Hierarchy Viewer分析.<br>  示例图：</p>
+  <image src="http://thyrsi.com/t6/377/1538209443x-1404793232.png">
 
-1.1.2 传统金字塔
-1.1.3 矢量切片
-1.2 矢量切片优势1.2.1 矢量与栅格根据数据组织结构方式的不同...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS">iOS</a>
-    
-</div>
-            
-        </div>
+<h2 id="4-TraceView"><a href="#4-TraceView" class="headerlink" title="4.TraceView"></a>4.TraceView</h2><p>   说明： <br><br>   一个图形化的工具, 用来展示和分析方法的执行时间。<br><br>   作用： <br><br>   分析方法调用栈以及其执行时间, 优化方法执行。<br></p>
+<p>   示例图：</p>
+   <image src="http://thyrsi.com/t6/377/1538209643x-1404792849.png">
+
+<h2 id="5-Memory-Monitor"><a href="#5-Memory-Monitor" class="headerlink" title="5.Memory Monitor"></a>5.Memory Monitor</h2><p>   说明：<br><br>   内存使用检测器, 可以实时检测当前Application的内存使用和释放等信息, 并以图形化界面展示。<br><br>   作用： <br><br>   用来做内存分析, 内存泄露排查的不二之选。可以结合heap viewer, allocation tracker来分析.<br>   可以导出hprof文件结合第三方的MAT工具分析泄露点。因为这个工具在ADT时代比较常用, AS2.0之后, 本身的Memory Monitor越来越强大, 结合日益完善的第三方工具基本上可以完成内存方面的优化了。<br></p>
+<p>   示例图：</p>
+  <image src="http://thyrsi.com/t6/377/1538209756x-1404793154.png">
+
+<h1 id="二、第三方工具"><a href="#二、第三方工具" class="headerlink" title="二、第三方工具"></a>二、第三方工具</h1><h2 id="1-Google的Battery-Historian"><a href="#1-Google的Battery-Historian" class="headerlink" title="1.Google的Battery Historian"></a>1.Google的Battery Historian</h2><pre><code>说明 ：Google出品, 通过Android系统的bugreport文件来做电量使用分析的工具.
+
+文档 ： https://github.com/google/battery-historian
+
+作用 ：  用来做电量使用分析.
+</code></pre><h2 id="2-网易的"><a href="#2-网易的" class="headerlink" title="2.网易的"></a>2.网易的</h2><pre><code>说明 ：针对Android App的CPU, 内存, 网络, 电量等多项综合的测试分析.文档  https://github.com/NetEase/Emmagee
+
+作用 ：比官方工具更适合国人使用来做App的整体性能分析.
+</code></pre><h2 id="3-Square"><a href="#3-Square" class="headerlink" title="3.Square"></a>3.Square</h2><pre><code>说明 ：Square出品, 必属精品 类似与App探针的内存泄露监测工具.
+文档 ：https://github.com/square/leakcanary
+作用 ：集成到App中, 用来做内存问题预防最好不过了.
+</code></pre><h1 id="三、Android-profile"><a href="#三、Android-profile" class="headerlink" title="三、Android profile"></a>三、Android profile</h1><pre><code>示例图 ：
+</code></pre>  <image src="http://thyrsi.com/t6/377/1538209977x-1404781090.png">
+
+  <image src="http://thyrsi.com/t6/377/1538210057x-1404792849.png">
+
+  <image src="http://thyrsi.com/t6/377/1538210079x-1404792849.png">
+
+<h1 id="四、GPU-Profile工具"><a href="#四、GPU-Profile工具" class="headerlink" title="四、GPU Profile工具"></a>四、GPU Profile工具</h1><pre><code>渲染性能问题往往是偷取你宝贵帧数的罪魁祸首,这种问题很容易产生,很容易出现,而且在一个非常方便的工具的帮助下,也非常容易去追踪。使用Peofile GPU Rendering  tool,你可以在手机上就可以看到究竟是什么导致你的应用程序出现卡顿,变慢的情况.
+</code></pre><h3 id="绿线"><a href="#绿线" class="headerlink" title="绿线"></a>绿线</h3><pre><code>下图中的绿线代表16ms,要确保一秒内打到60fps,你需要确保这些帧的每一条线都在绿色的16ms标记线之下.任何时候你看到一个竖线超过了绿色的标记现,你就会看到你的动画有卡顿现象产生.
+</code></pre><h3 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h3><pre><code>每一条柱状图都由三种颜色组成: 蓝-红-黄。这些线直接和Android的渲染流水线和他实际运行帧数的时间关联:
+
+蓝色代表测量绘制的时间,或者说它代表需要多长时间去创建和更新你的DisplayList.在Android中,一个视图在可以实际的进行渲染之前,它必须被转换成GPU所熟悉的格式,简单来说就是几条绘图命令,复杂点的可能是你的自定义的View嵌入了自定义的Path。一旦完成,结果会作为一个DisplayList对象被系统送入缓存,蓝色就是记录了需要花费多长时间在屏幕上更新视图(说白了就是执行每一个View的onDraw方法,创建或者更新每一个View的Display List对象).
+
+红色代表执行的时间,这部分是Android进行2D渲染 Display List的时间,为了绘制到屏幕上,Android需要使用OpenGl ES的API接口来绘制Display  List.这些API有效地将数据发送到GPU,最总在屏幕上显示出来.
+
+橙色部分表示的是处理时间,或者说是CPU告诉GPU渲染一帧的地方,这是一个阻塞调用,因为CPU会一直等待GPU发出接到命令的回复,如果柱状图很高,那就意味着你给GPU太多的工作,太多的负责
+
+视图需要OpenGL命令去绘制和处理.
+</code></pre><h1 id="五、结语"><a href="#五、结语" class="headerlink" title="五、结语"></a>五、结语</h1><h3 id="1。不要重复造轮子"><a href="#1。不要重复造轮子" class="headerlink" title="1。不要重复造轮子"></a>1。不要重复造轮子</h3><h3 id="2-别盲目的选择library"><a href="#2-别盲目的选择library" class="headerlink" title="2.别盲目的选择library"></a>2.别盲目的选择library</h3><h3 id="3-阅读更多的代码"><a href="#3-阅读更多的代码" class="headerlink" title="3.阅读更多的代码"></a>3.阅读更多的代码</h3><h3 id="4-看在上帝的份上，维护一个恰当的编程规范"><a href="#4-看在上帝的份上，维护一个恰当的编程规范" class="headerlink" title="4.看在上帝的份上，维护一个恰当的编程规范"></a>4.看在上帝的份上，维护一个恰当的编程规范</h3><h3 id="5-分析是你最好的朋友"><a href="#5-分析是你最好的朋友" class="headerlink" title="5.分析是你最好的朋友"></a>5.分析是你最好的朋友</h3><h3 id="6-测试，测试，再测试！"><a href="#6-测试，测试，再测试！" class="headerlink" title="6.测试，测试，再测试！"></a>6.测试，测试，再测试！</h3><h3 id="7-借助工具：充分利用现有工具进行敏捷开发。"><a href="#7-借助工具：充分利用现有工具进行敏捷开发。" class="headerlink" title="7.借助工具：充分利用现有工具进行敏捷开发。"></a>7.借助工具：充分利用现有工具进行敏捷开发。</h3></image></image></image></image></image></image></image>
     </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/03/31/Android简单使用及快速入门/" >
-            
-                <span>Android 简单使用及快速入门</span>
-        </a>
-        <div class="abstract-content">
-            开发前的准备：1.配置java环境2.下载安装jdk、下载sdk3.下载开发工具：android studio 、eclipse4.项目运行设备：模拟器、手机、平板电脑5.Android基本常识：比如：四大组件的了解等…自行补脑!开发场景：1.新建项目启动流程2.项目维护常用步骤android studio 项目结构 ：
-&lt;img src=http://thyrsi.com/t6/377/1538203420x-1404781090.png /&gt;  eclipse 项目结构: &lt;img src=http://thyrsi.com/t6/377/1538203534x-1...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/31</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/03/03/20170303-在线缓存(iOS)-汪洋/" >
-            
-                <span>移动在线缓存</span>
-        </a>
-        <div class="abstract-content">
-            移动在线缓存一.在线缓存的必要性   众所周知，移动一张图目前包含两个应用场景：在线和离线。在线场景中，多用户共用数据，与云服务同步，实时性较强。而后者为单用户使用数据，无实时性要求，不常更新，需要数据拷贝，数据也能保证一定的隐秘性。那么在线缓存的应用场景突出在哪里呢？
-###1.在线离线一体化目前移动一张图的在线离线需要在登录时用户手动切换。而数据方面二者并不是同步的，在数据管理方面存在一定的弊端。而通过在线缓存即可实现多用户同步数据，具有较强的数据实时性,数据也便于云端管理。
-###2. 方便用户操作。
-用户在在线与离线的应用场景中可以自由切换,比如在线过程中，临时切换，并不需要返回...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS">iOS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/02/24/20170224-Jenkins for iOS-刘小标/" >
-            
-                <span>Jenkins For iOS</span>
-        </a>
-        <div class="abstract-content">
-            Jenkins for iOS with Fastlane and SVN
-一、搭建环境Jenkins的安装需要JDK环境，JDK安装方法自行参考网络。Jenkins的安装有两种方式，一种是java包安装，另一种是pkg可执行程序（两种安装后的配置一样，pkg安装会在电脑上多出一个用户）。本文采用war包 + tomcat安装方法。
-1   安装Java环境，请自行下载安装
-2   安装tomcat,打开官网地址
-2.1    将下载的zip包解压（可以重命名），把解压后的文件夹放到 /Library下。
-2.2    在终端启动Tomcat服务器，这里首先cd到Tomcat的bin目录...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/02/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS">iOS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/02/17/AndroidRecyclerView使用解析/" >
-            
-                <span>Android Recycler View 使用解析</span>
-        </a>
-        <div class="abstract-content">
-            移动应用团队代码走查（20170217）1 摘要走查主题：Android RecyclerView  使用解析主讲人员：肖健参加人员：杨龙、万峥嵘、汪洋。走查时间：2017年2月17日星期五下午16:00到17：30走查地点：公司负一楼2 走查内容2.1 RecyclerView简介  在android L的预览版中，最新的v7支持包新添加了两个控件：RecyclerView和CardView。今天讲解的RecyclerView是经典的ListView的进化与升          华，与ListView比起来具有高度的解耦、更加灵活的特性，但也因此引入了一定的复杂性。
-2.2 Recyc...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/02/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
-    
-</div>
-            
-        </div>
-    </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/08/05/在线缓存功能开发分享-万峥嵘/" title= "在线缓存功能开发分享">
+                    <div class="nextTitle">在线缓存功能开发分享</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/05/18/android优化方案/" title= "Android 优化方案">
+                    <div class="prevTitle">Android 优化方案</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -512,6 +492,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、官方工具"><span class="toc-number">1.</span> <span class="toc-text">一、官方工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-StrictMode"><span class="toc-number">1.1.</span> <span class="toc-text">1.StrictMode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Systrace"><span class="toc-number">1.2.</span> <span class="toc-text">2.Systrace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Hierarchy-Viewer"><span class="toc-number">1.3.</span> <span class="toc-text">3.Hierarchy Viewer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TraceView"><span class="toc-number">1.4.</span> <span class="toc-text">4.TraceView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Memory-Monitor"><span class="toc-number">1.5.</span> <span class="toc-text">5.Memory Monitor</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、第三方工具"><span class="toc-number">2.</span> <span class="toc-text">二、第三方工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Google的Battery-Historian"><span class="toc-number">2.1.</span> <span class="toc-text">1.Google的Battery Historian</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-网易的"><span class="toc-number">2.2.</span> <span class="toc-text">2.网易的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Square"><span class="toc-number">2.3.</span> <span class="toc-text">3.Square</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、Android-profile"><span class="toc-number">3.</span> <span class="toc-text">三、Android profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、GPU-Profile工具"><span class="toc-number">4.</span> <span class="toc-text">四、GPU Profile工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绿线"><span class="toc-number">4.0.1.</span> <span class="toc-text">绿线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#柱状图"><span class="toc-number">4.0.2.</span> <span class="toc-text">柱状图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、结语"><span class="toc-number">5.</span> <span class="toc-text">五、结语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1。不要重复造轮子"><span class="toc-number">5.0.1.</span> <span class="toc-text">1。不要重复造轮子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-别盲目的选择library"><span class="toc-number">5.0.2.</span> <span class="toc-text">2.别盲目的选择library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-阅读更多的代码"><span class="toc-number">5.0.3.</span> <span class="toc-text">3.阅读更多的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-看在上帝的份上，维护一个恰当的编程规范"><span class="toc-number">5.0.4.</span> <span class="toc-text">4.看在上帝的份上，维护一个恰当的编程规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-分析是你最好的朋友"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.分析是你最好的朋友</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-测试，测试，再测试！"><span class="toc-number">5.0.6.</span> <span class="toc-text">6.测试，测试，再测试！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-借助工具：充分利用现有工具进行敏捷开发。"><span class="toc-number">5.0.7.</span> <span class="toc-text">7.借助工具：充分利用现有工具进行敏捷开发。</span></a></li></ol></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -848,6 +846,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
