@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>移动用地分析 · Fellow Travellers</title>
+    <title>Fellow Travellers</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,23 +203,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Fellow Travellers</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">移动用地分析</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Fellow Travellers</a>
 </header>
@@ -231,74 +220,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/travellers.png)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            移动用地分析
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
-    
-</div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.2k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/08/13</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -399,233 +338,74 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <header><br><td bgcolor="#0099ff"><br><br>   <center><table><tr><td bgcolor="#333333"><font size="7" face="黑体" color="#ffffff"><strong>移动用地分析功能</strong></font></td></tr></table></center><br><br><br></td><br></header>
-
-
-
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">用地分析是指在对地区各自然要素进行综合分析研究的基础上，按照城市规划和建设要求、用地整备工程技术的可能性和经济性，对城市规划用地进行适用性分析评定，以划出城市用地的不同等级。</font><br><br><br><font size="4">另外用于查清村和农、林、牧、渔场，居民点及其以外的独立工矿企事业单位土地权属界线和村以上各级行政界线，查清各类用地面积、分布和利用状况。</font><br><br><br><font color="#664499" size="4">在本文中，用地分析主要实现为对所选中区域进行土地类别、面积和分布的识别与判断，计算其中各个层级占其父级的百分比以及面积情况。</font>
-
-
-<hr>
-
-<p><br></p>
-<h2 id="实现逻辑略析"><a href="#实现逻辑略析" class="headerlink" title="实现逻辑略析"></a><font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font></h2><ol>
-<li>可视化与相关功能操作窗口的基本实现<br></li>
-</ol>
-<ol start="2">
-<li>加载功能基础的地图底图与分析操作图层<br></li>
-</ol>
-<ol start="3">
-<li>分析区域的选择并获取当前图形<br></li>
-</ol>
-<ol start="4">
-<li><font color="#664499">离线调用FeatureQuery（在线调用QueryTask）进行要素查询与过滤</font><br></li>
-</ol>
-<ol start="5">
-<li><font color="#664499">获得结果FeatureResult，从中获取Geometry<font color="#ee0000">（并非与绘制图形做过交叉处理的Geometry）</font>与Attribute</font><br></li>
-</ol>
-<ol start="6">
-<li><font color="#664499">图形切割与面积计算</font><br></li>
-</ol>
-<ol start="7">
-<li>通过GraphicLayer进行图形展示以及图形条组与相应控件Item绑定<br></li>
-</ol>
-<p><hr><br><br></p>
-<h2 id="重要部分代码实现"><a href="#重要部分代码实现" class="headerlink" title="重要部分代码实现"></a><font size="6" face="黑体" color="#005432"><strong>重要部分代码实现</strong></font></h2><h3 id="1-分析区域选择"><a href="#1-分析区域选择" class="headerlink" title="1.分析区域选择"></a>1.<font size="5" face="黑体"><strong>分析区域选择</strong></font><br></h3><pre><code>//通过多点集合绘制几何图形
-polygon.lineTo(currentPoint);
-currentGraphic = new Graphic(polygon, symbol);
-drawLayer.updateGraphic(currentGraphicIndex,currentGraphic);
-pointGraphic=new Graphic(multiPoint,pointSymbol);
-drawLayer.updateGraphic(pointGraphicIndex,pointGraphic);
-multiPoint.add(currentPoint);
-if(lastGraphicIndex!=-1){
-    drawLayer.removeGraphic(lastGraphicIndex);
-}
-lastGraphic=new Graphic(currentPoint,lastSymbol);
-lastGraphicIndex=drawLayer.addGraphic(lastGraphic);
-</code></pre><p><br></p>
-<h3 id="2-地图查询"><a href="#2-地图查询" class="headerlink" title="2.地图查询"></a>2.<font size="5" face="黑体" color="#ff0000"><strong>地图查询</strong></font><br></h3><blockquote>
-<p>  离线查询</p>
-</blockquote>
-<p>离线查询通过初始化一个QueryParameter并设置其参数，调用FeatureLayer对象的QueryFeature方法进行查询，拿到查询结果的Geometry与Attribute。</p>
-<pre><code>QueryParameters queryParams=new QueryParameters();
-//设置区域
-if (isALL) {
-queryParams.setGeometry(mapView_main.getExtent());
-}else {
-    Polygon queryPolygon=measureManager.getpolygon();
-    queryParams.setGeometry(queryPolygon);
-}
-//设置过滤字段
-queryParams.setOutFields(new String[]{&quot;*&quot;});
-landAnalysisResultInfos=new ArrayList&lt;&gt;();
-List&lt;LandAnalysisResultInfo&gt; analysisResultInfos=new ArrayList&lt;&gt;();                    
-Future&lt;FeatureResult&gt; resultFuture=null;
-FeatureResult featureResult=null;
-FeatureLayer featureLayer=(FeatureLayer)layer;
-resultFuture=featureLayer.getFeatureTable().queryFeatures(queryParams,callbackListener);
-try {
-    //获取结果
-    featureResult=resultFuture.get();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-if (featureResult!=null&amp;&amp;featureResult.featureCount()&gt;0) {
-    Iterator it = featureResult.iterator();
-     while (it.hasNext()){
-    GeodatabaseFeature geodatabaseFeature= (GeodatabaseFeature) it.next();
-    Geometry geometry=geodatabaseFeature.getGeometry();
-    &lt;String, Object&gt; featureMap=geodatabaseFeature.getAttributes();
-
-    if(geometry!=null){
-        //进行图形处理
-    }
-    if (featureMap!=null&amp;&amp;featureMap.size()&gt;0) {
-        //进行内容详情提取处理
-    }
-}
-</code></pre><p><br></p>
-<blockquote>
-<p>  在线查询</p>
-</blockquote>
-<p>在线查询通过初始化一个QueryParameter并设置其参数，然后通过在线图层的URL初始化一个QueryTask，通过其对象的execute方法拿到查询结果的Geometry与Attribute。</p>
-<pre><code>QueryParameters queryParams=new QueryParameters();
-Polygon Querypolygon=measureManager.getpolygon();
-queryParams.setGeometry(Querypolygon);
-landAnalysisResultInfos=new ArrayList&lt;&gt;();
-queryParams.setOutFields(new String[]{&quot;*&quot;});
-List&lt;LandAnalysisResultInfo&gt; analysisResultInfos=new ArrayList&lt;&gt;();
-Future&lt;FeatureResult&gt; resultFuture=null;
-FeatureResult featureResult=null;
-ArcGISDynamicMapServiceLayer featureLayer=(ArcGISDynamicMapServiceLayer)layer;
-QueryTask queryTask=new QueryTask(featureLayer.getQueryUrl(0));
-resultFuture=queryTask.execute(queryParams, callbackListener);
-try {
-    featureResult=resultFuture.get();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-if (featureResult!=null&amp;&amp;featureResult.featureCount()&gt;0) {
-    for (Object element : featureResult) {
-        if (element instanceof Feature) {
-            Feature f = (Feature) element;
-            Geometry geometry=f.getGeometry();
-            Map&lt;String, Object&gt; featureMap=f.getAttributes();
-            if(geometry!=null){
-                //进行图形处理
-            }
-            if (featureMap!=null&amp;&amp;featureMap.size()&gt;0) {
-                //进行内容详情提取处理
-            }
-        }
-    }
-}        
-</code></pre><p><br></p>
-<h3 id="3-图形交叉处理"><a href="#3-图形交叉处理" class="headerlink" title="3.图形交叉处理"></a>3.<font size="5" face="黑体" color="#ff0000"><strong>图形交叉处理</strong></font><br></h3><blockquote>
-<p> 通过调用GeometeyEngine.intersect()方法获取。</p>
-</blockquote>
-<pre><code>Geometry geometry = GeometryEngine.intersect(geometry,measureManager.getpolygon(),mapView_main.getSpatialReference());
-</code></pre><p><br></p>
-<h3 id="4-面积计算"><a href="#4-面积计算" class="headerlink" title="4.面积计算"></a>4.<font size="5" face="黑体"><strong>面积计算</strong></font><br></h3><blockquote>
-<p>由于获取的Geometry的面积与其父Geometry的面积均为调用Geometry对象的calculateArea2D()方法，并非实际面积。<br><br>所以我们需要通过Attribute获得的实际面积计算切割Geometry与其父Geometry的实际面积，并计算其百分比。</p>
-</blockquote>
-<pre><code>/**
- *通过在地图上的Area大小计算百分比与实际面积
- *
- * @param landResourceInfos 分析结果的数组 成员： {@link LandAnalysisResultInfo}
- * @return 一个结果的数组 变更了参数数组中成员的属性
- */
-public static List&lt;LandAnalysisResultInfo&gt; getLandPercentValue(List&lt;LandAnalysisResultInfo&gt; landResourceInfos){
-    /*计算实际面积 */
-    double MUM=0;
-    for (LandAnalysisResultInfo landResourceInfo : landResourceInfos) {
-        if (landResourceInfo.getYDMJ()==null) {
-            landResourceInfos.remove(landResourceInfo);
-            continue;
-        }
-        Double visualArea=landResourceInfo.getGeometry().calculateArea2D();
-        Double visualParentArea=landResourceInfo.getParentGeometry().calculateArea2D();
-        Double realArea=landResourceInfo.getYDMJ()/visualParentArea*visualArea;
-        landResourceInfo.setYDMJ(realArea);
-
-        //累计求和
-        MUM=MUM+landResourceInfo.getYDMJ();
-    }
-    /*分别计算百分比*/
-    for (LandAnalysisResultInfo landResourceInfo : landResourceInfos) {
-        landResourceInfo.setPercentValue(String.valueOf(landResourceInfo.getYDMJ()/MUM*100));
-    }
-    return landResourceInfos;
-}
-</code></pre><p><br></p>
-<h3 id="5-图形展示"><a href="#5-图形展示" class="headerlink" title="5.图形展示"></a>5.<font size="5" face="黑体"><strong>图形展示</strong></font><br></h3><blockquote>
-<p>由于本次使用为列表显示，故图形展示在点击子Item的时候进行Geometry的绘制与添加。</p>
-</blockquote>
-<pre><code>/**
- * 结果列表点击效果
- */
-private AdapterView.OnItemClickListener resultListOnItemClickListener =new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
-        resultDrawerLayer.removeAll();
-        resultDrawerLayer.addGraphic(new Graphic(landAnalysisResultInfos.get(position).getGeometry(), MapViewTapTool.getLabelSymbol(MainMapActivity.this,Geometry.Type.POLYGON, Color.BLUE)));
-        resultDrawerLayer.addGraphic(new Graphic(landAnalysisResultInfos.get(position).getParentGeometry(),MapViewTapTool.getLabelSymbol(MainMapActivity.this,Geometry.Type.POLYLINE, Color.BLACK)));
-        Envelope tempEnvelope = new Envelope();
-        landAnalysisResultInfos.get(position).getParentGeometry().queryEnvelope(tempEnvelope);
-        Point tempPoint = tEnvelope.getCenter();
-        mapView_main.centerAt(tempPoint,true);
-    }
-};
-</code></pre><p><hr><br><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><font size="6" face="黑体" color="#005432"><strong>结语</strong></font></h2><p>&emsp;&emsp;用地分析功能的开发，既减少了用户查看地图计算面积的时间，提高了地图的可阅读性。让用户通过移动设备简单的操作即可获取选取区域中各类型的板块内容与面积，并通过绘制图层让用户在地图上更直观的看清板块对象。</p>
-<p><font size="3"><a href="https://github.com/xiaoshuiz/Rep4MarkDown/tree/%E7%94%A8%E5%9C%B0%E5%88%86%E6%9E%90%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81/%E7%94%A8%E5%9C%B0%E5%88%86%E6%9E%90" title="点击进去作者Git" target="_blank" rel="noopener">相关关键代码查看</a></font><br><br><br><br></p>
-<p><image src="http://www.dist.com.cn/templates/cn/images/logo.png" align="right"><br><br>&emsp;</image></p>
-<p><br></p>
-<hr>
-
-
+            <main class="main index-page">
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/03/31/Android简单使用及快速入门/" >
+            
+                <span>Android 简单使用及快速入门</span>
+        </a>
+        <div class="abstract-content">
+            开发前的准备：1.配置java环境2.下载安装jdk、下载sdk3.下载开发工具：android studio 、eclipse4.项目运行设备：模拟器、手机、平板电脑5.Android基本常识：比如：四大组件的了解等…自行补脑!开发场景：1.新建项目启动流程2.项目维护常用步骤android studio 项目结构 ：
+&lt;img src=http://thyrsi.com/t6/377/1538203420x-1404781090.png /&gt;  eclipse 项目结构: &lt;img src=http://thyrsi.com/t6/377/1538203534x-1...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/31</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+    
+</div>
+            
+        </div>
     </article>
-    <!-- license  -->
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/02/17/AndroidRecyclerView使用解析/" >
+            
+                <span>Android Recycler View 使用解析</span>
+        </a>
+        <div class="abstract-content">
+            移动应用团队代码走查（20170217）1 摘要走查主题：Android RecyclerView  使用解析主讲人员：肖健参加人员：杨龙、万峥嵘、汪洋。走查时间：2017年2月17日星期五下午16:00到17：30走查地点：公司负一楼2 走查内容2.1 RecyclerView简介  在android L的预览版中，最新的v7支持包新添加了两个控件：RecyclerView和CardView。今天讲解的RecyclerView是经典的ListView的进化与升          华，与ListView比起来具有高度的解耦、更加灵活的特性，但也因此引入了一定的复杂性。
+2.2 Recyc...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/02/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/08/16/移动一张图专题分析-陈光禄/" title= "移动一张图专题分析">
-                    <div class="nextTitle">移动一张图专题分析</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/08/05/在线缓存功能开发分享-万峥嵘/" title= "在线缓存功能开发分享">
-                    <div class="prevTitle">在线缓存功能开发分享</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
     
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/tags/Android/">&#60; PREV</a><a class="page-number" href="/tags/Android/">1</a><span class="page-number current">2</span>
+    </nav>
     
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-
-    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -635,24 +415,6 @@ private AdapterView.OnItemClickListener resultListOnItemClickListener =new Adapt
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-分析区域选择"><span class="toc-number">3.1.</span> <span class="toc-text">1.分析区域选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-地图查询"><span class="toc-number">3.2.</span> <span class="toc-text">2.地图查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图形交叉处理"><span class="toc-number">3.3.</span> <span class="toc-text">3.图形交叉处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-面积计算"><span class="toc-number">3.4.</span> <span class="toc-text">4.面积计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-图形展示"><span class="toc-number">3.5.</span> <span class="toc-text">5.图形展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1083,8 +845,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
