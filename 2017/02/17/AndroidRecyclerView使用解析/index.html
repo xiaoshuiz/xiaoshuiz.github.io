@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Fellow Travellers</title>
+    <title>Android Recycler View 使用解析 · Fellow Travellers</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Fellow Travellers</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Android Recycler View 使用解析</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Fellow Travellers</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/travellers.png)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Android Recycler View 使用解析
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">981</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2017/02/17</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,45 +399,88 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/08/23/20170823-矢量切片MMPK-汪洋/" >
-            
-                <span>矢量切片 &amp; MMPK</span>
-        </a>
-        <div class="abstract-content">
-            矢量切片 &amp; MMPK基于ArcGIS SDK100 的新特性1. 矢量切片1.1 定义1.1.0 栅格数据以二维矩阵的形式来表示地理空间信息的数据结构，其中数据的最小存在单元是以像素的形式存在，可以理解为和图片的组织结构类似，以分辨率等特征作为精度的定义标准。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="移动应用团队代码走查（20170217）"><a href="#移动应用团队代码走查（20170217）" class="headerlink" title="移动应用团队代码走查（20170217）"></a>移动应用团队代码走查（20170217）</h1><h2 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1 摘要"></a>1 摘要</h2><h2 id="走查主题：Android-RecyclerView-使用解析"><a href="#走查主题：Android-RecyclerView-使用解析" class="headerlink" title="走查主题：Android RecyclerView  使用解析"></a>走查主题：Android RecyclerView  使用解析</h2><h2 id="主讲人员：肖健"><a href="#主讲人员：肖健" class="headerlink" title="主讲人员：肖健"></a>主讲人员：肖健</h2><h2 id="参加人员：杨龙、万峥嵘、汪洋。"><a href="#参加人员：杨龙、万峥嵘、汪洋。" class="headerlink" title="参加人员：杨龙、万峥嵘、汪洋。"></a>参加人员：杨龙、万峥嵘、汪洋。</h2><h2 id="走查时间：2017年2月17日星期五下午16-00到17：30"><a href="#走查时间：2017年2月17日星期五下午16-00到17：30" class="headerlink" title="走查时间：2017年2月17日星期五下午16:00到17：30"></a>走查时间：2017年2月17日星期五下午16:00到17：30</h2><h2 id="走查地点：公司负一楼"><a href="#走查地点：公司负一楼" class="headerlink" title="走查地点：公司负一楼"></a>走查地点：公司负一楼</h2><h2 id="2-走查内容"><a href="#2-走查内容" class="headerlink" title="2 走查内容"></a>2 走查内容</h2><h3 id="2-1-RecyclerView简介"><a href="#2-1-RecyclerView简介" class="headerlink" title="2.1 RecyclerView简介"></a>2.1 RecyclerView简介</h3><p>  在android L的预览版中，最新的v7支持包新添加了两个控件：RecyclerView和CardView。今天讲解的RecyclerView是经典的ListView的进化与升          华，与ListView比起来具有高度的解耦、更加灵活的特性，但也因此引入了一定的复杂性。</p>
+<h3 id="2-2-RecyclerView的使用方式"><a href="#2-2-RecyclerView的使用方式" class="headerlink" title="2.2 RecyclerView的使用方式"></a>2.2 RecyclerView的使用方式</h3><p>我们可以通过导入Support-v7包进行使用：<br>Recyclerview 有充分的定制自由，它可实现以下多种效果：<br><br>1.listview横向、纵向数据展示。<br><br>2.gridview网格布局数据展示。 <br><br>3.StaggeredGrid瀑布流式布局数据展示。 <br></p>
+<p>想要实现效果，只需要为Recyclerview设置布局管理器及关联adapter就可以显示数据展示效果，其使用代码： <br><br>//找到Recyclerview控件 <br><br><code>mRecyclerView = findView(R.id.id_recyclerview);</code> <br><br>①.listview代码设置: <br><br>//设置布局管理器 <br><br><code>mRecyclerView.setLayoutManager(new LinearLayoutManager(dataActivity));</code><br><br>//设置adapter <br><br><code>mRecyclerView.setAdapter(adapter)。</code> <br><br>一般情况下如果不设置滑动方向，默认是纵向滑动，想要实现横向滑动，只需要在设置布局管理器的地方做更改就可以：<br><br>//设置布局管理器 <br><br>// <code>mRecyclerView.setLayoutManager(new LinearLayoutManager(dataActivity));</code><br><br>替换成以下布局就好： <br><br><code>mRecyclerViewsetLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));</code> <br><br>②.girdview代码设置： <br><br>//设置布局管理器 <br><br><code>mRecyclerView.setLayoutManager(new GridLayoutManager(this,4));</code>//只需要更改布局管理器就可实现效果。 <br><br>//设置adapter <br><br><code>mRecyclerView.setAdapter(adapter)。</code><br><br>③.瀑布流式代码设置： <br><br>此效果与gridview效果一致，如果需要实现瀑布流式效果，只需要在adapter的onBindViewHolder方法中为我们的item设置个随机的高度就可以，当然也支持横向和纵向数据展示： <br><br>//设置布局管理器 <br><br>  mRecyclerView.setLayoutManager(newStaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL));//纵向 <br><br>//mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.HORIZONTAL));//横向 <br></p>
+<p>//设置adapter <br><br>  mRecyclerView.setAdapter(adapter)。 <br> </p>
+<p>下面是在adapter中引入item xml文件的设置方法代码： <br></p>
+<pre><code>@Override
+public AttachmentMaterHolderonCreateViewHolder(ViewGroup    parent, int viewType) {
+    View view= LayoutInflater.from(context).inflate(R.layout.material_list_item,null);
 
-1.1.1 矢量数据试图利用点、线、面等几何要素来表现这个世界，其数据结构紧凑精准，数据图形质量好，有利于地理信息检索与网络传输等。其中矢量数据的最小单元是以点的形式存在，点构成线，线组成面，面构造出体
+    //此处为引入item的xml文件比较简单就不贴出来了。
 
-1.1.2 传统金字塔
-1.1.3 矢量切片
-1.2 矢量切片优势1.2.1 矢量与栅格根据数据组织结构方式的不同...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS">iOS</a>
-    
-</div>
-            
-        </div>
+    AttachmentMaterHolder holder=new AttachmentMaterHolder(view);
+
+    return holder;
+}
+</code></pre><p>Activity的布局文件 <br></p>
+<pre><code>&lt; RelativeLayout
+    xmlns:Android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot; &gt;
+
+    &lt; android.support.v7.widget.RecyclerView
+             android:id=&quot;@+id/id_recyclerview&quot;
+             android:divider=&quot;#ffff0000&quot;
+             android:dividerHeight=&quot;10dp&quot;
+             android:layout_width=&quot;match_parent&quot;
+             android:layout_height=&quot;match_parent&quot; /&gt;
+&lt;/ RelativeLayout &gt; 
+</code></pre><p>在Acitvity中的onCreate中引用代码： <br></p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState); 
+    mRecyclerView = findView(R.id.id_recyclerview);
+    //设置布局管理器
+    mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    //设置adapter
+    mRecyclerView.setAdapter(new AttachmentMaterAdapter(this,“数据集”));
+}
+</code></pre><p>以上代码是实现初步的简单效果大致为： <br><br>listview、gridview、瀑布流式效果： <br><br>为了实现更炫酷的效果，我们可加入可选操作：</p>
+<p>//设置Item增加、移除动画</p>
+<p>mRecyclerView.setItemAnimator(new DefaultItemAnimator());</p>
+<p>这是系统为我们提供的一个默认的实现类，值得注意，这里更新数据集需要用 notifyItemInserted(position)与notifyItemRemoved(position) ，而不是notifyDataSetChanged()否则没有动画效果。</p>
+<p>其中分割线的添加需要在代码中设置：</p>
+<p>//添加分割线<br>mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL_LIST));</p>
+<p>其中ItemDecoration需要我们自己去实现，重写该方法计算分割线。</p>
+<p>在Recyclerview中如果我们需要添加点击事件或者长按事件需要我们自己在adapter中去添加代码实现adapter的点击事件，值得注意的地方是它的插入和删除数据的时候刷新是先调用notifyItemChanged(position);</p>
+<p>再调用：notifyItemRangeChanged(position, itemCount);</p>
+<h2 id="3-问题讨论"><a href="#3-问题讨论" class="headerlink" title="3 问题讨论"></a>3 问题讨论</h2><h3 id="1-Recyclerview与其他控件的区别及优势，操控的复杂程度？"><a href="#1-Recyclerview与其他控件的区别及优势，操控的复杂程度？" class="headerlink" title="1.Recyclerview与其他控件的区别及优势，操控的复杂程度？"></a>1.Recyclerview与其他控件的区别及优势，操控的复杂程度？</h3><h3 id="2-此控件在我们的项目中哪些地方有用到？效率如何？"><a href="#2-此控件在我们的项目中哪些地方有用到？效率如何？" class="headerlink" title="2.此控件在我们的项目中哪些地方有用到？效率如何？"></a>2.此控件在我们的项目中哪些地方有用到？效率如何？</h3><h3 id="3-UI的设计方面可借助于哪些框架？"><a href="#3-UI的设计方面可借助于哪些框架？" class="headerlink" title="3.UI的设计方面可借助于哪些框架？"></a>3.UI的设计方面可借助于哪些框架？</h3>
     </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2017/02/24/20170224-Jenkins for iOS-刘小标/" title= "Jenkins For iOS">
+                    <div class="nextTitle">Jenkins For iOS</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -386,6 +490,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动应用团队代码走查（20170217）"><span class="toc-number">1.</span> <span class="toc-text">移动应用团队代码走查（20170217）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-摘要"><span class="toc-number">1.1.</span> <span class="toc-text">1 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#走查主题：Android-RecyclerView-使用解析"><span class="toc-number">1.2.</span> <span class="toc-text">走查主题：Android RecyclerView  使用解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主讲人员：肖健"><span class="toc-number">1.3.</span> <span class="toc-text">主讲人员：肖健</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参加人员：杨龙、万峥嵘、汪洋。"><span class="toc-number">1.4.</span> <span class="toc-text">参加人员：杨龙、万峥嵘、汪洋。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#走查时间：2017年2月17日星期五下午16-00到17：30"><span class="toc-number">1.5.</span> <span class="toc-text">走查时间：2017年2月17日星期五下午16:00到17：30</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#走查地点：公司负一楼"><span class="toc-number">1.6.</span> <span class="toc-text">走查地点：公司负一楼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-走查内容"><span class="toc-number">1.7.</span> <span class="toc-text">2 走查内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-RecyclerView简介"><span class="toc-number">1.7.1.</span> <span class="toc-text">2.1 RecyclerView简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-RecyclerView的使用方式"><span class="toc-number">1.7.2.</span> <span class="toc-text">2.2 RecyclerView的使用方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-问题讨论"><span class="toc-number">1.8.</span> <span class="toc-text">3 问题讨论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Recyclerview与其他控件的区别及优势，操控的复杂程度？"><span class="toc-number">1.8.1.</span> <span class="toc-text">1.Recyclerview与其他控件的区别及优势，操控的复杂程度？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-此控件在我们的项目中哪些地方有用到？效率如何？"><span class="toc-number">1.8.2.</span> <span class="toc-text">2.此控件在我们的项目中哪些地方有用到？效率如何？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UI的设计方面可借助于哪些框架？"><span class="toc-number">1.8.3.</span> <span class="toc-text">3.UI的设计方面可借助于哪些框架？</span></a></li></ol></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -676,6 +798,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
