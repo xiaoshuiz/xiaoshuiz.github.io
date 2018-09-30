@@ -346,36 +346,34 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/16/Android Gis开发经验分享/" >
+        <a class="abstract-title" href = "/2017/04/21/20170421-地名、专题、场景收藏-刘小标/" >
             
-                <span>Android GIS开发经验分享</span>
+                <span>地名、专题、场景收藏</span>
         </a>
         <div class="abstract-content">
-            Android Gis开发经验分享
-概述
-一、地图坐标系的认识
-
-二、地图管理类的认识
-
-三、Gis开发熟知
-
-四、Gis开发平台差异化注意事项
-
-一、地图坐标系的认识
-1. WGS84坐标系一种国际上采用的地心坐标系.  
-
-2.    WGS84 Web墨卡托Web墨卡托是2005年谷歌在谷歌地图中首次使用的,如今主流的Web地图几乎都是使用的Web墨卡托,如：国内的百度地图、高德地图、腾讯地图和天地图等也是基于Web墨卡托（国内地图有加密要求，有两种情况，一种是在 Web墨卡托的基础上经过国家标准加密的国标02坐标系，熟称“火星坐标系”；另一种是在国标的02坐标系下进一步进行加密，...
+            一、    收藏模型1、收藏类型enum FavoriteType: Int {
+   case Theme = 0     // 专题
+   case Scene = 1     // 场景
+   case Place = 2     // 地名
+ }
+2、收藏数据模型class Archive: NSObject, NSCoding {
+    var type: FavoriteType?
+    var ID: String?
+    var name: String?
+    var createDate: String?
+    var pointX: Double?
+   ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/16</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/21</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "GIS">GIS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS">iOS</a>
     
 </div>
             
