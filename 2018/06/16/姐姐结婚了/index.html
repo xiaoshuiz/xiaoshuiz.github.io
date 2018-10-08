@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>移动图例过滤功能 · Nostalgia？</title>
+    <title>最も重要な結婚式 · Nostalgia？</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Nostalgia?</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">移动图例过滤功能</a>
+                <a href="#" class="post-name">最も重要な結婚式</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            移动图例过滤功能
+            最も重要な結婚式
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "功能开发">功能开发</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "姐姐婚礼">姐姐婚礼</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.3k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">355</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/09/24</span>
+                    <span class="post-intro-time">2018/06/16</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,249 +401,17 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p><header> </header></p>
-<td bgcolor="#0099ff"><br><br>   <center><table><tr><td bgcolor="#333333"><font size="7" face="黑体" color="#ffffff"><strong>移动图例过滤功能</strong></font></td></tr></table></center><br><br><br></td>
-
-<p></p>
-<p><div style="text-align: right"><font size="4"><br>—– &emsp;<br> xiaoshuiz<br>&emsp;  &emsp;&emsp;&emsp;<br> </font><br></div><br><br></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">图例过滤是对于多图例图层的一种查看方式，这种查看方式方便对特定类型的图块进行统一查看。</font><br><br><br><font size="4">多图例图层一般为DynamicLayer与FeatureLayer,而且单个图例的图层与多个图例的图层，其渲染器也是不同的，单个图例的为SimpleRenderer，多个图例为UniqueValueRenderer。</font><br><br><br><font color="#664499" size="4">在本文中，图例过滤主要为对图例进行特定过滤达到多图层互斥过滤的效果，另外对于在线图例过滤使用了Layer Definition进行图层Visible控制问题。</font>
-
-<p><hr><br><br></p>
-<h2 id="实现逻辑略析"><a href="#实现逻辑略析" class="headerlink" title="实现逻辑略析"></a><font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font></h2><ol>
-<li>可视化与相关功能操作监听的基本实现<br></li>
-</ol>
-<ol start="2">
-<li>加载功能基础的分析操作图层与其图例<br></li>
-</ol>
-<ol start="3">
-<li>单个图例的点击并获取其LabelName<br></li>
-</ol>
-<ol start="4">
-<li><font color="#664499">在线将ArcGisDynamicServiceLayer通过ArcGisFeatureLayer加载，并获取其Renderer转为UniqueValueRenderer（离线获取FeatureLayer的Renderer） 并获取Render中的Feild1字段<font color="#ee0000">（配置的过滤字段）</font></font><br></li>
-</ol>
-<ol start="5">
-<li><font color="#664499">WhereClause语句的拼接（过滤字段与LabelName中的值拼接成Sql Where语句）</font><br></li>
-</ol>
-<ol start="6">
-<li><p><font color="#664499">在线通过设置ArcGisDynamicServiceLayer的LayerDefinition（离线通过设置FeatureLayer的DefinitionExpression）进行过滤</font><br></p>
-</li>
-<li><p>对于在线DynamicLayer多图层控制显示问题，将Visible控制可视改为Layer Definition控制可视，只维护一套属性。</p>
-</li>
-</ol>
-<p><hr><br><br></p>
-<h2 id="重要部分代码实现"><a href="#重要部分代码实现" class="headerlink" title="重要部分代码实现"></a><font size="6" face="黑体" color="#ffb022"><strong>重要</strong></font><font size="6" face="黑体" color="#005432"><strong>部分代码实现</strong></font></h2><h3 id="1-LayerDefinition控制可视"><a href="#1-LayerDefinition控制可视" class="headerlink" title="1.LayerDefinition控制可视"></a>1.<font size="5" face="黑体"><strong>LayerDefinition控制可视</strong></font><br></h3><blockquote>
-<p>/** </p>
-<p>  **   根据visibleIds 更新DynamicLayer 通过DynamicLayer的Definition进行控制显示</p>
-<p>  ** Definition中 1-&gt; “1=1” 表示图层 1 全部显示</p>
-<p>  **/<br> <br></p>
-</blockquote>
-<pre><code>//要存储的LayerDefinitions
-Map&lt;String, Map&lt;Integer, String&gt;&gt; dynamicLayerDefinitionMap = TotalApplication.getDynamicLayerDefinitionMap();
-//要操作的LayerDefinitions
-Map&lt;Integer, String&gt; layerDefinitions = dynamicLayer.getLayerDefinitions();
-if (layerDefinitions==null) {
-    layerDefinitions=new HashMap&lt;&gt;();
-}
-if (isOpenLayer) {
-    //显示
-    if (dynamicLayerDefinitionMap.containsKey(dynamicLayer.getUrl())) {
-        //从存储语句中获取之前的过滤语句
-        for (int visibleId : visibleIds) {
-
-            Map&lt;Integer, String&gt; integerStringMap = dynamicLayerDefinitionMap.get(dynamicLayer.getUrl());
-            if (integerStringMap.containsKey(visibleId)
-                    &amp;&amp;integerStringMap.get(visibleId)!=null
-                    &amp;&amp;!Constants.SQL_FALSE.equalsIgnoreCase(integerStringMap.get(visibleId))) {
-                //已存该layer的id的Layer Definition Sql 语句
-                layerDefinitions.put(visibleId,integerStringMap.get(visibleId));
-            }else {
-                //全部显示
-                layerDefinitions.put(visibleId,Constants.SQL_TURE);
-            }
-        }
-    }else {
-        //全部显示
-        for (int visibleId : visibleIds) {
-            layerDefinitions.put(visibleId,Constants.SQL_TURE);
-        }
-    }
-}else {
-    //关闭
-    if (!layerDefinitions.isEmpty()) {
-        Map&lt;Integer, String&gt; integerStringMap;
-        if (dynamicLayerDefinitionMap.containsKey(dynamicLayer.getUrl())) {
-            //存储中有这个Layer的Definition
-            integerStringMap = dynamicLayerDefinitionMap.get(dynamicLayer.getUrl());
-        }else {
-            //存储中没有这个layer的definition
-            integerStringMap=new HashMap&lt;&gt;();
-        }
-        for (int visibleId : visibleIds) {
-            if (layerDefinitions.containsKey(visibleId)
-                    &amp;&amp;layerDefinitions.get(visibleId)!=null
-                    &amp;&amp;!Constants.SQL_FALSE.equalsIgnoreCase(layerDefinitions.get(visibleId))) {
-                //有可视语句，进行储存
-                integerStringMap.put(visibleId,layerDefinitions.get(visibleId));
-            }
-            //取消可视
-            layerDefinitions.put(visibleId,Constants.SQL_FALSE);
-        }
-        TotalApplication.getDynamicLayerDefinitionMap().put(dynamicLayer.getUrl(),integerStringMap);
-
-    }else {
-        //一般走不到这，避免花里胡哨的操作
-        for (int visibleId : visibleIds) {
-            //取消可视
-            layerDefinitions.put(visibleId,Constants.SQL_FALSE);
-        }
-    }
-}
-dynamicLayer.setLayerDefinitions(layerDefinitions);
-dynamicLayer.refresh();
-</code></pre><p><br></p>
-<h3 id="2-Render获取与过滤字段获取"><a href="#2-Render获取与过滤字段获取" class="headerlink" title="2.Render获取与过滤字段获取"></a>2.<font size="5" face="黑体"><strong>Render获取与过滤字段获取</strong></font><br></h3><blockquote>
-<p>  离线获取</p>
-</blockquote>
-<p>离线用的FeatureLayer.getRenderer()<br><br></p>
-<pre><code> FeatureLayer featureLayer= (FeatureLayer) layer;
-//判断是否获取过，避免重复查询
-if (TotalApplication.getInstanceFilterFieldMap().containsKey(layerName)) {
-    filterField=TotalApplication.getInstanceFilterFieldMap().get(layerName);
-}else{
-    //记录已查询 以免无结果 重复查询
-    TotalApplication.getInstanceFilterFieldMap().put(layerName,Constants.NO_FILTER_FIELD);
-    filterField=Constants.NO_FILTER_FIELD;
-    //获取过滤字段
-    Renderer renderer = featureLayer.getRenderer();
-    if (renderer instanceof UniqueValueRenderer) {
-        UniqueValueRenderer uniqueValueRenderer= (UniqueValueRenderer) renderer;
-        filterField = uniqueValueRenderer.getField1();
-        TotalApplication.getInstanceFilterFieldMap().put(layerName,filterField);
-    }
-}
-</code></pre><p><br></p>
-<blockquote>
-<p>  在线获取</p>
-</blockquote>
-<p>在线通过加载ArcGisFeatureLayer获取Renderer中的过滤字段<br><br></p>
-<pre><code>//Renderer中过滤字段的查询和保存，避免重复加载 例：RDDM
-if (TotalApplication.getInstanceFilterFieldMap().keySet().contains(url+Constants.SPLIT_SYMBOL[4]+layerID)) {
-    //通知过滤
-}else{
-    final ArcGISFeatureLayer arcGISFeatureLayer= new ArcGISFeatureLayer(url+Constants.SPLIT_SYMBOL[4]+layerID, ArcGISFeatureLayer.MODE.SELECTION);
-    final String finalUrl = url;
-    final String finalLayerID = layerID;
-    arcGISFeatureLayer.setOnStatusChangedListener(new OnStatusChangedListener() {
-        @Override
-        public void onStatusChanged(Object o, STATUS status) {
-            if (status== STATUS.INITIALIZED) {
-                //记录已查询 以免无结果 重复查询
-                TotalApplication.getInstanceFilterFieldMap().put(arcGISFeatureLayer.getUrl(),Constants.NO_FILTER_FIELD);
-                Renderer renderer = arcGISFeatureLayer.getRenderer();
-                if (renderer!=null) {
-
-                    if (renderer instanceof UniqueValueRenderer) {
-                        UniqueValueRenderer uniqueValueRenderer= (UniqueValueRenderer) renderer;
-                        //获取过滤字段 RDDM
-                        String filterField = uniqueValueRenderer.getField1();
-                        if (filterField!=null&amp;&amp;!filterField.isEmpty()) {
-                            TotalApplication.getInstanceFilterFieldMap().put(arcGISFeatureLayer.getUrl(),filterField);
-                        }
-                    }
-                }
-                //通知过滤
-            }
-
-        }
-    });
-}  
-</code></pre><h3 id="3-图例过滤"><a href="#3-图例过滤" class="headerlink" title="3.图例过滤"></a>3.<font size="5" face="黑体" color="#ff0000"><strong>图例过滤</strong></font><br></h3><blockquote>
-<p>  离线过滤</p>
-</blockquote>
-<p>离线用的FeatureLayer过滤 FeatureLayer的LayerDefinition为 String (Sql Where Clause)，<br><br><br>无需控制图层，且可以和Visible混合使用</p>
-<pre><code>//图例过滤 例：YDDM = &apos;mc&apos;
-featureLayer.setDefinitionExpression(filterField+Constants.WHERE_EQUAL+Constants.WHERE_QUOTATION_MARKS+finalLegendLabel+Constants.WHERE_QUOTATION_MARKS);
-</code></pre><p><br></p>
-<blockquote>
-<p>  在线过滤</p>
-</blockquote>
-<p>在线用的ArcGISDynamicMapServiceLayer过滤<br><br>ArcGISDynamicMapServiceLayer的LayerDefinition为Map&lt; int(layerId) , String(Sql Where Clause) &gt;，<br><br><br>得到所需数据进行过滤<br><br></p>
-<pre><code>//图例过滤
-if (filterField!=null&amp;&amp;!Constants.NO_FILTER_FIELD.equalsIgnoreCase(filterField)&amp;&amp;!filterField.isEmpty()) {
-    if (layer instanceof ArcGISDynamicMapServiceLayer) {
-        //拼组Sql Where clause 并设置LayerDefinitions 进行过滤
-        Map&lt;Integer, String&gt; layerDefinitions = ((ArcGISDynamicMapServiceLayer) layer).getLayerDefinitions();
-        if (layerDefinitions==null) {
-            layerDefinitions=new HashMap&lt;Integer, String&gt;();
-        }
-        //map中： layerId -&gt; where clause   YDDM = &apos;G1&apos;
-        layerDefinitions.put(Integer.parseInt(layerId),filterField+Constants.WHERE_EQUAL+Constants.WHERE_QUOTATION_MARKS+legendName+Constants.WHERE_QUOTATION_MARKS);
-        ((ArcGISDynamicMapServiceLayer) layer).setLayerDefinitions(layerDefinitions);
-        ((ArcGISDynamicMapServiceLayer) layer).refresh();
-    }
-}
-</code></pre><h3 id="4-结束过滤-全部显示"><a href="#4-结束过滤-全部显示" class="headerlink" title="4.结束过滤(全部显示)"></a>4.<font size="5" face="黑体" color="#ff0000"><strong>结束过滤(全部显示)</strong></font><br></h3><blockquote>
-<p> 离线结束过滤</p>
-</blockquote>
-<pre><code>Map&lt;String, Layer&gt; layerMap = TotalApplication.getInstanceAllLayerMap();
-if (layerMap.containsKey(name)) {
-    Layer layer = layerMap.get(name);
-    if (layer instanceof FeatureLayer) {
-        //设置LayerDefinition
-        ((FeatureLayer) layer).setDefinitionExpression(Constants.SQL_TURE);
-        //数据改变
-        legendAdapter.selectLabel= Constants.NO_SELECT;
-        TotalApplication.getLayerSelectLabelMap().put(name,Constants.NO_SELECT);
-        legendAdapter.notifyDataSetChanged();
-    }
-}
-</code></pre><p><br></p>
-<blockquote>
-<p> 在线结束过滤</p>
-</blockquote>
-<pre><code>//获取当前layer对应的Service Layer 的URL与Id
-List&lt;ThemeInfo&gt; theme = oneMapActivity.mDataSource.getTheme();
-for (ThemeInfo themeInfo : theme) {
-    if (name.equalsIgnoreCase(themeInfo.getName())) {
-        serviceUID=themeInfo.getServiceUid();
-        layerID=themeInfo.getLayerId();
-    }
-}
-List&lt;MapServicesInfo&gt; mapServices = oneMapActivity.mDataSource.getMapServices();
-for (MapServicesInfo mapService : mapServices) {
-    if (serviceUID!=null&amp;&amp;serviceUID.equalsIgnoreCase(mapService.getName())) {
-        url=mapService.getUrl();
-    }
-}
-//数据改变
-legendAdapter.selectLabel= Constants.NO_SELECT;
-TotalApplication.getLayerSelectLabelMap().put(name,Constants.NO_SELECT);
-legendAdapter.notifyDataSetChanged();
-//TODO 通知图例过滤
-</code></pre><p><br><br>全部显示</p>
-<pre><code>if (layer instanceof ArcGISDynamicMapServiceLayer) {
-    Map&lt;Integer, String&gt; layerDefinitions = ((ArcGISDynamicMapServiceLayer) layer).getLayerDefinitions();
-    if (layerDefinitions==null){
-        layerDefinitions=new HashMap&lt;Integer, String&gt;();
-    }
-    layerDefinitions.put(Integer.parseInt(layerId),Constants.SQL_TURE);
-    ((ArcGISDynamicMapServiceLayer) layer).setLayerDefinitions(layerDefinitions);
-    ((ArcGISDynamicMapServiceLayer) layer).refresh();
-}
-</code></pre><p><hr><br><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><font size="6" face="黑体" color="#005432"><strong>结语</strong></font></h2><p>&emsp;&emsp;图例过滤功能的开发，既减少了用户手动查找相应地块和汇总的时间，提高了地图的可阅读性。让用户通过移动设备简单的操作地图中同一类型的地块汇总，并通过绘制图层让用户在地图上更直观的看清板块对象。</p>
+        <h2 id="最も重要な結婚式"><a href="#最も重要な結婚式" class="headerlink" title="最も重要な結婚式"></a>最も重要な結婚式</h2><p><br><br><br><br>今天是我可爱的小妹妹结婚的<font color="#ff7072">大喜之日</font> 欢喜中夹杂个各种感受。 <br></p>
+<p><img src="https://i.imgur.com/L5HDMz5.jpg" alt=""></p>
+<p>想想以后年夜饭又少一位不免难受 但多了一个姐夫 家里又多了一位成员 甚至有了侄子就多了若干位小成员 心里还美美的<br></p>
+<p><img src="https://i.imgur.com/qpzMxl5.jpg" alt=""></p>
+<p> 但是你结婚之后家里就开始催我了呀 就开始了全家总动员的催婚大法 还记得今天回酒店 酒店阿姨说诶你怎么回来了 你老婆呢 我一脸懵住了 阿姨说看我带着个红花 以为是我结婚 哈哈哈 阿姨还说姐姐很漂亮 是个美丽的新娘 酒席上叔叔婶婶也在催 说什么时候把那位领回家 明明是一个城市的 那么多年了还不领回家 心里也不知道怎么去回应 <br></p>
+<p><img src="https://i.imgur.com/VkBaCvo.jpg" alt=""></p>
+<p>最近的事情也很多 我也毕业了 要去工作了 驾照考完了 最重要的当然是这个唯一的姐姐结婚了 姐夫也是个不错的人 愿你们相互扶持  能够好好的过这一辈子 <br><br><br>愿你永远十八岁 要不开头叫你妹妹嘛 毕竟我都二十多的人了嘛 总之呢 不管在哪里 这辈子一定要过的开开心心呀<br></p>
+<p><img src="https://i.imgur.com/O9elIJy.jpg" alt=""></p>
 <p><br></p>
-<p><image src="http://www.dist.com.cn/templates/cn/images/logo.png" align="right"><br><br>&emsp;</image></p>
+<p> 致天底下最可爱的<font color="#ff7072">真真.</font></p>
 <p><br></p>
-<hr>
-
-
-
-
-
-
-
-
 
     </article>
     <!-- license  -->
@@ -653,17 +421,12 @@ legendAdapter.notifyDataSetChanged();
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/09/24/offlineremote/" title= "移动离线督察功能">
-                    <div class="nextTitle">移动离线督察功能</div>
+                <a href= "/2018/07/24/legendfilter/" title= "移动图例过滤功能">
+                    <div class="nextTitle">移动图例过滤功能</div>
                 </a>
             
         </li>
         <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/08/13/landanalysis/" title= "移动用地分析">
-                    <div class="prevTitle">移动用地分析</div>
-                </a>
             
         </li>
     </ul>
@@ -706,7 +469,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-LayerDefinition控制可视"><span class="toc-number">3.1.</span> <span class="toc-text">1.LayerDefinition控制可视</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Render获取与过滤字段获取"><span class="toc-number">3.2.</span> <span class="toc-text">2.Render获取与过滤字段获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图例过滤"><span class="toc-number">3.3.</span> <span class="toc-text">3.图例过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-结束过滤-全部显示"><span class="toc-number">3.4.</span> <span class="toc-text">4.结束过滤(全部显示)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#最も重要な結婚式"><span class="toc-number">1.</span> <span class="toc-text">最も重要な結婚式</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -770,9 +533,14 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 5
+        Total : 6
         </div>
         <!-- search  -->
         
@@ -798,17 +566,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/offlineremote/" >移动离线督察功能</a>
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/offlineremote/" >离线督察</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/legendfilter/" >移动图例过滤功能</a>
+            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2018/08/13/landanalysis/" >用地分析</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2018/08/13/landanalysis/" >移动用地分析</a>
+            <span class="archive-post-date">07/24</span><a class="archive-post-title" href= "/2018/07/24/legendfilter/" >移动图例过滤功能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2018/06/16/姐姐结婚了/" >最も重要な結婚式</a>
         </li>
     
     </div>
@@ -816,13 +589,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="功能开发"><span class="iconfont-archer">&#xe606;</span>功能开发</span>
-    
-        <span class="sidebar-tag-name" data-tags="大学"><span class="iconfont-archer">&#xe606;</span>大学</span>
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
     
         <span class="sidebar-tag-name" data-tags="项目"><span class="iconfont-archer">&#xe606;</span>项目</span>
     
-        <span class="sidebar-tag-name" data-tags="热血"><span class="iconfont-archer">&#xe606;</span>热血</span>
+        <span class="sidebar-tag-name" data-tags="大学"><span class="iconfont-archer">&#xe606;</span>大学</span>
+    
+        <span class="sidebar-tag-name" data-tags="音乐"><span class="iconfont-archer">&#xe606;</span>音乐</span>
+    
+        <span class="sidebar-tag-name" data-tags="姐姐婚礼"><span class="iconfont-archer">&#xe606;</span>姐姐婚礼</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -857,11 +632,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Android"><span class="iconfont-archer">&#xe60a;</span>Android</span>
+        <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
-        <span class="sidebar-category-name" data-categories="团日活动"><span class="iconfont-archer">&#xe60a;</span>团日活动</span>
-    
-        <span class="sidebar-category-name" data-categories="音乐"><span class="iconfont-archer">&#xe60a;</span>音乐</span>
+        <span class="sidebar-category-name" data-categories="生活"><span class="iconfont-archer">&#xe60a;</span>生活</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

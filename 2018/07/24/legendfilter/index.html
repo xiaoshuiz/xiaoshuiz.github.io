@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>用地分析 · Nostalgia？</title>
+    <title>移动图例过滤功能 · Nostalgia？</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Nostalgia?</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">用地分析</a>
+                <a href="#" class="post-name">移动图例过滤功能</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            用地分析
+            移动图例过滤功能
             <!-- 404 -->
             
         </h1>
@@ -272,12 +272,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.2k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.3k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/08/13</span>
+                    <span class="post-intro-time">2018/07/24</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,193 +401,248 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <header><br><td bgcolor="#0099ff"><br><br>   <center><table><tr><td bgcolor="#333333"><font size="7" face="黑体" color="#ffffff"><strong>移动用地分析功能</strong></font></td></tr></table></center><br><br><br></td><br></header>
+        <p><header> </header></p>
+<td bgcolor="#0099ff"><br><br>   <center><table><tr><td bgcolor="#333333"><font size="7" face="黑体" color="#ffffff"><strong>移动图例过滤功能</strong></font></td></tr></table></center><br><br><br></td>
 
+<p></p>
+<p><div style="text-align: right"><font size="4"><br>—– &emsp;<br> xiaoshuiz<br>&emsp;  &emsp;&emsp;&emsp;<br> </font><br></div><br><br></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">图例过滤是对于多图例图层的一种查看方式，这种查看方式方便对特定类型的图块进行统一查看。</font><br><br><br><font size="4">多图例图层一般为DynamicLayer与FeatureLayer,而且单个图例的图层与多个图例的图层，其渲染器也是不同的，单个图例的为SimpleRenderer，多个图例为UniqueValueRenderer。</font><br><br><br><font color="#664499" size="4">在本文中，图例过滤主要为对图例进行特定过滤达到多图层互斥过滤的效果，另外对于在线图例过滤使用了Layer Definition进行图层Visible控制问题。</font>
 
-
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font size="6" face="黑体" color="#005432"><strong>简介</strong></font></h2><font size="4">用地分析是指在对地区各自然要素进行综合分析研究的基础上，按照城市规划和建设要求、用地整备工程技术的可能性和经济性，对城市规划用地进行适用性分析评定，以划出城市用地的不同等级。</font><br><br><br><font size="4">另外用于查清村和农、林、牧、渔场，居民点及其以外的独立工矿企事业单位土地权属界线和村以上各级行政界线，查清各类用地面积、分布和利用状况。</font><br><br><br><font color="#664499" size="4">在本文中，用地分析主要实现为对所选中区域进行土地类别、面积和分布的识别与判断，计算其中各个层级占其父级的百分比以及面积情况。</font>
-
-
-<hr>
-
-<p><br></p>
+<p><hr><br><br></p>
 <h2 id="实现逻辑略析"><a href="#实现逻辑略析" class="headerlink" title="实现逻辑略析"></a><font size="6" face="黑体" color="#005432"><strong>实现逻辑略析</strong></font></h2><ol>
-<li>可视化与相关功能操作窗口的基本实现<br></li>
+<li>可视化与相关功能操作监听的基本实现<br></li>
 </ol>
 <ol start="2">
-<li>加载功能基础的地图底图与分析操作图层<br></li>
+<li>加载功能基础的分析操作图层与其图例<br></li>
 </ol>
 <ol start="3">
-<li>分析区域的选择并获取当前图形<br></li>
+<li>单个图例的点击并获取其LabelName<br></li>
 </ol>
 <ol start="4">
-<li><font color="#664499">离线调用FeatureQuery（在线调用QueryTask）进行要素查询与过滤</font><br></li>
+<li><font color="#664499">在线将ArcGisDynamicServiceLayer通过ArcGisFeatureLayer加载，并获取其Renderer转为UniqueValueRenderer（离线获取FeatureLayer的Renderer） 并获取Render中的Feild1字段<font color="#ee0000">（配置的过滤字段）</font></font><br></li>
 </ol>
 <ol start="5">
-<li><font color="#664499">获得结果FeatureResult，从中获取Geometry<font color="#ee0000">（并非与绘制图形做过交叉处理的Geometry）</font>与Attribute</font><br></li>
+<li><font color="#664499">WhereClause语句的拼接（过滤字段与LabelName中的值拼接成Sql Where语句）</font><br></li>
 </ol>
 <ol start="6">
-<li><font color="#664499">图形切割与面积计算</font><br></li>
-</ol>
-<ol start="7">
-<li>通过GraphicLayer进行图形展示以及图形条组与相应控件Item绑定<br></li>
+<li><p><font color="#664499">在线通过设置ArcGisDynamicServiceLayer的LayerDefinition（离线通过设置FeatureLayer的DefinitionExpression）进行过滤</font><br></p>
+</li>
+<li><p>对于在线DynamicLayer多图层控制显示问题，将Visible控制可视改为Layer Definition控制可视，只维护一套属性。</p>
+</li>
 </ol>
 <p><hr><br><br></p>
-<h2 id="重要部分代码实现"><a href="#重要部分代码实现" class="headerlink" title="重要部分代码实现"></a><font size="6" face="黑体" color="#005432"><strong>重要部分代码实现</strong></font></h2><h3 id="1-分析区域选择"><a href="#1-分析区域选择" class="headerlink" title="1.分析区域选择"></a>1.<font size="5" face="黑体"><strong>分析区域选择</strong></font><br></h3><pre><code>//通过多点集合绘制几何图形
-polygon.lineTo(currentPoint);
-currentGraphic = new Graphic(polygon, symbol);
-drawLayer.updateGraphic(currentGraphicIndex,currentGraphic);
-pointGraphic=new Graphic(multiPoint,pointSymbol);
-drawLayer.updateGraphic(pointGraphicIndex,pointGraphic);
-multiPoint.add(currentPoint);
-if(lastGraphicIndex!=-1){
-    drawLayer.removeGraphic(lastGraphicIndex);
-}
-lastGraphic=new Graphic(currentPoint,lastSymbol);
-lastGraphicIndex=drawLayer.addGraphic(lastGraphic);
-</code></pre><p><br></p>
-<h3 id="2-地图查询"><a href="#2-地图查询" class="headerlink" title="2.地图查询"></a>2.<font size="5" face="黑体" color="#ff0000"><strong>地图查询</strong></font><br></h3><blockquote>
-<p>  离线查询</p>
+<h2 id="重要部分代码实现"><a href="#重要部分代码实现" class="headerlink" title="重要部分代码实现"></a><font size="6" face="黑体" color="#ffb022"><strong>重要</strong></font><font size="6" face="黑体" color="#005432"><strong>部分代码实现</strong></font></h2><h3 id="1-LayerDefinition控制可视"><a href="#1-LayerDefinition控制可视" class="headerlink" title="1.LayerDefinition控制可视"></a>1.<font size="5" face="黑体"><strong>LayerDefinition控制可视</strong></font><br></h3><blockquote>
+<p>/** </p>
+<p>  **   根据visibleIds 更新DynamicLayer 通过DynamicLayer的Definition进行控制显示</p>
+<p>  ** Definition中 1-&gt; “1=1” 表示图层 1 全部显示</p>
+<p>  **/<br> <br></p>
 </blockquote>
-<p>离线查询通过初始化一个QueryParameter并设置其参数，调用FeatureLayer对象的QueryFeature方法进行查询，拿到查询结果的Geometry与Attribute。</p>
-<pre><code>QueryParameters queryParams=new QueryParameters();
-//设置区域
-if (isALL) {
-queryParams.setGeometry(mapView_main.getExtent());
-}else {
-    Polygon queryPolygon=measureManager.getpolygon();
-    queryParams.setGeometry(queryPolygon);
+<pre><code>//要存储的LayerDefinitions
+Map&lt;String, Map&lt;Integer, String&gt;&gt; dynamicLayerDefinitionMap = TotalApplication.getDynamicLayerDefinitionMap();
+//要操作的LayerDefinitions
+Map&lt;Integer, String&gt; layerDefinitions = dynamicLayer.getLayerDefinitions();
+if (layerDefinitions==null) {
+    layerDefinitions=new HashMap&lt;&gt;();
 }
-//设置过滤字段
-queryParams.setOutFields(new String[]{&quot;*&quot;});
-landAnalysisResultInfos=new ArrayList&lt;&gt;();
-List&lt;LandAnalysisResultInfo&gt; analysisResultInfos=new ArrayList&lt;&gt;();                    
-Future&lt;FeatureResult&gt; resultFuture=null;
-FeatureResult featureResult=null;
-FeatureLayer featureLayer=(FeatureLayer)layer;
-resultFuture=featureLayer.getFeatureTable().queryFeatures(queryParams,callbackListener);
-try {
-    //获取结果
-    featureResult=resultFuture.get();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-if (featureResult!=null&amp;&amp;featureResult.featureCount()&gt;0) {
-    Iterator it = featureResult.iterator();
-     while (it.hasNext()){
-    GeodatabaseFeature geodatabaseFeature= (GeodatabaseFeature) it.next();
-    Geometry geometry=geodatabaseFeature.getGeometry();
-    &lt;String, Object&gt; featureMap=geodatabaseFeature.getAttributes();
+if (isOpenLayer) {
+    //显示
+    if (dynamicLayerDefinitionMap.containsKey(dynamicLayer.getUrl())) {
+        //从存储语句中获取之前的过滤语句
+        for (int visibleId : visibleIds) {
 
-    if(geometry!=null){
-        //进行图形处理
+            Map&lt;Integer, String&gt; integerStringMap = dynamicLayerDefinitionMap.get(dynamicLayer.getUrl());
+            if (integerStringMap.containsKey(visibleId)
+                    &amp;&amp;integerStringMap.get(visibleId)!=null
+                    &amp;&amp;!Constants.SQL_FALSE.equalsIgnoreCase(integerStringMap.get(visibleId))) {
+                //已存该layer的id的Layer Definition Sql 语句
+                layerDefinitions.put(visibleId,integerStringMap.get(visibleId));
+            }else {
+                //全部显示
+                layerDefinitions.put(visibleId,Constants.SQL_TURE);
+            }
+        }
+    }else {
+        //全部显示
+        for (int visibleId : visibleIds) {
+            layerDefinitions.put(visibleId,Constants.SQL_TURE);
+        }
     }
-    if (featureMap!=null&amp;&amp;featureMap.size()&gt;0) {
-        //进行内容详情提取处理
+}else {
+    //关闭
+    if (!layerDefinitions.isEmpty()) {
+        Map&lt;Integer, String&gt; integerStringMap;
+        if (dynamicLayerDefinitionMap.containsKey(dynamicLayer.getUrl())) {
+            //存储中有这个Layer的Definition
+            integerStringMap = dynamicLayerDefinitionMap.get(dynamicLayer.getUrl());
+        }else {
+            //存储中没有这个layer的definition
+            integerStringMap=new HashMap&lt;&gt;();
+        }
+        for (int visibleId : visibleIds) {
+            if (layerDefinitions.containsKey(visibleId)
+                    &amp;&amp;layerDefinitions.get(visibleId)!=null
+                    &amp;&amp;!Constants.SQL_FALSE.equalsIgnoreCase(layerDefinitions.get(visibleId))) {
+                //有可视语句，进行储存
+                integerStringMap.put(visibleId,layerDefinitions.get(visibleId));
+            }
+            //取消可视
+            layerDefinitions.put(visibleId,Constants.SQL_FALSE);
+        }
+        TotalApplication.getDynamicLayerDefinitionMap().put(dynamicLayer.getUrl(),integerStringMap);
+
+    }else {
+        //一般走不到这，避免花里胡哨的操作
+        for (int visibleId : visibleIds) {
+            //取消可视
+            layerDefinitions.put(visibleId,Constants.SQL_FALSE);
+        }
+    }
+}
+dynamicLayer.setLayerDefinitions(layerDefinitions);
+dynamicLayer.refresh();
+</code></pre><p><br></p>
+<h3 id="2-Render获取与过滤字段获取"><a href="#2-Render获取与过滤字段获取" class="headerlink" title="2.Render获取与过滤字段获取"></a>2.<font size="5" face="黑体"><strong>Render获取与过滤字段获取</strong></font><br></h3><blockquote>
+<p>  离线获取</p>
+</blockquote>
+<p>离线用的FeatureLayer.getRenderer()<br><br></p>
+<pre><code> FeatureLayer featureLayer= (FeatureLayer) layer;
+//判断是否获取过，避免重复查询
+if (TotalApplication.getInstanceFilterFieldMap().containsKey(layerName)) {
+    filterField=TotalApplication.getInstanceFilterFieldMap().get(layerName);
+}else{
+    //记录已查询 以免无结果 重复查询
+    TotalApplication.getInstanceFilterFieldMap().put(layerName,Constants.NO_FILTER_FIELD);
+    filterField=Constants.NO_FILTER_FIELD;
+    //获取过滤字段
+    Renderer renderer = featureLayer.getRenderer();
+    if (renderer instanceof UniqueValueRenderer) {
+        UniqueValueRenderer uniqueValueRenderer= (UniqueValueRenderer) renderer;
+        filterField = uniqueValueRenderer.getField1();
+        TotalApplication.getInstanceFilterFieldMap().put(layerName,filterField);
     }
 }
 </code></pre><p><br></p>
 <blockquote>
-<p>  在线查询</p>
+<p>  在线获取</p>
 </blockquote>
-<p>在线查询通过初始化一个QueryParameter并设置其参数，然后通过在线图层的URL初始化一个QueryTask，通过其对象的execute方法拿到查询结果的Geometry与Attribute。</p>
-<pre><code>QueryParameters queryParams=new QueryParameters();
-Polygon Querypolygon=measureManager.getpolygon();
-queryParams.setGeometry(Querypolygon);
-landAnalysisResultInfos=new ArrayList&lt;&gt;();
-queryParams.setOutFields(new String[]{&quot;*&quot;});
-List&lt;LandAnalysisResultInfo&gt; analysisResultInfos=new ArrayList&lt;&gt;();
-Future&lt;FeatureResult&gt; resultFuture=null;
-FeatureResult featureResult=null;
-ArcGISDynamicMapServiceLayer featureLayer=(ArcGISDynamicMapServiceLayer)layer;
-QueryTask queryTask=new QueryTask(featureLayer.getQueryUrl(0));
-resultFuture=queryTask.execute(queryParams, callbackListener);
-try {
-    featureResult=resultFuture.get();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-if (featureResult!=null&amp;&amp;featureResult.featureCount()&gt;0) {
-    for (Object element : featureResult) {
-        if (element instanceof Feature) {
-            Feature f = (Feature) element;
-            Geometry geometry=f.getGeometry();
-            Map&lt;String, Object&gt; featureMap=f.getAttributes();
-            if(geometry!=null){
-                //进行图形处理
-            }
-            if (featureMap!=null&amp;&amp;featureMap.size()&gt;0) {
-                //进行内容详情提取处理
-            }
-        }
-    }
-}        
-</code></pre><p><br></p>
-<h3 id="3-图形交叉处理"><a href="#3-图形交叉处理" class="headerlink" title="3.图形交叉处理"></a>3.<font size="5" face="黑体" color="#ff0000"><strong>图形交叉处理</strong></font><br></h3><blockquote>
-<p> 通过调用GeometeyEngine.intersect()方法获取。</p>
-</blockquote>
-<pre><code>Geometry geometry = GeometryEngine.intersect(geometry,measureManager.getpolygon(),mapView_main.getSpatialReference());
-</code></pre><p><br></p>
-<h3 id="4-面积计算"><a href="#4-面积计算" class="headerlink" title="4.面积计算"></a>4.<font size="5" face="黑体"><strong>面积计算</strong></font><br></h3><blockquote>
-<p>由于获取的Geometry的面积与其父Geometry的面积均为调用Geometry对象的calculateArea2D()方法，并非实际面积。<br><br>所以我们需要通过Attribute获得的实际面积计算切割Geometry与其父Geometry的实际面积，并计算其百分比。</p>
-</blockquote>
-<pre><code>/**
- *通过在地图上的Area大小计算百分比与实际面积
- *
- * @param landResourceInfos 分析结果的数组 成员： {@link LandAnalysisResultInfo}
- * @return 一个结果的数组 变更了参数数组中成员的属性
- */
-public static List&lt;LandAnalysisResultInfo&gt; getLandPercentValue(List&lt;LandAnalysisResultInfo&gt; landResourceInfos){
-    /*计算实际面积 */
-    double MUM=0;
-    for (LandAnalysisResultInfo landResourceInfo : landResourceInfos) {
-        if (landResourceInfo.getYDMJ()==null) {
-            landResourceInfos.remove(landResourceInfo);
-            continue;
-        }
-        Double visualArea=landResourceInfo.getGeometry().calculateArea2D();
-        Double visualParentArea=landResourceInfo.getParentGeometry().calculateArea2D();
-        Double realArea=landResourceInfo.getYDMJ()/visualParentArea*visualArea;
-        landResourceInfo.setYDMJ(realArea);
+<p>在线通过加载ArcGisFeatureLayer获取Renderer中的过滤字段<br><br></p>
+<pre><code>//Renderer中过滤字段的查询和保存，避免重复加载 例：RDDM
+if (TotalApplication.getInstanceFilterFieldMap().keySet().contains(url+Constants.SPLIT_SYMBOL[4]+layerID)) {
+    //通知过滤
+}else{
+    final ArcGISFeatureLayer arcGISFeatureLayer= new ArcGISFeatureLayer(url+Constants.SPLIT_SYMBOL[4]+layerID, ArcGISFeatureLayer.MODE.SELECTION);
+    final String finalUrl = url;
+    final String finalLayerID = layerID;
+    arcGISFeatureLayer.setOnStatusChangedListener(new OnStatusChangedListener() {
+        @Override
+        public void onStatusChanged(Object o, STATUS status) {
+            if (status== STATUS.INITIALIZED) {
+                //记录已查询 以免无结果 重复查询
+                TotalApplication.getInstanceFilterFieldMap().put(arcGISFeatureLayer.getUrl(),Constants.NO_FILTER_FIELD);
+                Renderer renderer = arcGISFeatureLayer.getRenderer();
+                if (renderer!=null) {
 
-        //累计求和
-        MUM=MUM+landResourceInfo.getYDMJ();
+                    if (renderer instanceof UniqueValueRenderer) {
+                        UniqueValueRenderer uniqueValueRenderer= (UniqueValueRenderer) renderer;
+                        //获取过滤字段 RDDM
+                        String filterField = uniqueValueRenderer.getField1();
+                        if (filterField!=null&amp;&amp;!filterField.isEmpty()) {
+                            TotalApplication.getInstanceFilterFieldMap().put(arcGISFeatureLayer.getUrl(),filterField);
+                        }
+                    }
+                }
+                //通知过滤
+            }
+
+        }
+    });
+}  
+</code></pre><h3 id="3-图例过滤"><a href="#3-图例过滤" class="headerlink" title="3.图例过滤"></a>3.<font size="5" face="黑体" color="#ff0000"><strong>图例过滤</strong></font><br></h3><blockquote>
+<p>  离线过滤</p>
+</blockquote>
+<p>离线用的FeatureLayer过滤 FeatureLayer的LayerDefinition为 String (Sql Where Clause)，<br><br><br>无需控制图层，且可以和Visible混合使用</p>
+<pre><code>//图例过滤 例：YDDM = &apos;mc&apos;
+featureLayer.setDefinitionExpression(filterField+Constants.WHERE_EQUAL+Constants.WHERE_QUOTATION_MARKS+finalLegendLabel+Constants.WHERE_QUOTATION_MARKS);
+</code></pre><p><br></p>
+<blockquote>
+<p>  在线过滤</p>
+</blockquote>
+<p>在线用的ArcGISDynamicMapServiceLayer过滤<br><br>ArcGISDynamicMapServiceLayer的LayerDefinition为Map&lt; int(layerId) , String(Sql Where Clause) &gt;，<br><br><br>得到所需数据进行过滤<br><br></p>
+<pre><code>//图例过滤
+if (filterField!=null&amp;&amp;!Constants.NO_FILTER_FIELD.equalsIgnoreCase(filterField)&amp;&amp;!filterField.isEmpty()) {
+    if (layer instanceof ArcGISDynamicMapServiceLayer) {
+        //拼组Sql Where clause 并设置LayerDefinitions 进行过滤
+        Map&lt;Integer, String&gt; layerDefinitions = ((ArcGISDynamicMapServiceLayer) layer).getLayerDefinitions();
+        if (layerDefinitions==null) {
+            layerDefinitions=new HashMap&lt;Integer, String&gt;();
+        }
+        //map中： layerId -&gt; where clause   YDDM = &apos;G1&apos;
+        layerDefinitions.put(Integer.parseInt(layerId),filterField+Constants.WHERE_EQUAL+Constants.WHERE_QUOTATION_MARKS+legendName+Constants.WHERE_QUOTATION_MARKS);
+        ((ArcGISDynamicMapServiceLayer) layer).setLayerDefinitions(layerDefinitions);
+        ((ArcGISDynamicMapServiceLayer) layer).refresh();
     }
-    /*分别计算百分比*/
-    for (LandAnalysisResultInfo landResourceInfo : landResourceInfos) {
-        landResourceInfo.setPercentValue(String.valueOf(landResourceInfo.getYDMJ()/MUM*100));
+}
+</code></pre><h3 id="4-结束过滤-全部显示"><a href="#4-结束过滤-全部显示" class="headerlink" title="4.结束过滤(全部显示)"></a>4.<font size="5" face="黑体" color="#ff0000"><strong>结束过滤(全部显示)</strong></font><br></h3><blockquote>
+<p> 离线结束过滤</p>
+</blockquote>
+<pre><code>Map&lt;String, Layer&gt; layerMap = TotalApplication.getInstanceAllLayerMap();
+if (layerMap.containsKey(name)) {
+    Layer layer = layerMap.get(name);
+    if (layer instanceof FeatureLayer) {
+        //设置LayerDefinition
+        ((FeatureLayer) layer).setDefinitionExpression(Constants.SQL_TURE);
+        //数据改变
+        legendAdapter.selectLabel= Constants.NO_SELECT;
+        TotalApplication.getLayerSelectLabelMap().put(name,Constants.NO_SELECT);
+        legendAdapter.notifyDataSetChanged();
     }
-    return landResourceInfos;
 }
 </code></pre><p><br></p>
-<h3 id="5-图形展示"><a href="#5-图形展示" class="headerlink" title="5.图形展示"></a>5.<font size="5" face="黑体"><strong>图形展示</strong></font><br></h3><blockquote>
-<p>由于本次使用为列表显示，故图形展示在点击子Item的时候进行Geometry的绘制与添加。</p>
+<blockquote>
+<p> 在线结束过滤</p>
 </blockquote>
-<pre><code>/**
- * 结果列表点击效果
- */
-private AdapterView.OnItemClickListener resultListOnItemClickListener =new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
-        resultDrawerLayer.removeAll();
-        resultDrawerLayer.addGraphic(new Graphic(landAnalysisResultInfos.get(position).getGeometry(), MapViewTapTool.getLabelSymbol(MainMapActivity.this,Geometry.Type.POLYGON, Color.BLUE)));
-        resultDrawerLayer.addGraphic(new Graphic(landAnalysisResultInfos.get(position).getParentGeometry(),MapViewTapTool.getLabelSymbol(MainMapActivity.this,Geometry.Type.POLYLINE, Color.BLACK)));
-        Envelope tempEnvelope = new Envelope();
-        landAnalysisResultInfos.get(position).getParentGeometry().queryEnvelope(tempEnvelope);
-        Point tempPoint = tEnvelope.getCenter();
-        mapView_main.centerAt(tempPoint,true);
+<pre><code>//获取当前layer对应的Service Layer 的URL与Id
+List&lt;ThemeInfo&gt; theme = oneMapActivity.mDataSource.getTheme();
+for (ThemeInfo themeInfo : theme) {
+    if (name.equalsIgnoreCase(themeInfo.getName())) {
+        serviceUID=themeInfo.getServiceUid();
+        layerID=themeInfo.getLayerId();
     }
-};
+}
+List&lt;MapServicesInfo&gt; mapServices = oneMapActivity.mDataSource.getMapServices();
+for (MapServicesInfo mapService : mapServices) {
+    if (serviceUID!=null&amp;&amp;serviceUID.equalsIgnoreCase(mapService.getName())) {
+        url=mapService.getUrl();
+    }
+}
+//数据改变
+legendAdapter.selectLabel= Constants.NO_SELECT;
+TotalApplication.getLayerSelectLabelMap().put(name,Constants.NO_SELECT);
+legendAdapter.notifyDataSetChanged();
+//TODO 通知图例过滤
+</code></pre><p><br><br>全部显示</p>
+<pre><code>if (layer instanceof ArcGISDynamicMapServiceLayer) {
+    Map&lt;Integer, String&gt; layerDefinitions = ((ArcGISDynamicMapServiceLayer) layer).getLayerDefinitions();
+    if (layerDefinitions==null){
+        layerDefinitions=new HashMap&lt;Integer, String&gt;();
+    }
+    layerDefinitions.put(Integer.parseInt(layerId),Constants.SQL_TURE);
+    ((ArcGISDynamicMapServiceLayer) layer).setLayerDefinitions(layerDefinitions);
+    ((ArcGISDynamicMapServiceLayer) layer).refresh();
+}
 </code></pre><p><hr><br><br></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><font size="6" face="黑体" color="#005432"><strong>结语</strong></font></h2><p>&emsp;&emsp;用地分析功能的开发，既减少了用户查看地图计算面积的时间，提高了地图的可阅读性。让用户通过移动设备简单的操作即可获取选取区域中各类型的板块内容与面积，并通过绘制图层让用户在地图上更直观的看清板块对象。</p>
-<p><font size="3"><a href="https://github.com/xiaoshuiz/Rep4MarkDown/tree/%E7%94%A8%E5%9C%B0%E5%88%86%E6%9E%90%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81/%E7%94%A8%E5%9C%B0%E5%88%86%E6%9E%90" title="点击进去作者Git" target="_blank" rel="noopener">相关关键代码查看</a></font><br><br><br><br></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a><font size="6" face="黑体" color="#005432"><strong>结语</strong></font></h2><p>&emsp;&emsp;图例过滤功能的开发，既减少了用户手动查找相应地块和汇总的时间，提高了地图的可阅读性。让用户通过移动设备简单的操作地图中同一类型的地块汇总，并通过绘制图层让用户在地图上更直观的看清板块对象。</p>
+<p><br></p>
 <p><image src="http://www.dist.com.cn/templates/cn/images/logo.png" align="right"><br><br>&emsp;</image></p>
 <p><br></p>
 <hr>
+
+
+
+
+
+
+
 
 
     </article>
@@ -598,16 +653,16 @@ private AdapterView.OnItemClickListener resultListOnItemClickListener =new Adapt
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/09/24/offlineremote/" title= "离线督察">
-                    <div class="nextTitle">离线督察</div>
+                <a href= "/2018/08/13/landanalysis/" title= "用地分析">
+                    <div class="nextTitle">用地分析</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/07/24/legendfilter/" title= "移动图例过滤功能">
-                    <div class="prevTitle">移动图例过滤功能</div>
+                <a href= "/2018/06/16/姐姐结婚了/" title= "最も重要な結婚式">
+                    <div class="prevTitle">最も重要な結婚式</div>
                 </a>
             
         </li>
@@ -651,7 +706,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-分析区域选择"><span class="toc-number">3.1.</span> <span class="toc-text">1.分析区域选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-地图查询"><span class="toc-number">3.2.</span> <span class="toc-text">2.地图查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图形交叉处理"><span class="toc-number">3.3.</span> <span class="toc-text">3.图形交叉处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-面积计算"><span class="toc-number">3.4.</span> <span class="toc-text">4.面积计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-图形展示"><span class="toc-number">3.5.</span> <span class="toc-text">5.图形展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现逻辑略析"><span class="toc-number">2.</span> <span class="toc-text">实现逻辑略析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要部分代码实现"><span class="toc-number">3.</span> <span class="toc-text">重要部分代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-LayerDefinition控制可视"><span class="toc-number">3.1.</span> <span class="toc-text">1.LayerDefinition控制可视</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Render获取与过滤字段获取"><span class="toc-number">3.2.</span> <span class="toc-text">2.Render获取与过滤字段获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-图例过滤"><span class="toc-number">3.3.</span> <span class="toc-text">3.图例过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-结束过滤-全部显示"><span class="toc-number">3.4.</span> <span class="toc-text">4.结束过滤(全部显示)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
