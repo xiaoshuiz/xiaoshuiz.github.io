@@ -451,6 +451,22 @@ height:50vh;
 
     
     
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "sfDC2f4vntkWJ1QiM1k2HftG-gzGzoHsz",
+        appKey: "sTDI3Rxv6OVjs3omP6kN7sNV",
+        placeholder: "要说点什么吗小可爱...",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
 
     <!-- 评论 -->
 </main>
@@ -491,8 +507,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     
@@ -633,15 +647,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="BW2017"><span class="iconfont-archer">&#xe606;</span>BW2017</span>
     
-        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
-    
-        <span class="sidebar-tag-name" data-tags="项目"><span class="iconfont-archer">&#xe606;</span>项目</span>
-    
-        <span class="sidebar-tag-name" data-tags="大学"><span class="iconfont-archer">&#xe606;</span>大学</span>
-    
         <span class="sidebar-tag-name" data-tags="音乐"><span class="iconfont-archer">&#xe606;</span>音乐</span>
     
         <span class="sidebar-tag-name" data-tags="姐姐婚礼"><span class="iconfont-archer">&#xe606;</span>姐姐婚礼</span>
+    
+        <span class="sidebar-tag-name" data-tags="大学"><span class="iconfont-archer">&#xe606;</span>大学</span>
+    
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
+    
+        <span class="sidebar-tag-name" data-tags="项目"><span class="iconfont-archer">&#xe606;</span>项目</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -706,7 +720,7 @@ jsonContent:
     
     <!-- busuanzi  -->
     
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     <!-- CNZZ  -->
     
